@@ -36,8 +36,22 @@ interface SparkStar {
 	x: number;
 	y: number;
 	size: number;
-	timer: number;
-	timerSpeed: number;
+	state: "waiting" | "rising" | "holding" | "falling";
+	framesDone: number;
+	framesTotal: number;
+}
+
+function sparkDuration(state: SparkStar["state"]): number {
+	switch (state) {
+		case "waiting": return 80  + Math.floor(Math.random() * 240); // ~1.3–5.3s pause
+		case "rising":  return 14  + Math.floor(Math.random() * 46);  // ~0.23–1s fade-in
+		case "holding": return 8   + Math.floor(Math.random() * 72);  // ~0.13–1.3s hold
+		case "falling": return 22  + Math.floor(Math.random() * 78);  // ~0.37–1.7s fade-out
+	}
+}
+
+function easeInOut(t: number): number {
+	return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
 }
 
 export default function StarField() {
@@ -66,6 +80,24 @@ export default function StarField() {
 			];
 		}
 
+		function makeSparkStars(w: number, h: number): SparkStar[] {
+			const count = 8;
+			const states = ["waiting", "rising", "holding", "falling"] as const;
+			return Array.from({ length: count }, (_, i) => {
+				const slotW = w / count;
+				const state = states[Math.floor(Math.random() * 4)];
+				const framesTotal = sparkDuration(state);
+				return {
+					x: slotW * i + slotW * (0.15 + Math.random() * 0.7),
+					y: h * (0.08 + Math.random() * 0.84),
+					size: 2.0 + Math.random() * 1.2,
+					state,
+					framesDone: Math.floor(Math.random() * framesTotal),
+					framesTotal,
+				};
+			});
+		}
+
 		const resize = () => {
 			canvas.width = window.innerWidth;
 			canvas.height = window.innerHeight;
@@ -82,18 +114,7 @@ export default function StarField() {
 			opacityDelta: (Math.random() * 0.004 + 0.001) * (Math.random() > 0.5 ? 1 : -1),
 		}));
 
-		// distribute sparkle stars evenly across the screen width — one per slot
-		const sparkCount = 8;
-		sparkStarsRef.current = Array.from({ length: sparkCount }, (_, i) => {
-			const slotW = canvas.width / sparkCount;
-			return {
-				x: slotW * i + slotW * (0.15 + Math.random() * 0.7),
-				y: canvas.height * (0.08 + Math.random() * 0.84),
-				size: 2.0 + Math.random() * 1.2,
-				timer: Math.random(),
-				timerSpeed: 0.0015 + Math.random() * 0.002,
-			};
-		});
+		sparkStarsRef.current = makeSparkStars(canvas.width, canvas.height);
 
 		function spawnShootingStar(w: number, h: number): ShootingStar {
 			const speed = 10 + Math.random() * 8;
@@ -116,7 +137,6 @@ export default function StarField() {
 		}
 
 		function drawGlow(x: number, y: number, size: number, alpha: number) {
-			// outer halo — wide, very soft
 			const halo = ctx.createRadialGradient(x, y, 0, x, y, size * 9);
 			halo.addColorStop(0,   `rgba(200, 190, 255, ${alpha * 0.18})`);
 			halo.addColorStop(0.4, `rgba(180, 160, 255, ${alpha * 0.06})`);
@@ -126,7 +146,6 @@ export default function StarField() {
 			ctx.arc(x, y, size * 9, 0, Math.PI * 2);
 			ctx.fill();
 
-			// inner bloom — tighter, brighter
 			const bloom = ctx.createRadialGradient(x, y, 0, x, y, size * 3);
 			bloom.addColorStop(0,   `rgba(255, 255, 255, ${alpha * 0.55})`);
 			bloom.addColorStop(0.3, `rgba(220, 210, 255, ${alpha * 0.25})`);
@@ -148,7 +167,19 @@ export default function StarField() {
 		const draw = (timestamp: number) => {
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-			// ── Nebulae / Galaxy Blobs ───────────────────────────────
+			// ── Cursor Glow ──────────────────────────────────────────────
+			const cx = (mouseRef.current.x / 2 + 0.5) * canvas.width;
+			const cy = (mouseRef.current.y / 2 + 0.5) * canvas.height;
+			const cursorGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 160);
+			cursorGrad.addColorStop(0,   "rgba(124, 58, 237, 0.055)");
+			cursorGrad.addColorStop(0.5, "rgba(99,  102, 241, 0.022)");
+			cursorGrad.addColorStop(1,   "rgba(0,   0,   0,   0)");
+			ctx.fillStyle = cursorGrad;
+			ctx.beginPath();
+			ctx.arc(cx, cy, 160, 0, Math.PI * 2);
+			ctx.fill();
+
+			// ── Nebulae / Galaxy Blobs ───────────────────────────────────
 			nebulaeRef.current.forEach((neb) => {
 				neb.x += neb.driftX;
 				neb.y += neb.driftY;
@@ -167,7 +198,7 @@ export default function StarField() {
 				ctx.fill();
 			});
 
-			// ── Regular Stars ────────────────────────────────────────
+			// ── Regular Stars ────────────────────────────────────────────
 			starsRef.current.forEach((star) => {
 				star.opacity += star.opacityDelta;
 				if (star.opacity > 1 || star.opacity < 0.05) star.opacityDelta *= -1;
@@ -182,28 +213,46 @@ export default function StarField() {
 				ctx.fill();
 			});
 
-			// ── Sparkle Stars ────────────────────────────────────────
+			// ── Sparkle Stars (4-phase independent random timing) ────────
 			sparkStarsRef.current.forEach((s) => {
-				s.timer = (s.timer + s.timerSpeed) % 1;
-				const pulse = Math.sin(s.timer * Math.PI); // 0→1→0 over the cycle
+				s.framesDone++;
+				if (s.framesDone >= s.framesTotal) {
+					s.framesDone = 0;
+					const next: SparkStar["state"] =
+						s.state === "waiting" ? "rising"  :
+						s.state === "rising"  ? "holding" :
+						s.state === "holding" ? "falling" :
+						"waiting";
+					s.state = next;
+					s.framesTotal = sparkDuration(next);
+				}
+
+				const t = s.framesDone / s.framesTotal;
+				const alpha =
+					s.state === "waiting" ? 0               :
+					s.state === "rising"  ? easeInOut(t)    :
+					s.state === "holding" ? 1                :
+					                        1 - easeInOut(t);
+
+				if (alpha < 0.01) return;
 
 				ctx.beginPath();
 				ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-				ctx.fillStyle = `rgba(230, 220, 255, ${0.2 + pulse * 0.5})`;
+				ctx.fillStyle = `rgba(230, 220, 255, ${0.1 + alpha * 0.6})`;
 				ctx.fill();
 
-				if (pulse > 0.2) {
-					drawGlow(s.x, s.y, s.size, (pulse - 0.2) / 0.8);
+				if (alpha > 0.15) {
+					drawGlow(s.x, s.y, s.size, (alpha - 0.15) / 0.85);
 				}
 			});
 
-			// ── Spawn Shooting Stars ─────────────────────────────────
+			// ── Spawn Shooting Stars ─────────────────────────────────────
 			if (timestamp >= nextSpawnRef.current && shootingStarsRef.current.length < 2) {
 				shootingStarsRef.current.push(spawnShootingStar(canvas.width, canvas.height));
 				nextSpawnRef.current = timestamp + 3500 + Math.random() * 7000;
 			}
 
-			// ── Animate Shooting Stars ───────────────────────────────
+			// ── Animate Shooting Stars ───────────────────────────────────
 			shootingStarsRef.current = shootingStarsRef.current.filter((s) => s.life < 1);
 			shootingStarsRef.current.forEach((s) => {
 				s.life += s.lifeSpeed;

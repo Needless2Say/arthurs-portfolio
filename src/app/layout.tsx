@@ -1,9 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import { Navbar, Footer, PageTransition } from "@/components/layout";
 import StarField from "@/components/ui/StarField";
+import ScrollProgress from "@/components/ui/ScrollProgress";
+import ScrollToTop from "@/components/ui/ScrollToTop";
+import KonamiEasterEgg from "@/components/ui/KonamiEasterEgg";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -14,6 +17,12 @@ const geistMono = Geist_Mono({
 	variable: "--font-geist-mono",
 	subsets: ["latin"],
 });
+
+export const viewport: Viewport = {
+	width: "device-width",
+	initialScale: 1,
+	maximumScale: 5,
+};
 
 export const metadata: Metadata = {
 	title: {
@@ -46,11 +55,13 @@ export default function RootLayout({
 					`}
 				</Script>
 			</head>
+
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 				<a href="#main-content" className="skip-to-content">
 					Skip to content
 				</a>
 
+				<ScrollProgress />
 				<StarField />
 				<Navbar />
 
@@ -59,6 +70,8 @@ export default function RootLayout({
 				</main>
 
 				<Footer />
+				<ScrollToTop />
+				<KonamiEasterEgg />
 			</body>
 		</html>
 	);

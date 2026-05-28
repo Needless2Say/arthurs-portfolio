@@ -3,7 +3,7 @@ import type { Experience, Education } from "@/types/portfolio";
 export const PERSONAL_INFO = {
 	name: "Arthur Krieger",
 	title: "Software/Platform Engineer · CS + Data Science",
-	tagline: "Building at the intersection of data and software.",
+	tagline: "Building at the intersection of Data and Software.",
 	email: "kriegear@umich.edu",
 	resumePdf: "/arthurs-portfolio/Arthur_Krieger_Resume.pdf",
 	links: {
@@ -54,8 +54,10 @@ export const EXPERIENCE: Experience[] = [
 		location: "Chicago, IL",
 		period: "June 2025 - Present",
 		bullets: [
-			"Wealth Asset Management Engineering Team",
-			"Building data pipelines that ingest data from various sources and transform it for data scientists and analysts",
+			"Build and maintain data pipelines that ingest, transform, and deliver financial data to analysts and data scientists on the Wealth Asset Management Engineering Team",
+			"Develop GitHub Actions CI/CD workflows and DevOps automation tooling to streamline engineering team processes across BitBucket and Bamboo",
+			"Create Streamlit dashboards for internal data observability, pipeline monitoring, and ad-hoc analytics on Snowflake",
+			"Provision and manage cloud infrastructure with Terraform on GCP",
 		],
 		tech: ["Python", "Snowflake", "SQL", "GCP Cloud Services", "GitHub Actions", "Streamlit", "Terraform", "BitBucket", "Bamboo"],
 	},
@@ -85,7 +87,7 @@ export const EXPERIENCE: Experience[] = [
 	},
 	{
 		role: "Research Assistant",
-		company: "Deptartment of Obstetrics and Gynecology — Wayne State University",
+		company: "Department of Obstetrics and Gynecology — Wayne State University",
 		location: "Detroit, MI",
 		period: "September 2021 - August 2022",
 		bullets: [

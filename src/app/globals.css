@@ -167,6 +167,73 @@ body {
   	animation: page-enter 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* ─── Stellar collapse (email modal close) ──────────────── */
+@keyframes stellar-collapse {
+  /* pre-collapse tremor — barely moving */
+  0%  { opacity:1; transform:scale(1) rotate(0deg) translate(0,0);            filter:brightness(1) blur(0px) saturate(1);   box-shadow:0 0 60px rgba(124,58,237,0.2); }
+  4%  { opacity:1; transform:scale(1.01) rotate(2deg) translate(2px,-1px);    filter:brightness(1.1) blur(0) saturate(1.2); }
+  8%  { opacity:1; transform:scale(1.01) rotate(-1deg) translate(-2px,1px);   filter:brightness(1.2) blur(0) saturate(1.4); }
+  /* supernova flash — spin just beginning */
+  15% { opacity:1; transform:scale(1.08) rotate(12deg);  filter:brightness(3.2) blur(0) saturate(3);
+        box-shadow:0 0 180px rgba(220,100,255,1), 0 0 80px rgba(255,255,255,0.45), inset 0 0 50px rgba(255,200,255,0.35); }
+  /* collapse picks up — clearly spinning */
+  32% { opacity:1;  transform:scale(0.78) rotate(75deg);  filter:brightness(4) blur(2px) saturate(3.5);
+        box-shadow:0 0 100px rgba(255,140,255,0.7); }
+  /* implosion — 1 full spin */
+  57% { opacity:0.6; transform:scale(0.28) rotate(360deg); filter:brightness(2.2) blur(5px) saturate(2); }
+  /* near singularity — 2.5 full spins, blurring from speed */
+  80% { opacity:0.12; transform:scale(0.06) rotate(900deg); filter:brightness(0.4) blur(10px) saturate(0.5); }
+  /* singularity — 1800 deg total = 5 full spins, last 20% covers 900 deg */
+  100%{ opacity:0;    transform:scale(0)    rotate(1800deg); filter:brightness(0) blur(16px) saturate(0); }
+}
+
+/* Three expanding shockwave rings — staggered start */
+@keyframes collapse-shockwave {
+  0%   { transform:scale(0.55); opacity:0; }
+  16%  { transform:scale(1);    opacity:0.95; }
+  100% { transform:scale(3.6);  opacity:0; }
+}
+@keyframes collapse-shockwave-2 {
+  0%   { transform:scale(0.55); opacity:0; }
+  26%  { transform:scale(1.1);  opacity:0.65; }
+  100% { transform:scale(3.1);  opacity:0; }
+}
+@keyframes collapse-shockwave-3 {
+  0%   { transform:scale(0.55); opacity:0; }
+  36%  { transform:scale(1.2);  opacity:0.38; }
+  100% { transform:scale(2.7);  opacity:0; }
+}
+
+/* Spark particles — rotate wrapper per angle, translateX moves radially */
+@keyframes spark-fly {
+  0%   { opacity:1; transform:translateX(0) scale(1.4); }
+  18%  { opacity:1; }
+  100% { opacity:0; transform:translateX(160px) scale(0); }
+}
+
+/* Radial nova bloom overlay */
+@keyframes nova-flash {
+  0%   { opacity:0; }
+  15%  { opacity:1; }
+  48%  { opacity:0; }
+  100% { opacity:0; }
+}
+
+/* Backdrop stays full then fades after star is gone */
+@keyframes backdrop-collapse {
+  0%   { opacity:1; }
+  20%  { opacity:1; }
+  100% { opacity:0; }
+}
+
+.animate-stellar-collapse   { animation: stellar-collapse    0.65s linear forwards; }
+.animate-collapse-shockwave  { animation: collapse-shockwave  0.68s ease-out forwards; }
+.animate-collapse-shockwave-2{ animation: collapse-shockwave-2 0.72s ease-out forwards; }
+.animate-collapse-shockwave-3{ animation: collapse-shockwave-3 0.76s ease-out forwards; }
+.animate-spark-fly           { animation: spark-fly 0.58s ease-out forwards; animation-delay: 0.09s; }
+.animate-nova-flash          { animation: nova-flash 0.68s ease-out forwards; }
+.animate-backdrop-collapse   { animation: backdrop-collapse 0.78s ease-in forwards; }
+
 /* ─── Reduced motion ─────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
 	.animate-fade-in-up,
@@ -176,6 +243,14 @@ body {
 	.animate-warp-in,
 	.animate-page-enter,
 	.animate-nav-item,
+	.animate-ping,
+	.animate-stellar-collapse,
+	.animate-collapse-shockwave,
+	.animate-collapse-shockwave-2,
+	.animate-collapse-shockwave-3,
+	.animate-spark-fly,
+	.animate-nova-flash,
+	.animate-backdrop-collapse,
 	.gradient-text {
 		animation: none;
 		opacity: 1;

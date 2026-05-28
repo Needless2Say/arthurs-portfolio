@@ -46,40 +46,44 @@ export default function Resume() {
 					<Reveal>
 						<SectionHeader title="Experience" />
 					</Reveal>
+
 					<div className="space-y-4">
 						{EXPERIENCE.map((exp, i) => (
-						<Reveal key={i} delay={i * 80}>
-							<Card glow="purple">
-								<div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3">
-									<div>
-										<h3 className="text-white font-bold text-sm">
-											{exp.role}
-										</h3>
-										<p className="text-purple-300 text-xs">
-											{exp.company} · {exp.location}
-										</p>
+							<Reveal key={i} delay={i * 80}>
+								<Card glow="purple">
+									<div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3">
+										<div>
+											<h3 className="text-white font-bold text-sm">
+												{exp.role}
+											</h3>
+											<p className="text-purple-300 text-xs">
+												{exp.company} · {exp.location}
+											</p>
+										</div>
+
+										<span className="text-slate-500 font-mono text-xs mt-1 sm:mt-0 whitespace-nowrap">
+											{exp.period}
+										</span>
 									</div>
-									<span className="text-slate-500 font-mono text-xs mt-1 sm:mt-0 whitespace-nowrap">
-										{exp.period}
-									</span>
-								</div>
-								<ul className="space-y-1 mb-3">
-									{exp.bullets.map((b, j) => (
-										<li key={j} className="text-slate-400 text-xs flex gap-2">
-											<span className="text-purple-500 mt-0.5 flex-shrink-0">
-												›
-											</span>
-											{b}
-										</li>
-									))}
-								</ul>
-								<div className="flex flex-wrap gap-1.5">
-									{exp.tech.map((t) => (
-										<TechBadge key={t} label={t} color="nebula" />
-									))}
-								</div>
-							</Card>
-						</Reveal>
+
+									<ul className="space-y-1 mb-3">
+										{exp.bullets.map((b, j) => (
+											<li key={j} className="text-slate-400 text-xs flex gap-2">
+												<span className="text-purple-500 mt-0.5 flex-shrink-0">
+													›
+												</span>
+												{b}
+											</li>
+										))}
+									</ul>
+
+									<div className="flex flex-wrap gap-1.5">
+										{exp.tech.map((t) => (
+											<TechBadge key={t} label={t} color="nebula" />
+										))}
+									</div>
+								</Card>
+							</Reveal>
 						))}
 					</div>
 				</section>
@@ -89,6 +93,7 @@ export default function Resume() {
 					<Reveal>
 						<SectionHeader title="Education" />
 					</Reveal>
+
 					<div className="space-y-4">
 						{EDUCATION.map((edu, i) => (
 							<Reveal key={i} delay={i * 80}>
@@ -112,6 +117,7 @@ export default function Resume() {
 												</p>
 											)}
 										</div>
+
 										<div className="text-right mt-2 sm:mt-0 flex-shrink-0">
 											<p className="text-slate-400 font-mono text-xs">
 												{edu.period}
@@ -135,6 +141,7 @@ export default function Resume() {
 					<Reveal>
 						<SectionHeader title="Skills" />
 					</Reveal>
+
 					<div className="space-y-5">
 						{SKILL_GROUPS.map((group, i) => (
 							<Reveal key={group.label} delay={i * 60}>
@@ -158,6 +165,7 @@ export default function Resume() {
 					<Reveal>
 						<SectionHeader title="Certifications" />
 					</Reveal>
+
 					<ul className="space-y-2">
 						{CERTIFICATIONS.map((cert, i) => (
 							<Reveal key={i} delay={i * 80}>
