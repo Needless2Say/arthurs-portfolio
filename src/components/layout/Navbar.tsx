@@ -54,6 +54,7 @@ export default function Navbar() {
 					<span className="text-white font-bold font-mono text-sm tracking-widest">
 						AK
 					</span>
+
 					<button
 						onClick={() => {
 							if (!open) menuKeyRef.current += 1;
@@ -61,7 +62,7 @@ export default function Navbar() {
 						}}
 						aria-label="Toggle navigation"
 						aria-expanded={open}
-						className="flex flex-col gap-1 p-1 text-slate-200 hover:text-white transition-colors duration-200"
+						className="flex flex-col gap-1 p-2.5 min-h-[44px] min-w-[44px] items-center justify-center text-slate-200 hover:text-white transition-colors duration-200"
 					>
 						<span
 							className={cn(

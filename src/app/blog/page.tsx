@@ -45,17 +45,26 @@ export default function Blog() {
 						))}
 					</div>
 				) : (
-					<Card className="text-center py-12">
-						<p className="text-slate-300 text-lg font-semibold mb-2">
-							Posts coming soon
+					<div className="text-center py-20">
+						<div className="flex items-center justify-center gap-3 mb-8 text-slate-800 select-none font-mono text-lg tracking-widest">
+							<span className="animate-pulse-glow">✦</span>
+							<span>✦</span>
+							<span className="animate-pulse-glow" style={{ animationDelay: "1.2s" }}>✦</span>
+						</div>
+						<p className="text-white font-bold text-2xl mb-3 glow-text">
+							Transmissions incoming.
 						</p>
-						<p className="text-slate-500 text-sm">
-							Writing is in progress — check back later.
+						<p className="text-slate-500 text-sm max-w-xs mx-auto leading-relaxed mb-10">
+							Writing is in progress. First posts deploying soon.
 						</p>
-						<p className="text-slate-700 font-mono text-xs mt-6"
-							>{"// BLOG_POSTS.length === 0"}
-						</p>
-					</Card>
+						<div className="inline-flex items-center gap-2.5 glass-card px-5 py-2.5 border-white/5">
+							<span className="relative flex h-1.5 w-1.5">
+								<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75" />
+								<span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-purple-500" />
+							</span>
+							<span className="text-slate-500 font-mono text-xs tracking-widest">signal pending...</span>
+						</div>
+					</div>
 				)}
 			</div>
 		</div>

@@ -3,7 +3,7 @@ import type { Project } from "@/types/portfolio";
 export const PROJECTS: Project[] = [
 	{
 		title: "KriegerDataForge",
-		subtitle: "Full-Stack Platform",
+		subtitle: "Full Stack Platform",
 		description: "A personal full stack platform that powers all the applications I build. A shared FastAPI backend and PostgreSQL database serve data to multiple front end apps, including a Calorie Tracker and a Video Game Database, with a single unified API layer.",
 		techStack: [
 			"Next.js",
@@ -26,7 +26,7 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		title: "Calorie Tracker",
-		subtitle: "Web Application",
+		subtitle: "Web Application · KriegerDataForge",
 		description: "A nutrition tracking app built on the KriegerDataForge platform. Log meals, track macros, set daily goals, and visualize your progress, all powered by the shared FastAPI backend.",
 		techStack: [
 			"Next.js",
@@ -40,9 +40,22 @@ export const PROJECTS: Project[] = [
 		featured: false,
 	},
 	{
+		title: "Video Game Database",
+		subtitle: "Web Application · KriegerDataForge",
+		description: "A searchable video game catalog built on the KriegerDataForge platform. Browse and filter an extensive library of titles by genre, platform, and rating — all powered by the shared FastAPI backend and PostgreSQL database.",
+		techStack: [
+			"Next.js",
+			"React",
+			"FastAPI",
+			"PostgreSQL",
+		],
+		links: {},
+		featured: false,
+	},
+	{
 		title: "Tiffany's Space",
 		subtitle: "E-commerce Platform · KriegerDataForge",
-		description: "A full stack boutique e-commerce storefront built for my sister. Customers can browse and purchase across five categories - Clothing, Books, Handmade Crafts, Art, and Accessories — with a persistent shopping cart, order history, and a mock checkout flow. A dedicated admin dashboard lets Tiffany manage her product catalog and orders directly. Built on the KriegerDataForge ecosystem, the shared FastAPI backend and PostgreSQL database power the store's API, keeping it consistent with every other app on the platform.",
+		description: "A full stack boutique e-commerce storefront. Customers can browse and purchase across five categories - Clothing, Books, Handmade Crafts, Art, and Accessories — with a persistent shopping cart, order history, and a mock checkout flow. A dedicated admin dashboard lets Tiffany manage her product catalog and orders directly. Built on the KriegerDataForge ecosystem, the shared FastAPI backend and PostgreSQL database power the store's API, keeping it consistent with every other app on the platform.",
 		techStack: [
 			"Next.js",
 			"React",

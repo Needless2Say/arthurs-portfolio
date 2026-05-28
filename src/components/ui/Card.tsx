@@ -17,7 +17,7 @@ export default function Card({ children, className, glow = "purple" }: CardProps
 	return (
 		<div
 			className={cn(
-				"glass-card p-6 transition-all duration-300",
+				"glass-card p-6 transition-all duration-300 hover:-translate-y-1",
 				glowMap[glow],
 				className
 			)}
