@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
-import { Navbar, Footer } from "@/components/layout";
+import { Navbar, Footer, PageTransition } from "@/components/layout";
 import StarField from "@/components/ui/StarField";
 
 const geistSans = Geist({
@@ -54,7 +54,7 @@ export default function RootLayout({
         <StarField />
         <Navbar />
         <main id="main-content" className="relative z-10">
-          {children}
+          <PageTransition>{children}</PageTransition>
         </main>
         <Footer />
       </body>
