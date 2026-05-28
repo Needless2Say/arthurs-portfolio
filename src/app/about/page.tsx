@@ -9,139 +9,171 @@ import Card from "@/components/ui/Card";
 import Reveal from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
-  title: "About",
-  description: "Learn about Arthur Krieger — CS + Data Science, University of Michigan.",
+	title: "About",
+	description: "Learn about Arthur Krieger — CS + Data Science, University of Michigan.",
 };
 
 export default function About() {
-  return (
-    <div className="min-h-screen pt-24 pb-16 px-4">
-      <div className="max-w-4xl mx-auto">
+	return (
+		<div className="min-h-screen pt-24 pb-16 px-4">
+			<div className="max-w-4xl mx-auto">
 
-        {/* ── Hero: Photo + Bio ── */}
-        <Reveal className="flex flex-col lg:flex-row gap-10 mb-16 items-start">
-          <div className="flex-shrink-0 mx-auto lg:mx-0">
-            <div className="relative w-44 h-60 rounded-xl overflow-hidden border border-purple-500/20 shadow-[0_0_40px_rgba(124,58,237,0.15)]">
-              <Image src={me_pic} alt="Arthur Krieger" fill className="object-cover" />
-            </div>
-          </div>
+				{/* ── Hero: Photo + Bio ── */}
+				<Reveal className="flex flex-col lg:flex-row gap-10 mb-16 items-start">
+					<div className="flex-shrink-0 mx-auto lg:mx-0">
+						<div className="relative w-44 h-60 rounded-xl overflow-hidden border border-purple-500/20 shadow-[0_0_40px_rgba(124,58,237,0.15)]">
+							<Image src={me_pic} alt="Arthur Krieger" fill className="object-cover" />
+						</div>
+					</div>
 
-          <div className="flex-grow">
-            <h1 className="text-4xl font-bold text-white glow-text mb-1">{PERSONAL_INFO.name}</h1>
-            <p className="text-purple-400 font-mono text-sm mb-5">{PERSONAL_INFO.title}</p>
-            <p className="text-slate-300 text-base leading-relaxed mb-6">{PERSONAL_INFO.bio}</p>
+					<div className="flex-grow">
+						<h1 className="text-4xl font-bold text-white glow-text mb-1">
+							{PERSONAL_INFO.name}
+						</h1>
+						<p className="text-purple-400 font-mono text-sm mb-5">
+							{PERSONAL_INFO.title}
+						</p>
+						<p className="text-slate-300 text-base leading-relaxed mb-6">
+							{PERSONAL_INFO.bio}
+						</p>
 
-            <div className="glass-card p-4 border-white/5">
-              <p className="text-slate-500 font-mono text-xs uppercase tracking-widest mb-3">
-                Notable Coursework
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {EDUCATION[0].coursework.map((course) => (
-                  <TechBadge key={course} label={course.split(" – ")[0]} color="nebula" />
-                ))}
-              </div>
-            </div>
-          </div>
-        </Reveal>
+						<div className="glass-card p-4 border-white/5">
+							<p className="text-slate-500 font-mono text-xs uppercase tracking-widest mb-3">
+								Notable Coursework
+							</p>
+							<div className="flex flex-wrap gap-2">
+								{EDUCATION[0].coursework.map((course) => (
+									<TechBadge key={course} label={course.split(" – ")[0]} color="nebula" />
+								))}
+							</div>
+						</div>
+					</div>
+				</Reveal>
 
-        {/* ── Experience Timeline ── */}
-        <section className="mb-16">
-          <Reveal>
-            <SectionHeader title="Experience" />
-          </Reveal>
-          <div className="relative">
-            <div className="absolute left-4 top-2 bottom-2 w-px bg-gradient-to-b from-purple-600/50 via-blue-600/30 to-transparent" />
-            <div className="space-y-6">
-              {EXPERIENCE.map((exp, i) => (
-                <Reveal key={i} className="relative pl-12" delay={i * 90}>
-                  <div className="absolute left-4 top-5 w-4 h-4 rounded-full bg-[#09090f] border-2 border-purple-500 -translate-x-1/2 flex items-center justify-center">
-                    <div className="w-1.5 h-1.5 rounded-full bg-purple-400" />
-                  </div>
-                  <Card glow="purple">
-                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3">
-                      <div>
-                        <h3 className="text-white font-bold text-base">{exp.role}</h3>
-                        <p className="text-purple-300 text-sm font-medium">{exp.company}</p>
-                        <p className="text-slate-500 text-xs">{exp.location}</p>
-                      </div>
-                      <span className="text-slate-400 font-mono text-xs mt-1 sm:mt-0 sm:text-right whitespace-nowrap">
-                        {exp.period}
-                      </span>
-                    </div>
-                    <ul className="space-y-1.5 mb-4">
-                      {exp.bullets.map((bullet, j) => (
-                        <li key={j} className="text-slate-400 text-sm flex gap-2">
-                          <span className="text-purple-500 mt-0.5 flex-shrink-0">›</span>
-                          {bullet}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="flex flex-wrap gap-1.5">
-                      {exp.tech.map((t) => (
-                        <TechBadge key={t} label={t} color="nebula" />
-                      ))}
-                    </div>
-                  </Card>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
+				{/* ── Experience Timeline ── */}
+				<section className="mb-16">
+					<Reveal>
+						<SectionHeader title="Experience" />
+					</Reveal>
 
-        {/* ── Education ── */}
-        <section className="mb-16">
-          <Reveal>
-            <SectionHeader title="Education" />
-          </Reveal>
-          <div className="grid gap-4">
-            {EDUCATION.map((edu, i) => (
-              <Reveal key={i} delay={i * 90}>
-                <Card glow="blue">
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
-                    <div>
-                      <h3 className="text-white font-bold">{edu.school}</h3>
-                      <p className="text-blue-300 text-sm mt-0.5">{edu.degree}</p>
-                      {edu.minor && <p className="text-slate-400 text-sm">{edu.minor}</p>}
-                      {edu.honors && (
-                        <p className="text-yellow-400 text-sm font-medium mt-1">{edu.honors}</p>
-                      )}
-                    </div>
-                    <div className="text-right mt-2 sm:mt-0 flex-shrink-0">
-                      <p className="text-slate-400 font-mono text-xs">{edu.period}</p>
-                      <p className="text-slate-500 text-xs">{edu.location}</p>
-                      <p className="text-yellow-400 font-mono text-xs mt-1">GPA {edu.gpa}</p>
-                    </div>
-                  </div>
-                </Card>
-              </Reveal>
-            ))}
-          </div>
-        </section>
+					<div className="relative">
+						<div className="absolute left-4 top-2 bottom-2 w-px bg-gradient-to-b from-purple-600/50 via-blue-600/30 to-transparent" />
+						<div className="space-y-6">
+							{EXPERIENCE.map((exp, i) => (
+								<Reveal key={i} className="relative pl-12" delay={i * 90}>
+									<div className="absolute left-4 top-5 w-4 h-4 rounded-full bg-[#09090f] border-2 border-purple-500 -translate-x-1/2 flex items-center justify-center">
+										<div className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+									</div>
 
-        {/* ── Skills ── */}
-        <section>
-          <Reveal>
-            <SectionHeader title="Skills" />
-          </Reveal>
-          <div className="space-y-5">
-            {SKILL_GROUPS.map((group, i) => (
-              <Reveal key={group.label} delay={i * 70}>
-                <div>
-                  <p className="text-slate-500 font-mono text-xs uppercase tracking-widest mb-2">
-                    {group.label}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {group.skills.map((skill) => (
-                      <TechBadge key={skill} label={skill} color={group.color} />
-                    ))}
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </section>
+									<Card glow="purple">
+										<div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3">
+											<div>
+												<h3 className="text-white font-bold text-base">
+													{exp.role}
+												</h3>
+												<p className="text-purple-300 text-sm font-medium">
+													{exp.company}
+												</p>
+												<p className="text-slate-500 text-xs">
+													{exp.location}
+												</p>
+											</div>
 
-      </div>
-    </div>
-  );
+											<span className="text-slate-400 font-mono text-xs mt-1 sm:mt-0 sm:text-right whitespace-nowrap">
+												{exp.period}
+											</span>
+										</div>
+
+										<ul className="space-y-1.5 mb-4">
+											{exp.bullets.map((bullet, j) => (
+												<li key={j} className="text-slate-400 text-sm flex gap-2">
+													<span className="text-purple-500 mt-0.5 flex-shrink-0">
+														›
+													</span>
+													{bullet}
+												</li>
+											))}
+										</ul>
+
+										<div className="flex flex-wrap gap-1.5">
+											{exp.tech.map((t) => (
+												<TechBadge key={t} label={t} color="nebula" />
+											))}
+										</div>
+									</Card>
+								</Reveal>
+							))}
+						</div>
+					</div>
+				</section>
+
+				{/* ── Education ── */}
+				<section className="mb-16">
+					<Reveal>
+						<SectionHeader title="Education" />
+					</Reveal>
+
+					<div className="grid gap-4">
+						{EDUCATION.map((edu, i) => (
+							<Reveal key={i} delay={i * 90}>
+								<Card glow="blue">
+									<div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+										<div>
+											<h3 className="text-white font-bold">{edu.school}</h3>
+											<p className="text-blue-300 text-sm mt-0.5">{edu.degree}</p>
+											{edu.minor && (
+												<p className="text-slate-400 text-sm">
+													{edu.minor}
+												</p>
+											)}
+											{edu.honors && (
+												<p className="text-yellow-400 text-sm font-medium mt-1">{edu.honors}</p>
+											)}
+										</div>
+
+										<div className="text-right mt-2 sm:mt-0 flex-shrink-0">
+											<p className="text-slate-400 font-mono text-xs">
+												{edu.period}
+											</p>
+											<p className="text-slate-500 text-xs">
+												{edu.location}
+											</p>
+											<p className="text-yellow-400 font-mono text-xs mt-1">
+												GPA {edu.gpa}
+											</p>
+										</div>
+									</div>
+								</Card>
+							</Reveal>
+						))}
+					</div>
+				</section>
+
+				{/* ── Skills ── */}
+				<section>
+					<Reveal>
+						<SectionHeader title="Skills" />
+					</Reveal>
+	
+					<div className="space-y-5">
+						{SKILL_GROUPS.map((group, i) => (
+							<Reveal key={group.label} delay={i * 70}>
+								<div>
+									<p className="text-slate-500 font-mono text-xs uppercase tracking-widest mb-2">
+										{group.label}
+									</p>
+									<div className="flex flex-wrap gap-2">
+										{group.skills.map((skill) => (
+											<TechBadge key={skill} label={skill} color={group.color} />
+										))}
+									</div>
+								</div>
+							</Reveal>
+						))}
+					</div>
+				</section>
+
+			</div>
+		</div>
+	);
 }

@@ -2,7 +2,7 @@
 
 /* ─── Base ─────────────────────────────────────────── */
 :root {
-  color-scheme: dark;
+  	color-scheme: dark;
 }
 
 body {
@@ -14,162 +14,179 @@ body {
 
 /* ─── Scrollbar ─────────────────────────────────────── */
 ::-webkit-scrollbar {
-  width: 5px;
+  	width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #09090f;
+  	background: #09090f;
 }
 ::-webkit-scrollbar-thumb {
-  background: #4c1d95;
-  border-radius: 3px;
+	background: #4c1d95;
+	border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #7c3aed;
+  	background: #7c3aed;
 }
 
 /* ─── Accessibility ─────────────────────────────────── */
 .skip-to-content {
-  position: absolute;
-  top: -9999px;
-  left: 0;
-  padding: 8px 16px;
-  background: #7c3aed;
-  color: white;
-  z-index: 9999;
-  border-radius: 0 0 8px 0;
-  font-size: 0.875rem;
+	position: absolute;
+	top: -9999px;
+	left: 0;
+	padding: 8px 16px;
+	background: #7c3aed;
+	color: white;
+	z-index: 9999;
+	border-radius: 0 0 8px 0;
+	font-size: 0.875rem;
 }
 .skip-to-content:focus {
-  top: 0;
+  	top: 0;
 }
 
 /* ─── Glass card ─────────────────────────────────────── */
 .glass-card {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 12px;
+	background: rgba(255, 255, 255, 0.04);
+	backdrop-filter: blur(14px);
+	-webkit-backdrop-filter: blur(14px);
+	border: 1px solid rgba(255, 255, 255, 0.07);
+	border-radius: 12px;
 }
 
 /* ─── Text effects ──────────────────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, #a855f7 0%, #60a5fa 50%, #a855f7 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradient-shift 6s linear infinite;
+	background: linear-gradient(135deg, #a855f7 0%, #60a5fa 50%, #a855f7 100%);
+	background-size: 200% auto;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	animation: gradient-shift 6s linear infinite;
 }
 
 .glow-text {
-  text-shadow: 0 0 30px rgba(168, 85, 247, 0.35), 0 0 60px rgba(168, 85, 247, 0.15);
+  	text-shadow: 0 0 30px rgba(168, 85, 247, 0.35), 0 0 60px rgba(168, 85, 247, 0.15);
 }
 
 /* ─── Animations ─────────────────────────────────────── */
 @keyframes gradient-shift {
-  0% { background-position: 0% center; }
-  100% { background-position: 200% center; }
+	0% { background-position: 0% center; }
+	100% { background-position: 200% center; }
 }
 
 @keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+	from { opacity: 0; }
+	to { opacity: 1; }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
+	0%, 100% { opacity: 1; }
+	50% { opacity: 0.35; }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(-8px); }
 }
 
 .animate-fade-in-up {
-  animation: fade-in-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  	animation: fade-in-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .animate-fade-in {
-  animation: fade-in 0.8s ease-out both;
+  	animation: fade-in 0.8s ease-out both;
 }
 
 .animate-pulse-glow {
-  animation: pulse-glow 2.5s ease-in-out infinite;
+  	animation: pulse-glow 2.5s ease-in-out infinite;
 }
 
 .animate-float {
-  animation: float 3s ease-in-out infinite;
+  	animation: float 3s ease-in-out infinite;
+}
+
+/* ─── Mobile nav item stagger ───────────────────────── */
+@keyframes nav-item-in {
+	from {
+		opacity: 0;
+		transform: translateX(-8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+.animate-nav-item {
+	animation: nav-item-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* ─── Scroll reveal ──────────────────────────────────── */
 @keyframes warp-in {
-  from {
-    opacity: 0;
-    transform: translateY(28px) scale(0.97);
-    filter: blur(4px);
-  }
-  65% {
-    filter: blur(0);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
+	from {
+		opacity: 0;
+		transform: translateY(28px) scale(0.97);
+		filter: blur(4px);
+	}
+	65% {
+		filter: blur(0);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+		filter: blur(0);
+	}
 }
 
 .animate-warp-in {
-  animation: warp-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  	animation: warp-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* ─── Page transition ────────────────────────────────── */
 @keyframes page-enter {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+	from {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 .animate-page-enter {
-  animation: page-enter 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  	animation: page-enter 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* ─── Reduced motion ─────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .animate-fade-in-up,
-  .animate-fade-in,
-  .animate-pulse-glow,
-  .animate-float,
-  .animate-warp-in,
-  .animate-page-enter,
-  .gradient-text {
-    animation: none;
-    opacity: 1;
-    transform: none;
-    filter: none;
-  }
-  .gradient-text {
-    background: #a855f7;
-    -webkit-text-fill-color: unset;
-    color: #a855f7;
-    background-clip: unset;
-    -webkit-background-clip: unset;
-  }
+	.animate-fade-in-up,
+	.animate-fade-in,
+	.animate-pulse-glow,
+	.animate-float,
+	.animate-warp-in,
+	.animate-page-enter,
+	.animate-nav-item,
+	.gradient-text {
+		animation: none;
+		opacity: 1;
+		transform: none;
+		filter: none;
+	}
+	.gradient-text {
+		background: #a855f7;
+		-webkit-text-fill-color: unset;
+		color: #a855f7;
+		background-clip: unset;
+		-webkit-background-clip: unset;
+	}
 }
