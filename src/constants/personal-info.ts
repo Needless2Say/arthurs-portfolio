@@ -22,7 +22,7 @@ export const EDUCATION: Education[] = [
     location: "Ann Arbor, MI",
     degree: "B.S. Computer Science Engineering",
     minor: "Data Science Minor",
-    gpa: "3.77 / 4.0",
+    gpa: "3.75 / 4.0",
     period: "Sep 2022 – Sep 2025",
     coursework: [
       "EECS 281 – Data Structures & Algorithms",

@@ -14,7 +14,7 @@ export const SKILL_GROUPS: SkillGroup[] = [
   {
     label: "Backend",
     color: "green",
-    skills: ["FastAPI", "REST APIs", "Alembic", "Node.js"],
+    skills: ["FastAPI", "REST APIs", "Alembic"],
   },
   {
     label: "Data & Cloud",

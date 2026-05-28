@@ -18,30 +18,36 @@ export default function Blog() {
           subtitle="Thoughts on code, data, and building things."
         />
 
-        <div className="space-y-4">
-          {BLOG_POSTS.map((post) => (
-            <Card key={post.slug} glow="purple" className="group cursor-default">
-              <h2 className="text-white font-bold text-lg mb-2 group-hover:text-purple-300 transition-colors">
-                {post.title}
-              </h2>
-              <p className="text-slate-400 text-sm leading-relaxed mb-4">{post.excerpt}</p>
-              <div className="flex flex-wrap gap-1.5 mb-4">
-                {post.tags.map((tag) => (
-                  <TechBadge key={tag} label={tag} color="nebula" />
-                ))}
-              </div>
-              <div className="flex items-center gap-4 text-slate-500 font-mono text-xs">
-                <span>{post.date}</span>
-                <span>·</span>
-                <span>{post.readTime} min read</span>
-              </div>
-            </Card>
-          ))}
-        </div>
-
-        <p className="text-center text-slate-700 font-mono text-xs mt-12">
-          {"// full posts coming soon"}
-        </p>
+        {BLOG_POSTS.length > 0 ? (
+          <div className="space-y-4">
+            {BLOG_POSTS.map((post) => (
+              <Card key={post.slug} glow="purple" className="group cursor-default">
+                <h2 className="text-white font-bold text-lg mb-2 group-hover:text-purple-300 transition-colors">
+                  {post.title}
+                </h2>
+                <p className="text-slate-400 text-sm leading-relaxed mb-4">{post.excerpt}</p>
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {post.tags.map((tag) => (
+                    <TechBadge key={tag} label={tag} color="nebula" />
+                  ))}
+                </div>
+                <div className="flex items-center gap-4 text-slate-500 font-mono text-xs">
+                  <span>{post.date}</span>
+                  <span>·</span>
+                  <span>{post.readTime} min read</span>
+                </div>
+              </Card>
+            ))}
+          </div>
+        ) : (
+          <Card className="text-center py-12">
+            <p className="text-slate-300 text-lg font-semibold mb-2">Posts coming soon</p>
+            <p className="text-slate-500 text-sm">
+              Writing is in progress — check back later.
+            </p>
+            <p className="text-slate-700 font-mono text-xs mt-6">{"// BLOG_POSTS.length === 0"}</p>
+          </Card>
+        )}
       </div>
     </div>
   );
