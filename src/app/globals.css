@@ -1,71 +1,133 @@
 @import "tailwindcss";
 
-/*
+/* ─── Base ─────────────────────────────────────────── */
 :root {
-	--background: #ffffff;
-	--foreground: #171717;
-}
-
-@theme inline {
-	--color-background: var(--background);
-	--color-foreground: var(--foreground);
-	--font-sans: var(--font-geist-sans);
-	--font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-	:root {
-		--background: #0a0a0a;
-		--foreground: #ededed;
-	}
+  color-scheme: dark;
 }
 
 body {
-	background: var(--background);
-	color: var(--foreground);
-	font-family: Arial, Helvetica, sans-serif;
-}
-*/
-
-:root {
-	background-image: url("../../public/space_2.jpg");
-	background-repeat: no-repeat;
-	background-size: cover;
+  background-color: #09090f;
+  color: #f1f5f9;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-
-text-gradient-animation {
-	font-family: "Poppins", sans-serif;
-	font-size: 30px;
-	text-transform: uppercase;
-	text-align: center;
-	background: linear-gradient(to right, #fc72ff, #8f68ff, #487bff, #8f68ff, #fc72ff);
-	background-size: 200%;
-	background-clip: text;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	animation: animate-gradient 2.5s linear infinite;
+/* ─── Scrollbar ─────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #09090f;
+}
+::-webkit-scrollbar-thumb {
+  background: #4c1d95;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #7c3aed;
 }
 
-@keyframes animate-gradient {
-	to {
-		background-position: 200%;
-	}
+/* ─── Accessibility ─────────────────────────────────── */
+.skip-to-content {
+  position: absolute;
+  top: -9999px;
+  left: 0;
+  padding: 8px 16px;
+  background: #7c3aed;
+  color: white;
+  z-index: 9999;
+  border-radius: 0 0 8px 0;
+  font-size: 0.875rem;
+}
+.skip-to-content:focus {
+  top: 0;
 }
 
+/* ─── Glass card ─────────────────────────────────────── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+}
 
-/* @keyframes animate {
-	0% {
-		background-position: 0 100%;
-	}
-	50% {
-		background-position: 100% 0;
-	}
-	100% {
-		background-position: 0 100%;
-	}
-} */
+/* ─── Text effects ──────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #a855f7 0%, #60a5fa 50%, #a855f7 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 6s linear infinite;
+}
 
+.glow-text {
+  text-shadow: 0 0 30px rgba(168, 85, 247, 0.35), 0 0 60px rgba(168, 85, 247, 0.15);
+}
 
+/* ─── Animations ─────────────────────────────────────── */
+@keyframes gradient-shift {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
 
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out both;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ─── Reduced motion ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-fade-in,
+  .animate-pulse-glow,
+  .animate-float,
+  .gradient-text {
+    animation: none;
+  }
+  .gradient-text {
+    background: #a855f7;
+    -webkit-text-fill-color: unset;
+    color: #a855f7;
+    background-clip: unset;
+    -webkit-background-clip: unset;
+  }
+}

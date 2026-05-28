@@ -1,41 +1,94 @@
-"use client";
-
-import Navbar from "@/ui/navbar";
+import type { Metadata } from "next";
 import Link from "next/link";
+import SectionHeader from "@/components/ui/SectionHeader";
+import CopyButton from "@/components/ui/CopyButton";
+import { PERSONAL_INFO } from "@/constants/personal-info";
 
+export const metadata: Metadata = {
+  title: "Contact",
+  description: "Get in touch with Arthur Krieger.",
+};
 
-export default function About() {
-    return (
-        <div className="min-h-screen flex flex-col items-center justify-center">
-            {/* Navbar */}
-            <Navbar currentPage={"Contact"} />
+const contacts = [
+  {
+    label: "Email",
+    value: PERSONAL_INFO.email,
+    href: `mailto:${PERSONAL_INFO.email}`,
+    description: "Drop me a line anytime",
+    borderClass:
+      "hover:border-purple-500/50 hover:shadow-[0_0_24px_rgba(124,58,237,0.15)]",
+    copyable: true,
+  },
+  {
+    label: "LinkedIn",
+    value: "arthur-krieger",
+    href: PERSONAL_INFO.links.linkedin,
+    description: "Connect with me professionally",
+    borderClass:
+      "hover:border-blue-500/50 hover:shadow-[0_0_24px_rgba(59,130,246,0.15)]",
+    copyable: false,
+  },
+  {
+    label: "GitHub",
+    value: "Needless2Say",
+    href: PERSONAL_INFO.links.github,
+    description: "Browse my repositories",
+    borderClass:
+      "hover:border-slate-400/50 hover:shadow-[0_0_24px_rgba(148,163,184,0.1)]",
+    copyable: false,
+  },
+  {
+    label: "Instagram",
+    value: "needless2say_dbfan",
+    href: PERSONAL_INFO.links.instagram,
+    description: "Follow my journey",
+    borderClass:
+      "hover:border-pink-500/50 hover:shadow-[0_0_24px_rgba(236,72,153,0.15)]",
+    copyable: false,
+  },
+];
 
-            <main className="flex flex-col items-center justify-center flex-grow px-4 py-8 mt-20
-                             sm:mt-0">
-                {/* Contact Container */}
-                <div className="flex flex-col justify-center content-center items-center mt-12 text-2xl sm:text-4xl lg:text-5xl">
-                    <div className="px-1 py-2 my-8 hover:bg-slate-700/[.70]">
-                        <div className="hover:cursor-pointer transition-colors duration-500 umich-text">
-                            <Link href="mailto:kriegear@umich.edu" target="_blank">kriegear@umich.edu</Link>
-                        </div>
-                    </div>
-                    <div className="px-1 py-2 my-8 hover:bg-slate-700/[.70]">
-                        <span className="hover:cursor-pointer hover:text-blue-600 hover:underline">
-                            <Link href="https://www.linkedin.com/in/arthur-krieger-3b986220a/" target="_blank">LinkedIn</Link>
-                        </span>
-                    </div>
-                    <div className="px-1 py-2 my-8 hover:bg-slate-700/[.70]">
-                        <span className="hover:cursor-pointer hover:text-black hover:underline">
-                        <Link href="https://github.com/Needless2Say" target="_blank">GitHub</Link>
-                        </span>
-                    </div>
-                    <div className="px-1 py-2 my-8 hover:bg-slate-700/[.70]">
-                        <span className="hover:cursor-pointer hover:text-red-500 hover:underline">
-                        <Link href="https://www.instagram.com/needless2say_dbfan/" target="_blank">Instagram</Link>
-                        </span>
-                    </div>
-                </div>
-            </main>
+export default function Contact() {
+  return (
+    <div className="min-h-screen pt-24 pb-16 px-4">
+      <div className="max-w-2xl mx-auto">
+        <SectionHeader
+          title="Let's Connect"
+          subtitle="I'm always open to new opportunities and conversations."
+          align="center"
+        />
+
+        <div className="grid sm:grid-cols-2 gap-4 mt-10">
+          {contacts.map((contact) => (
+            <div
+              key={contact.label}
+              className={`glass-card p-6 transition-all duration-300 border ${contact.borderClass}`}
+            >
+              <p className="text-slate-500 font-mono text-xs uppercase tracking-widest mb-1">
+                {contact.label}
+              </p>
+              <p className="text-white font-medium text-lg mb-1">{contact.value}</p>
+              <p className="text-slate-400 text-sm mb-5">{contact.description}</p>
+
+              <div className="flex items-center gap-3">
+                <Link
+                  href={contact.href}
+                  target={contact.copyable ? undefined : "_blank"}
+                  rel={contact.copyable ? undefined : "noopener noreferrer"}
+                  className="text-sm text-slate-400 hover:text-white transition-colors font-mono"
+                >
+                  {contact.copyable ? "Send email →" : "Open →"}
+                </Link>
+                {contact.copyable && <CopyButton text={PERSONAL_INFO.email} />}
+              </div>
+            </div>
+          ))}
         </div>
-    );
+
+        <p className="text-center text-slate-600 text-xs mt-12 font-mono">
+          Based in Chicago, IL · Open to remote & hybrid roles
+        </p>
+      </div>
+    </div>
+  );
 }
