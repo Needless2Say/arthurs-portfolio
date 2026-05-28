@@ -113,24 +113,34 @@ export default function Projects() {
               <p className="text-slate-600 font-mono text-sm mb-4">{"// more projects"}</p>
             </Reveal>
             <div className="grid sm:grid-cols-2 gap-4">
-              {rest.map((project, i) => (
-                <Reveal key={project.title} delay={i * 80}>
-                  <Card glow="blue">
-                    <p className="text-blue-400 font-mono text-xs uppercase tracking-wider mb-1">
-                      {project.subtitle}
-                    </p>
-                    <h3 className="text-white font-bold text-lg mb-2">{project.title}</h3>
-                    <p className="text-slate-400 text-sm leading-relaxed mb-4">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {project.techStack.map((t) => (
-                        <TechBadge key={t} label={t} />
-                      ))}
-                    </div>
-                  </Card>
-                </Reveal>
-              ))}
+              {rest.map((project, i) => {
+                const [primaryLabel, ecosystemLabel] = (project.subtitle ?? "").split(" · ");
+                return (
+                  <Reveal key={project.title} delay={i * 80}>
+                    <Card glow="blue">
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
+                        <p className="text-blue-400 font-mono text-xs uppercase tracking-wider">
+                          {primaryLabel}
+                        </p>
+                        {ecosystemLabel && (
+                          <span className="text-xs text-yellow-400/80 border border-yellow-400/25 rounded-full px-2 py-0.5 font-mono">
+                            {ecosystemLabel}
+                          </span>
+                        )}
+                      </div>
+                      <h3 className="text-white font-bold text-lg mb-2">{project.title}</h3>
+                      <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                        {project.description}
+                      </p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {project.techStack.map((t) => (
+                          <TechBadge key={t} label={t} />
+                        ))}
+                      </div>
+                    </Card>
+                  </Reveal>
+                );
+              })}
               {/* Placeholder */}
               <Reveal delay={rest.length * 80}>
                 <div className="glass-card p-6 border border-dashed border-white/10 opacity-50">
