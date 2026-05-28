@@ -6,6 +6,7 @@ import { SKILL_GROUPS } from "@/constants/skills";
 import SectionHeader from "@/components/ui/SectionHeader";
 import TechBadge from "@/components/ui/TechBadge";
 import Card from "@/components/ui/Card";
+import Reveal from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: "About",
@@ -16,16 +17,12 @@ export default function About() {
   return (
     <div className="min-h-screen pt-24 pb-16 px-4">
       <div className="max-w-4xl mx-auto">
+
         {/* ── Hero: Photo + Bio ── */}
-        <div className="flex flex-col lg:flex-row gap-10 mb-16 items-start">
+        <Reveal className="flex flex-col lg:flex-row gap-10 mb-16 items-start">
           <div className="flex-shrink-0 mx-auto lg:mx-0">
             <div className="relative w-44 h-60 rounded-xl overflow-hidden border border-purple-500/20 shadow-[0_0_40px_rgba(124,58,237,0.15)]">
-              <Image
-                src={me_pic}
-                alt="Arthur Krieger"
-                fill
-                className="object-cover"
-              />
+              <Image src={me_pic} alt="Arthur Krieger" fill className="object-cover" />
             </div>
           </div>
 
@@ -45,16 +42,18 @@ export default function About() {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
 
         {/* ── Experience Timeline ── */}
         <section className="mb-16">
-          <SectionHeader title="Experience" />
+          <Reveal>
+            <SectionHeader title="Experience" />
+          </Reveal>
           <div className="relative">
             <div className="absolute left-4 top-2 bottom-2 w-px bg-gradient-to-b from-purple-600/50 via-blue-600/30 to-transparent" />
             <div className="space-y-6">
               {EXPERIENCE.map((exp, i) => (
-                <div key={i} className="relative pl-12">
+                <Reveal key={i} className="relative pl-12" delay={i * 90}>
                   <div className="absolute left-4 top-5 w-4 h-4 rounded-full bg-[#09090f] border-2 border-purple-500 -translate-x-1/2 flex items-center justify-center">
                     <div className="w-1.5 h-1.5 rounded-full bg-purple-400" />
                   </div>
@@ -83,7 +82,7 @@ export default function About() {
                       ))}
                     </div>
                   </Card>
-                </div>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -91,48 +90,57 @@ export default function About() {
 
         {/* ── Education ── */}
         <section className="mb-16">
-          <SectionHeader title="Education" />
+          <Reveal>
+            <SectionHeader title="Education" />
+          </Reveal>
           <div className="grid gap-4">
             {EDUCATION.map((edu, i) => (
-              <Card key={i} glow="blue">
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
-                  <div>
-                    <h3 className="text-white font-bold">{edu.school}</h3>
-                    <p className="text-blue-300 text-sm mt-0.5">{edu.degree}</p>
-                    {edu.minor && <p className="text-slate-400 text-sm">{edu.minor}</p>}
-                    {edu.honors && (
-                      <p className="text-yellow-400 text-sm font-medium mt-1">{edu.honors}</p>
-                    )}
+              <Reveal key={i} delay={i * 90}>
+                <Card glow="blue">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+                    <div>
+                      <h3 className="text-white font-bold">{edu.school}</h3>
+                      <p className="text-blue-300 text-sm mt-0.5">{edu.degree}</p>
+                      {edu.minor && <p className="text-slate-400 text-sm">{edu.minor}</p>}
+                      {edu.honors && (
+                        <p className="text-yellow-400 text-sm font-medium mt-1">{edu.honors}</p>
+                      )}
+                    </div>
+                    <div className="text-right mt-2 sm:mt-0 flex-shrink-0">
+                      <p className="text-slate-400 font-mono text-xs">{edu.period}</p>
+                      <p className="text-slate-500 text-xs">{edu.location}</p>
+                      <p className="text-yellow-400 font-mono text-xs mt-1">GPA {edu.gpa}</p>
+                    </div>
                   </div>
-                  <div className="text-right mt-2 sm:mt-0 flex-shrink-0">
-                    <p className="text-slate-400 font-mono text-xs">{edu.period}</p>
-                    <p className="text-slate-500 text-xs">{edu.location}</p>
-                    <p className="text-yellow-400 font-mono text-xs mt-1">GPA {edu.gpa}</p>
-                  </div>
-                </div>
-              </Card>
+                </Card>
+              </Reveal>
             ))}
           </div>
         </section>
 
         {/* ── Skills ── */}
         <section>
-          <SectionHeader title="Skills" />
+          <Reveal>
+            <SectionHeader title="Skills" />
+          </Reveal>
           <div className="space-y-5">
-            {SKILL_GROUPS.map((group) => (
-              <div key={group.label}>
-                <p className="text-slate-500 font-mono text-xs uppercase tracking-widest mb-2">
-                  {group.label}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {group.skills.map((skill) => (
-                    <TechBadge key={skill} label={skill} color={group.color} />
-                  ))}
+            {SKILL_GROUPS.map((group, i) => (
+              <Reveal key={group.label} delay={i * 70}>
+                <div>
+                  <p className="text-slate-500 font-mono text-xs uppercase tracking-widest mb-2">
+                    {group.label}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {group.skills.map((skill) => (
+                      <TechBadge key={skill} label={skill} color={group.color} />
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </section>
+
       </div>
     </div>
   );
