@@ -53,7 +53,7 @@ export default function StarField() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d")!;
     if (!ctx) return;
 
     function makeNebulae(w: number, h: number): Nebula[] {
@@ -94,17 +94,17 @@ export default function StarField() {
       };
     });
 
-    function spawnShootingStar(): ShootingStar {
+    function spawnShootingStar(w: number, h: number): ShootingStar {
       const speed = 10 + Math.random() * 8;
       const angleDeg = 28 + Math.random() * 30;
       const angleRad = angleDeg * (Math.PI / 180);
       const dir = Math.random() > 0.5 ? 1 : -1;
       const x = dir > 0
-        ? canvas.width * (0.05 + Math.random() * 0.35)
-        : canvas.width * (0.60 + Math.random() * 0.35);
+        ? w * (0.05 + Math.random() * 0.35)
+        : w * (0.60 + Math.random() * 0.35);
       return {
         x,
-        y: canvas.height * (Math.random() * 0.38),
+        y: h * (Math.random() * 0.38),
         vx: Math.cos(angleRad) * speed * dir,
         vy: Math.sin(angleRad) * speed,
         length: 85 + Math.random() * 115,
@@ -198,7 +198,7 @@ export default function StarField() {
 
       // ── Spawn shooting stars ─────────────────────────────────
       if (timestamp >= nextSpawnRef.current && shootingStarsRef.current.length < 2) {
-        shootingStarsRef.current.push(spawnShootingStar());
+        shootingStarsRef.current.push(spawnShootingStar(canvas.width, canvas.height));
         nextSpawnRef.current = timestamp + 3500 + Math.random() * 7000;
       }
 
