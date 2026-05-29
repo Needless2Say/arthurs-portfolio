@@ -2,6 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import HyperdriveCanvas from "./HyperdriveCanvas";
+import BlackHoleCanvas  from "./BlackHoleCanvas";
+import WormholeCanvas   from "./WormholeCanvas";
+import PulsarCanvas     from "./PulsarCanvas";
+import NebulaCanvas     from "./NebulaCanvas";
+import FalconCanvas     from "./FalconCanvas";
 
 const STORAGE_KEY = "home_loader_v2";
 const DISPLAY_MS  = 2500;
@@ -64,8 +69,13 @@ function HyperdriveAnimation() {
 
 // Each entry: the animation component + the eyebrow label shown in the card
 const ANIMATIONS: Array<{ label: string; Component: () => React.JSX.Element }> = [
-	{ label: "◇ initializing systems ◇",  Component: PlanetAnimation },
-	{ label: "◇ entering hyperspace ◇",   Component: HyperdriveAnimation },
+	{ label: "◇ initializing systems ◇",   Component: PlanetAnimation },
+	{ label: "◇ entering hyperspace ◇",    Component: HyperdriveAnimation },
+	{ label: "◇ event horizon detected ◇", Component: () => <BlackHoleCanvas /> },
+	{ label: "◇ wormhole opening ◇",        Component: () => <WormholeCanvas /> },
+	{ label: "◇ pulsar signal acquired ◇",  Component: () => <PulsarCanvas /> },
+	{ label: "◇ nebula sector ◇",           Component: () => <NebulaCanvas /> },
+	{ label: "◇ punch it chewie ◇",         Component: () => <FalconCanvas /> },
 ];
 
 // ── Loader ────────────────────────────────────────────────────
