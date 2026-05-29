@@ -24,16 +24,67 @@ export const viewport: Viewport = {
 	maximumScale: 5,
 };
 
+const BASE_URL = "https://needless2say.github.io/arthurs-portfolio";
+
 export const metadata: Metadata = {
+	metadataBase: new URL(BASE_URL),
 	title: {
-		default: "Arthur Krieger",
+		default: "Arthur Krieger | Software Engineer & KriegerDataForge",
 		template: "%s | Arthur Krieger",
 	},
-	description: "Software Engineer & CS + Data Science grad from the University of Michigan. Building at the intersection of data and software.",
+	description:
+		"Arthur Krieger — Software/Platform Engineer at Charles Schwab, CS + Data Science graduate from the University of Michigan (2025). Founder of KriegerDataForge. Building full-stack apps, data pipelines, ML systems, and fitness technology from Chicago, IL.",
+	keywords: [
+		"Arthur Krieger",
+		"KriegerDataForge",
+		"Software Engineer Chicago",
+		"Platform Engineer",
+		"Data Engineer",
+		"Full Stack Developer",
+		"Machine Learning Engineer",
+		"University of Michigan Computer Science",
+		"Charles Schwab engineer",
+		"Python developer",
+		"Next.js developer",
+		"TypeScript",
+		"React developer",
+		"Snowflake",
+		"data pipelines",
+		"fitness app",
+		"fitness technology",
+		"software portfolio",
+	],
+	authors: [{ name: "Arthur Krieger", url: BASE_URL }],
+	creator: "Arthur Krieger",
+	publisher: "KriegerDataForge",
+	robots: {
+		index: true,
+		follow: true,
+		googleBot: {
+			index: true,
+			follow: true,
+			"max-video-preview": -1,
+			"max-image-preview": "large",
+			"max-snippet": -1,
+		},
+	},
 	openGraph: {
 		type: "website",
 		locale: "en_US",
-		siteName: "Arthur Krieger",
+		url: BASE_URL,
+		siteName: "Arthur Krieger | KriegerDataForge",
+		title: "Arthur Krieger | Software Engineer & KriegerDataForge",
+		description:
+			"Software/Platform Engineer at Charles Schwab. CS + Data Science, University of Michigan 2025. Founder of KriegerDataForge — building data pipelines, full-stack apps, ML systems, and fitness technology.",
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Arthur Krieger | Software Engineer & KriegerDataForge",
+		description:
+			"Software/Platform Engineer at Charles Schwab. CS + Data Science, UMich 2025. Founder of KriegerDataForge. Building in Chicago, IL.",
+	},
+	alternates: {
+		canonical: BASE_URL,
 	},
 };
 
@@ -45,6 +96,43 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<head>
+				{/* JSON-LD: Person + WebSite structured data */}
+				<script
+					type="application/ld+json"
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify([
+							{
+								"@context": "https://schema.org",
+								"@type": "Person",
+								name: "Arthur Krieger",
+								jobTitle: "Software/Platform Engineer",
+								worksFor: { "@type": "Organization", name: "Charles Schwab" },
+								alumniOf: { "@type": "EducationalOrganization", name: "University of Michigan" },
+								url: BASE_URL,
+								email: "kriegear@umich.edu",
+								address: { "@type": "PostalAddress", addressLocality: "Chicago", addressRegion: "IL", addressCountry: "US" },
+								sameAs: [
+									"https://www.linkedin.com/in/arthur-krieger-3b986220a/",
+									"https://github.com/Needless2Say",
+								],
+								knowsAbout: [
+									"Software Engineering", "Data Engineering", "Machine Learning",
+									"Python", "Next.js", "TypeScript", "React", "Snowflake",
+									"Data Pipelines", "Full Stack Development", "Fitness Technology",
+								],
+								founder: { "@type": "Organization", name: "KriegerDataForge" },
+							},
+							{
+								"@context": "https://schema.org",
+								"@type": "WebSite",
+								name: "Arthur Krieger | KriegerDataForge",
+								url: BASE_URL,
+								description: "Portfolio of Arthur Krieger — Software/Platform Engineer, KriegerDataForge founder, and builder of full-stack apps, data pipelines, and fitness technology.",
+								author: { "@type": "Person", name: "Arthur Krieger" },
+							},
+						]),
+					}}
+				/>
 				<Script async src="https://www.googletagmanager.com/gtag/js?id=G-98X0KCB8Z9" />
 				<Script id="google-analytics">
 					{`

@@ -8,7 +8,15 @@ import { SKILL_GROUPS } from "@/constants/skills";
 
 export const metadata: Metadata = {
 	title: "Resume",
-	description: "Arthur Krieger's resume — experience, education, and skills.",
+	description:
+		"Arthur Krieger's resume — Software/Platform Engineer at Charles Schwab, Data Engineer intern at Revantage (Blackstone), UMich CS + Data Science 2025. Skills: Python, TypeScript, React, Next.js, Snowflake, SQL, GCP, Terraform, and more.",
+	alternates: { canonical: "https://needless2say.github.io/arthurs-portfolio/resume" },
+	openGraph: {
+		title: "Resume | Arthur Krieger",
+		description:
+			"Software/Platform Engineer at Charles Schwab. UMich CS + Data Science 2025. Experience in data pipelines, DevOps, dashboards, and full-stack development.",
+		url: "https://needless2say.github.io/arthurs-portfolio/resume",
+	},
 };
 
 export default function Resume() {

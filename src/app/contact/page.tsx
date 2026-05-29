@@ -7,7 +7,15 @@ import { PERSONAL_INFO } from "@/constants/personal-info";
 
 export const metadata: Metadata = {
 	title: "Contact",
-	description: "Get in touch with Arthur Krieger.",
+	description:
+		"Get in touch with Arthur Krieger — Software/Platform Engineer, KriegerDataForge founder. Open to new opportunities, collaborations, and conversations about software, data, fitness technology, and more.",
+	alternates: { canonical: "https://needless2say.github.io/arthurs-portfolio/contact" },
+	openGraph: {
+		title: "Contact Arthur Krieger | KriegerDataForge",
+		description:
+			"Reach out to Arthur Krieger — Software Engineer, data builder, KriegerDataForge founder. Open to new opportunities and collaborations.",
+		url: "https://needless2say.github.io/arthurs-portfolio/contact",
+	},
 };
 
 const contacts = [

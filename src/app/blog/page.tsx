@@ -6,7 +6,15 @@ import { BLOG_POSTS } from "@/constants/blog";
 
 export const metadata: Metadata = {
 	title: "Blog",
-	description: "Thoughts on code, data, and building things — by Arthur Krieger.",
+	description:
+		"Technical writing by Arthur Krieger — thoughts on software engineering, data pipelines, machine learning, fitness technology, and building KriegerDataForge.",
+	alternates: { canonical: "https://needless2say.github.io/arthurs-portfolio/blog" },
+	openGraph: {
+		title: "Blog | Arthur Krieger & KriegerDataForge",
+		description:
+			"Software engineering, data, ML, fitness technology, and lessons from building KriegerDataForge — by Arthur Krieger.",
+		url: "https://needless2say.github.io/arthurs-portfolio/blog",
+	},
 };
 
 export default function Blog() {

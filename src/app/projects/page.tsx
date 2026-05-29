@@ -8,7 +8,15 @@ import { PROJECTS } from "@/constants/projects";
 
 export const metadata: Metadata = {
 	title: "Projects",
-	description: "Personal projects built by Arthur Krieger.",
+	description:
+		"Projects built by Arthur Krieger — full-stack web apps, data pipelines, ML systems, and fitness technology under the KriegerDataForge brand. Built with Next.js, React, TypeScript, FastAPI, Python, PostgreSQL, and more.",
+	alternates: { canonical: "https://needless2say.github.io/arthurs-portfolio/projects" },
+	openGraph: {
+		title: "Projects | Arthur Krieger & KriegerDataForge",
+		description:
+			"Full-stack apps, data pipelines, ML systems, and fitness technology built by Arthur Krieger under the KriegerDataForge brand.",
+		url: "https://needless2say.github.io/arthurs-portfolio/projects",
+	},
 };
 
 export default function Projects() {

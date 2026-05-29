@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ROUTES } from "@/constants/routes";
 import { PERSONAL_INFO } from "@/constants/personal-info";
@@ -5,6 +6,19 @@ import TypewriterText from "@/components/ui/TypewriterText";
 import HomeLoader from "@/components/ui/HomeLoader";
 import MissionTimeline from "@/components/ui/MissionTimeline";
 import SocialLinks from "@/components/ui/SocialLinks";
+
+export const metadata: Metadata = {
+	title: "Arthur Krieger | Software Engineer & KriegerDataForge Founder",
+	description:
+		"Arthur Krieger — Software/Platform Engineer at Charles Schwab, CS + Data Science from the University of Michigan (2025). Founder of KriegerDataForge. Building data pipelines, full-stack apps, ML systems, and fitness technology from Chicago, IL. Open to new opportunities.",
+	alternates: { canonical: "https://needless2say.github.io/arthurs-portfolio" },
+	openGraph: {
+		title: "Arthur Krieger | Software Engineer & KriegerDataForge Founder",
+		description:
+			"Software/Platform Engineer at Charles Schwab. Founder of KriegerDataForge. Building data pipelines, full-stack apps, ML systems, and fitness technology. Based in Chicago, IL.",
+		url: "https://needless2say.github.io/arthurs-portfolio",
+	},
+};
 
 const STATS = [
 	{ value: "3",          label: "Internships" },
