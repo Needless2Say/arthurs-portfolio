@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -73,7 +73,7 @@ export default function NotFound() {
 				>
 					<Link
 						href="/"
-						className="px-7 py-3 rounded-full bg-purple-600 hover:bg-purple-500 text-white font-semibold transition-all duration-300 hover:shadow-[0_0_24px_rgba(124,58,237,0.5)] w-full sm:w-auto text-center text-sm"
+						className="px-7 py-3 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all duration-300 hover:shadow-[0_0_24px_rgba(37,99,235,0.5)] w-full sm:w-auto text-center text-sm"
 					>
 						↩ Return to Home Base
 					</Link>

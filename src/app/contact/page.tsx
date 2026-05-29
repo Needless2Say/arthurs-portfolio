@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import SectionHeader from "@/components/ui/SectionHeader";
 import CopyButton from "@/components/ui/CopyButton";
@@ -24,7 +24,7 @@ const contacts = [
 		value: PERSONAL_INFO.email,
 		href: `mailto:${PERSONAL_INFO.email}`,
 		description: "Drop me a line anytime",
-		borderClass: "hover:border-purple-500/50 hover:shadow-[0_0_24px_rgba(124,58,237,0.15)]",
+		borderClass: "hover:border-blue-500/50 hover:shadow-[0_0_24px_rgba(37,99,235,0.15)]",
 		copyable: true,
 	},
 	{

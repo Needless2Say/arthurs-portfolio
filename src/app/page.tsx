@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ROUTES } from "@/constants/routes";
@@ -39,7 +39,7 @@ export default function Home() {
 
 				{/* Eyebrow */}
 				<p
-					className="text-purple-400 font-mono text-xs tracking-[0.25em] uppercase mb-6 animate-fade-in"
+					className="text-blue-400 font-mono text-xs tracking-[0.25em] uppercase mb-6 animate-fade-in"
 					style={{ animationDelay: "0s" }}
 				>
 					Ann Arbor → Chicago
@@ -53,7 +53,7 @@ export default function Home() {
 					Arthur
 				</h1>
 				<h1
-					className="text-6xl sm:text-7xl md:text-8xl font-bold gradient-text leading-tight mb-5 pb-2 animate-fade-in-up"
+					className="text-6xl sm:text-7xl md:text-8xl font-bold name-gradient-text leading-tight mb-5 pb-2 animate-fade-in-up"
 					style={{ animationDelay: "0.2s" }}
 				>
 					Krieger
@@ -61,7 +61,7 @@ export default function Home() {
 
 				{/* Typewriter role */}
 				<p
-					className="text-purple-300 font-mono text-sm tracking-wider mb-4 h-5 animate-fade-in"
+					className="text-blue-300 font-mono text-sm tracking-wider mb-4 h-5 animate-fade-in"
 					style={{ animationDelay: "0.25s" }}
 				>
 					<TypewriterText />
@@ -112,7 +112,7 @@ export default function Home() {
 				>
 					<Link
 						href={ROUTES.PROJECTS}
-						className="px-8 py-3 rounded-full bg-purple-600 hover:bg-purple-500 text-white font-semibold transition-all duration-300 hover:shadow-[0_0_24px_rgba(124,58,237,0.5)] w-full sm:w-auto text-center text-sm"
+						className="px-8 py-3 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all duration-300 hover:shadow-[0_0_24px_rgba(37,99,235,0.5)] w-full sm:w-auto text-center text-sm"
 					>
 						View My Work
 					</Link>
@@ -145,7 +145,7 @@ export default function Home() {
 						scroll
 					</span>
 					<div className="w-5 h-8 rounded-full border border-white/10 flex items-start justify-center pt-1.5 animate-pulse-glow">
-						<div className="w-0.5 h-1.5 rounded-full bg-purple-500 animate-float" />
+						<div className="w-0.5 h-1.5 rounded-full bg-blue-500 animate-float" />
 					</div>
 				</div>
 
@@ -161,7 +161,7 @@ export default function Home() {
 		<div className="pb-28 pt-4">
 			<section className="relative w-full max-w-3xl mx-auto px-4">
 				<div className="text-center mb-8">
-					<p className="text-cyan-400 font-mono text-[10px] tracking-[0.4em] uppercase mb-2">
+					<p className="text-yellow-400 font-mono text-[10px] tracking-[0.4em] uppercase mb-2">
 						◇ base of operations ◇
 					</p>
 					<h2 className="text-3xl sm:text-4xl font-bold gradient-text glow-text mb-5 pb-2">
@@ -172,12 +172,12 @@ export default function Home() {
 					</p>
 				</div>
 
-				<div className="relative group rounded-xl overflow-hidden border border-cyan-500/20 shadow-[0_0_60px_rgba(6,182,212,0.08)] bg-black/40 transition-all duration-300 hover:border-cyan-400/40 hover:shadow-[0_0_80px_rgba(6,182,212,0.15)] max-w-2xl mx-auto">
-					{/* HUD corners */}
-					<span className="pointer-events-none absolute top-2 left-2  z-10 w-4 h-4 border-t-2 border-l-2 border-cyan-400/70 rounded-tl-sm transition-all duration-300 group-hover:border-cyan-300" />
-					<span className="pointer-events-none absolute top-2 right-2 z-10 w-4 h-4 border-t-2 border-r-2 border-cyan-400/70 rounded-tr-sm transition-all duration-300 group-hover:border-cyan-300" />
-					<span className="pointer-events-none absolute bottom-[2.75rem] left-2  z-10 w-4 h-4 border-b-2 border-l-2 border-cyan-400/70 rounded-bl-sm transition-all duration-300 group-hover:border-cyan-300" />
-					<span className="pointer-events-none absolute bottom-[2.75rem] right-2 z-10 w-4 h-4 border-b-2 border-r-2 border-cyan-400/70 rounded-br-sm transition-all duration-300 group-hover:border-cyan-300" />
+				<div className="relative group rounded-xl overflow-hidden border border-yellow-500/20 shadow-[0_0_60px_rgba(234,179,8,0.08)] bg-black/40 transition-all duration-300 hover:border-yellow-400/40 hover:shadow-[0_0_80px_rgba(234,179,8,0.15)] max-w-2xl mx-auto">
+					{/* HUD corners — blue lines, yellow glow outline */}
+					<span className="pointer-events-none absolute top-2 left-2  z-10 w-4 h-4 border-t-2 border-l-2 border-blue-400 rounded-tl-sm transition-all duration-300 group-hover:border-blue-300" style={{ filter: "drop-shadow(0 0 3px rgba(250,204,21,0.85))" }} />
+					<span className="pointer-events-none absolute top-2 right-2 z-10 w-4 h-4 border-t-2 border-r-2 border-blue-400 rounded-tr-sm transition-all duration-300 group-hover:border-blue-300" style={{ filter: "drop-shadow(0 0 3px rgba(250,204,21,0.85))" }} />
+					<span className="pointer-events-none absolute bottom-[2.75rem] left-2  z-10 w-4 h-4 border-b-2 border-l-2 border-blue-400 rounded-bl-sm transition-all duration-300 group-hover:border-blue-300" style={{ filter: "drop-shadow(0 0 3px rgba(250,204,21,0.85))" }} />
+					<span className="pointer-events-none absolute bottom-[2.75rem] right-2 z-10 w-4 h-4 border-b-2 border-r-2 border-blue-400 rounded-br-sm transition-all duration-300 group-hover:border-blue-300" style={{ filter: "drop-shadow(0 0 3px rgba(250,204,21,0.85))" }} />
 
 					{/* Image */}
 					<div className="relative w-full aspect-video">
@@ -201,13 +201,13 @@ export default function Home() {
 					</div>
 
 					{/* Status bar */}
-					<div className="flex items-center justify-between px-4 py-2.5 bg-black/65 border-t border-cyan-500/10">
+					<div className="flex items-center justify-between px-4 py-2.5 bg-black/65 border-t border-yellow-500/10">
 						<div className="flex items-center gap-2">
 							<span className="relative flex h-1.5 w-1.5">
 								<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
 								<span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
 							</span>
-							<span className="font-mono text-[10px] tracking-[0.35em] text-cyan-400/80 uppercase">
+							<span className="font-mono text-[10px] tracking-[0.35em] text-yellow-400/80 uppercase">
 								CHICAGO HQ
 							</span>
 						</div>

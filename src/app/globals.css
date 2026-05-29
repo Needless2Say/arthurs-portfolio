@@ -20,11 +20,11 @@ body {
   	background: #09090f;
 }
 ::-webkit-scrollbar-thumb {
-	background: #4c1d95;
+	background: #1e3a8a;
 	border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  	background: #7c3aed;
+  	background: #2563eb;
 }
 
 /* ─── Accessibility ─────────────────────────────────── */
@@ -33,7 +33,7 @@ body {
 	top: -9999px;
 	left: 0;
 	padding: 8px 16px;
-	background: #7c3aed;
+	background: #2563eb;
 	color: white;
 	z-index: 9999;
 	border-radius: 0 0 8px 0;
@@ -54,7 +54,7 @@ body {
 
 /* ─── Text effects ──────────────────────────────────── */
 .gradient-text {
-	background: linear-gradient(135deg, #a855f7 0%, #60a5fa 50%, #a855f7 100%);
+	background: linear-gradient(135deg, #60a5fa 0%, #facc15 50%, #60a5fa 100%);
 	background-size: 200% auto;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -63,7 +63,7 @@ body {
 }
 
 .glow-text {
-  	text-shadow: 0 0 30px rgba(168, 85, 247, 0.35), 0 0 60px rgba(168, 85, 247, 0.15);
+  	text-shadow: 0 0 30px rgba(59, 130, 246, 0.45), 0 0 60px rgba(59, 130, 246, 0.20);
 }
 
 /* ─── Animations ─────────────────────────────────────── */
@@ -168,9 +168,9 @@ body {
 }
 
 /* ─── Home loader ────────────────────────────────────────── */
-@keyframes energy-bar {
-  from { width: 0%; background-position: 0% 50%; }
-  to   { width: 100%; background-position: 200% 50%; }
+@keyframes energy-bar-mask {
+  from { width: 100%; }
+  to   { width: 0%; }
 }
 @keyframes space-ring-expand {
   0%   { transform: scale(0.3);  opacity: 0.75; }
@@ -201,15 +201,15 @@ body {
 /* ─── Stellar collapse (email modal close) ──────────────── */
 @keyframes stellar-collapse {
   /* pre-collapse tremor — barely moving */
-  0%  { opacity:1; transform:scale(1) rotate(0deg) translate(0,0);            filter:brightness(1) blur(0px) saturate(1);   box-shadow:0 0 60px rgba(124,58,237,0.2); }
+  0%  { opacity:1; transform:scale(1) rotate(0deg) translate(0,0);            filter:brightness(1) blur(0px) saturate(1);   box-shadow:0 0 60px rgba(37,99,235,0.2); }
   4%  { opacity:1; transform:scale(1.01) rotate(2deg) translate(2px,-1px);    filter:brightness(1.1) blur(0) saturate(1.2); }
   8%  { opacity:1; transform:scale(1.01) rotate(-1deg) translate(-2px,1px);   filter:brightness(1.2) blur(0) saturate(1.4); }
   /* supernova flash — spin just beginning */
   15% { opacity:1; transform:scale(1.08) rotate(12deg);  filter:brightness(3.2) blur(0) saturate(3);
-        box-shadow:0 0 180px rgba(220,100,255,1), 0 0 80px rgba(255,255,255,0.45), inset 0 0 50px rgba(255,200,255,0.35); }
+        box-shadow:0 0 180px rgba(59,130,246,1), 0 0 80px rgba(255,255,255,0.45), inset 0 0 50px rgba(147,197,253,0.35); }
   /* collapse picks up — clearly spinning */
   32% { opacity:1;  transform:scale(0.78) rotate(75deg);  filter:brightness(4) blur(2px) saturate(3.5);
-        box-shadow:0 0 100px rgba(255,140,255,0.7); }
+        box-shadow:0 0 100px rgba(96,165,250,0.7); }
   /* implosion — 1 full spin */
   57% { opacity:0.6; transform:scale(0.28) rotate(360deg); filter:brightness(2.2) blur(5px) saturate(2); }
   /* near singularity — 2.5 full spins, blurring from speed */
@@ -265,6 +265,21 @@ body {
 .animate-nova-flash          { animation: nova-flash 0.68s ease-out forwards; }
 .animate-backdrop-collapse   { animation: backdrop-collapse 0.78s ease-in forwards; }
 
+/* ─── Static blue→yellow gradient text (name) ───────── */
+.name-gradient-text {
+	background: linear-gradient(to right, #1e3a8a 25%, #facc15 75%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+/* ─── Animated gradient divider line ────────────────── */
+.animate-gradient-line {
+	background: linear-gradient(90deg, #2563eb 0%, #facc15 25%, #3b82f6 50%, #facc15 75%, #2563eb 100%);
+	background-size: 300% auto;
+	animation: gradient-shift 4s linear infinite;
+}
+
 /* ─── Reduced motion ─────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
 	.animate-fade-in-up,
@@ -286,6 +301,7 @@ body {
 	.animate-spark-fly,
 	.animate-nova-flash,
 	.animate-backdrop-collapse,
+	.animate-gradient-line,
 	.gradient-text {
 		animation: none;
 		opacity: 1;
@@ -293,9 +309,9 @@ body {
 		filter: none;
 	}
 	.gradient-text {
-		background: #a855f7;
+		background: #3b82f6;
 		-webkit-text-fill-color: unset;
-		color: #a855f7;
+		color: #3b82f6;
 		background-clip: unset;
 		-webkit-background-clip: unset;
 	}

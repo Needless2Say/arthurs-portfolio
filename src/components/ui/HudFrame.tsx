@@ -1,4 +1,4 @@
-import { cn } from "@/utils/cn";
+﻿import { cn } from "@/utils/cn";
 
 type HudColor = "purple" | "cyan" | "yellow" | "emerald";
 
@@ -11,8 +11,8 @@ interface HudFrameProps {
 }
 
 const colorMap: Record<HudColor, { border: string; text: string; dot: string }> = {
-	purple:  { border: "border-purple-400/70",  text: "text-purple-300",  dot: "bg-purple-400" },
-	cyan:    { border: "border-cyan-400/70",    text: "text-cyan-300",    dot: "bg-cyan-400" },
+	purple:  { border: "border-blue-400/70",  text: "text-blue-300",  dot: "bg-blue-400" },
+	cyan:    { border: "border-yellow-400/70",    text: "text-yellow-300",    dot: "bg-yellow-400" },
 	yellow:  { border: "border-yellow-400/70",  text: "text-yellow-300",  dot: "bg-yellow-400" },
 	emerald: { border: "border-emerald-400/70", text: "text-emerald-300", dot: "bg-emerald-400" },
 };

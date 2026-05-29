@@ -1,4 +1,4 @@
-import { cn } from "@/utils/cn";
+﻿import { cn } from "@/utils/cn";
 
 interface CardProps {
 	children: React.ReactNode;
@@ -7,7 +7,7 @@ interface CardProps {
 }
 
 const glowMap = {
-	purple: "hover:border-purple-500/40 hover:shadow-[0_0_30px_rgba(124,58,237,0.12)]",
+	purple: "hover:border-blue-500/40 hover:shadow-[0_0_30px_rgba(37,99,235,0.12)]",
 	blue: "hover:border-blue-500/40 hover:shadow-[0_0_30px_rgba(59,130,246,0.12)]",
 	gold: "hover:border-yellow-500/40 hover:shadow-[0_0_30px_rgba(251,191,36,0.12)]",
 	none: "",
