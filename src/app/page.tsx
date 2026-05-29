@@ -47,13 +47,13 @@ export default function Home() {
 
 				{/* Name */}
 				<h1
-					className="text-6xl sm:text-7xl md:text-8xl font-bold text-white glow-text leading-tight mb-2 animate-fade-in-up"
+					className="text-6xl sm:text-7xl md:text-8xl font-bold text-white glow-text leading-tight mb-2 pb-2 animate-fade-in-up"
 					style={{ animationDelay: "0.1s" }}
 				>
 					Arthur
 				</h1>
 				<h1
-					className="text-6xl sm:text-7xl md:text-8xl font-bold gradient-text leading-tight mb-5 animate-fade-in-up"
+					className="text-6xl sm:text-7xl md:text-8xl font-bold gradient-text leading-tight mb-5 pb-2 animate-fade-in-up"
 					style={{ animationDelay: "0.2s" }}
 				>
 					Krieger
@@ -164,7 +164,7 @@ export default function Home() {
 					<p className="text-cyan-400 font-mono text-[10px] tracking-[0.4em] uppercase mb-2">
 						◇ base of operations ◇
 					</p>
-					<h2 className="text-3xl sm:text-4xl font-bold gradient-text glow-text mb-2">
+					<h2 className="text-3xl sm:text-4xl font-bold gradient-text glow-text mb-5 pb-2">
 						Chicago HQ
 					</h2>
 					<p className="text-slate-500 text-sm font-mono">

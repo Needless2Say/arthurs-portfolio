@@ -77,7 +77,7 @@ export default async function About() {
 					</div>
 
 					<div className="flex-grow">
-						<h1 className="text-4xl font-bold text-white glow-text mb-1">
+						<h1 className="text-4xl font-bold text-white glow-text mb-2 pb-2">
 							{PERSONAL_INFO.name}
 						</h1>
 						<p className="text-purple-400 font-mono text-sm mb-5">
@@ -280,7 +280,7 @@ export default async function About() {
 							<p className="font-mono text-[10px] tracking-[0.4em] uppercase text-cyan-400/50 mb-2">
 								◇ ALL STATIONS ACTIVE ◇
 							</p>
-							<h2 className="text-3xl md:text-4xl font-bold gradient-text mb-3">
+							<h2 className="text-3xl md:text-4xl font-bold gradient-text mb-3 pb-2">
 								Mission Control
 							</h2>
 							<p className="text-slate-400 text-base mt-2">

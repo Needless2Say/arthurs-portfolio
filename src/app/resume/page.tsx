@@ -27,7 +27,7 @@ export default function Resume() {
 				{/* Header */}
 				<Reveal className="flex items-start justify-between mb-10">
 					<div>
-						<h1 className="text-4xl font-bold text-white glow-text">{PERSONAL_INFO.name}</h1>
+						<h1 className="text-4xl font-bold text-white glow-text pb-2">{PERSONAL_INFO.name}</h1>
 						<p className="text-purple-400 font-mono text-sm mt-1">{PERSONAL_INFO.title}</p>
 					</div>
 					<a
