@@ -167,6 +167,37 @@ body {
   	animation: page-enter 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* ─── Home loader ────────────────────────────────────────── */
+@keyframes energy-bar {
+  from { width: 0%; background-position: 0% 50%; }
+  to   { width: 100%; background-position: 200% 50%; }
+}
+@keyframes space-ring-expand {
+  0%   { transform: scale(0.3);  opacity: 0.75; }
+  100% { transform: scale(2.6);  opacity: 0; }
+}
+@keyframes orb-breathe {
+  0%, 100% { transform: scale(1);    opacity: 0.9; }
+  50%       { transform: scale(1.08); opacity: 1; }
+}
+@keyframes orbit-cw {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes orbit-ccw {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+@keyframes star-blink {
+  0%, 100% { opacity: 0.15; }
+  50%       { opacity: 0.9; }
+}
+
+.animate-orb-breathe  { animation: orb-breathe  2.2s ease-in-out infinite; }
+.animate-orbit-cw-lg  { animation: orbit-cw     9s   linear infinite; }
+.animate-orbit-cw-md  { animation: orbit-cw     6s   linear infinite; }
+.animate-orbit-ccw-sm { animation: orbit-ccw    4s   linear infinite; }
+
 /* ─── Stellar collapse (email modal close) ──────────────── */
 @keyframes stellar-collapse {
   /* pre-collapse tremor — barely moving */
@@ -244,6 +275,10 @@ body {
 	.animate-page-enter,
 	.animate-nav-item,
 	.animate-ping,
+	.animate-orb-breathe,
+	.animate-orbit-cw-lg,
+	.animate-orbit-cw-md,
+	.animate-orbit-ccw-sm,
 	.animate-stellar-collapse,
 	.animate-collapse-shockwave,
 	.animate-collapse-shockwave-2,

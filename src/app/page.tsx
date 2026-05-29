@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ROUTES } from "@/constants/routes";
 import { PERSONAL_INFO } from "@/constants/personal-info";
 import TypewriterText from "@/components/ui/TypewriterText";
-// import GokuIntro from "@/components/ui/GokuIntro";
+import HomeLoader from "@/components/ui/HomeLoader";
 import MissionTimeline from "@/components/ui/MissionTimeline";
 import SocialLinks from "@/components/ui/SocialLinks";
 
@@ -16,7 +16,8 @@ const STATS = [
 export default function Home() {
 	return (
 		<>
-		{/* <GokuIntro /> */}
+		<HomeLoader />
+
 		<div className="min-h-screen flex flex-col items-center justify-center px-4 pt-20 pb-8">
 			<div className="text-center max-w-3xl mx-auto">
 
