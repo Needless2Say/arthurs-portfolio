@@ -77,7 +77,7 @@ export default async function About() {
 					</div>
 
 					<div className="flex-grow">
-						<h1 className="text-4xl font-bold text-white glow-text mb-1">
+						<h1 className="text-4xl font-bold text-white glow-text mb-2 pb-2">
 							{PERSONAL_INFO.name}
 						</h1>
 						<p className="text-purple-400 font-mono text-sm mb-5">
@@ -278,13 +278,13 @@ export default async function About() {
 					<Reveal>
 						<div className="mb-10">
 							<p className="font-mono text-[10px] tracking-[0.4em] uppercase text-cyan-400/50 mb-2">
-								◇ all stations active ◇
+								◇ ALL STATIONS ACTIVE ◇
 							</p>
-							<h2 className="text-3xl md:text-4xl font-bold gradient-text mb-3">
+							<h2 className="text-3xl md:text-4xl font-bold gradient-text mb-3 pb-2">
 								Mission Control
 							</h2>
 							<p className="text-slate-400 text-base mt-2">
-								Where the work gets done — home base and Chicago HQ.
+								Where the work gets done — Home Base and Chicago HQ.
 							</p>
 							<div className="h-px mt-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-transparent" />
 						</div>
@@ -292,8 +292,8 @@ export default async function About() {
 
 					<div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
 						{([
-							{ src: mission_home,    label: "HOME BASE",   location: "Home, IL",           delay: 0  },
-							{ src: mission_chicago, label: "CHICAGO HQ",  location: "Downtown Chicago, IL", delay: 100 },
+							{ src: mission_home,    label: "HOME BASE",  location: "Canton, Michigan",     delay: 0  },
+							{ src: mission_chicago, label: "CHICAGO HQ", location: "Downtown Chicago, IL", delay: 100 },
 						] as const).map((station, i) => (
 							<Reveal key={i} delay={station.delay}>
 								<div className="relative group rounded-xl overflow-hidden border border-cyan-500/20 shadow-[0_0_40px_rgba(6,182,212,0.08)] bg-black/40 transition-all duration-300 hover:border-cyan-400/40 hover:shadow-[0_0_50px_rgba(6,182,212,0.15)]">

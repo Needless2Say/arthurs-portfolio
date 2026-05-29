@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { ROUTES } from "@/constants/routes";
 import { PERSONAL_INFO } from "@/constants/personal-info";
 import TypewriterText from "@/components/ui/TypewriterText";
 import HomeLoader from "@/components/ui/HomeLoader";
 import MissionTimeline from "@/components/ui/MissionTimeline";
 import SocialLinks from "@/components/ui/SocialLinks";
+import mission_chicago from "@/../public/mission_control_chicago.jpg";
 
 export const metadata: Metadata = {
 	title: "Arthur Krieger | Software Engineer & KriegerDataForge Founder",
@@ -45,13 +47,13 @@ export default function Home() {
 
 				{/* Name */}
 				<h1
-					className="text-6xl sm:text-7xl md:text-8xl font-bold text-white glow-text leading-tight mb-2 animate-fade-in-up"
+					className="text-6xl sm:text-7xl md:text-8xl font-bold text-white glow-text leading-tight mb-2 pb-2 animate-fade-in-up"
 					style={{ animationDelay: "0.1s" }}
 				>
 					Arthur
 				</h1>
 				<h1
-					className="text-6xl sm:text-7xl md:text-8xl font-bold gradient-text leading-tight mb-5 animate-fade-in-up"
+					className="text-6xl sm:text-7xl md:text-8xl font-bold gradient-text leading-tight mb-5 pb-2 animate-fade-in-up"
 					style={{ animationDelay: "0.2s" }}
 				>
 					Krieger
@@ -151,8 +153,70 @@ export default function Home() {
 		</div>
 
 		{/* ===== Mission Timeline (below the fold) ===== */}
-		<div className="pb-24 pt-8">
+		<div className="pb-16 pt-8">
 			<MissionTimeline />
+		</div>
+
+		{/* ===== Chicago HQ ===== */}
+		<div className="pb-28 pt-4">
+			<section className="relative w-full max-w-3xl mx-auto px-4">
+				<div className="text-center mb-8">
+					<p className="text-cyan-400 font-mono text-[10px] tracking-[0.4em] uppercase mb-2">
+						◇ base of operations ◇
+					</p>
+					<h2 className="text-3xl sm:text-4xl font-bold gradient-text glow-text mb-5 pb-2">
+						Chicago HQ
+					</h2>
+					<p className="text-slate-500 text-sm font-mono">
+						{"// where the code ships from"}
+					</p>
+				</div>
+
+				<div className="relative group rounded-xl overflow-hidden border border-cyan-500/20 shadow-[0_0_60px_rgba(6,182,212,0.08)] bg-black/40 transition-all duration-300 hover:border-cyan-400/40 hover:shadow-[0_0_80px_rgba(6,182,212,0.15)] max-w-2xl mx-auto">
+					{/* HUD corners */}
+					<span className="pointer-events-none absolute top-2 left-2  z-10 w-4 h-4 border-t-2 border-l-2 border-cyan-400/70 rounded-tl-sm transition-all duration-300 group-hover:border-cyan-300" />
+					<span className="pointer-events-none absolute top-2 right-2 z-10 w-4 h-4 border-t-2 border-r-2 border-cyan-400/70 rounded-tr-sm transition-all duration-300 group-hover:border-cyan-300" />
+					<span className="pointer-events-none absolute bottom-[2.75rem] left-2  z-10 w-4 h-4 border-b-2 border-l-2 border-cyan-400/70 rounded-bl-sm transition-all duration-300 group-hover:border-cyan-300" />
+					<span className="pointer-events-none absolute bottom-[2.75rem] right-2 z-10 w-4 h-4 border-b-2 border-r-2 border-cyan-400/70 rounded-br-sm transition-all duration-300 group-hover:border-cyan-300" />
+
+					{/* Image */}
+					<div className="relative w-full aspect-video">
+						<Image
+							src={mission_chicago}
+							alt="Chicago HQ — Arthur Krieger's workspace"
+							fill
+							className="object-cover"
+							sizes="(max-width: 640px) 100vw, 672px"
+						/>
+						{/* Scanline overlay */}
+						<div
+							className="absolute inset-0 pointer-events-none z-[1]"
+							style={{ background: "repeating-linear-gradient(0deg, rgba(0,0,0,0.04) 0px, rgba(0,0,0,0.04) 1px, transparent 1px, transparent 3px)" }}
+						/>
+						{/* Vignette */}
+						<div
+							className="absolute inset-0 pointer-events-none z-[1]"
+							style={{ background: "radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.55) 100%)" }}
+						/>
+					</div>
+
+					{/* Status bar */}
+					<div className="flex items-center justify-between px-4 py-2.5 bg-black/65 border-t border-cyan-500/10">
+						<div className="flex items-center gap-2">
+							<span className="relative flex h-1.5 w-1.5">
+								<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+								<span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+							</span>
+							<span className="font-mono text-[10px] tracking-[0.35em] text-cyan-400/80 uppercase">
+								CHICAGO HQ
+							</span>
+						</div>
+						<span className="font-mono text-[10px] tracking-wider text-slate-500">
+							Downtown Chicago, IL
+						</span>
+					</div>
+				</div>
+			</section>
 		</div>
 		</>
 	);

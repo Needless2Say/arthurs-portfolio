@@ -73,7 +73,7 @@ export default function MissionTimeline() {
 				<p className="text-purple-400 font-mono text-[10px] tracking-[0.4em] uppercase mb-2">
 					◇ mission control ◇
 				</p>
-				<h2 className="text-3xl sm:text-4xl font-bold gradient-text glow-text mb-2">
+				<h2 className="text-3xl sm:text-4xl font-bold gradient-text glow-text mb-2 pb-2">
 					Career Trajectory
 				</h2>
 				<p className="text-slate-500 text-sm font-mono">

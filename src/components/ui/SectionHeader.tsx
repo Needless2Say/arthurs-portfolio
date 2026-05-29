@@ -15,7 +15,7 @@ export default function SectionHeader({
 }: SectionHeaderProps) {
 	return (
 		<div className={cn("mb-10", align === "center" && "text-center", className)}>
-			<h2 className="text-3xl md:text-4xl font-bold gradient-text mb-3">
+			<h2 className="text-3xl md:text-4xl font-bold gradient-text mb-3 pb-2">
 				{title}
 			</h2>
 			{subtitle && <p className="text-slate-400 text-base mt-2">{subtitle}</p>}
