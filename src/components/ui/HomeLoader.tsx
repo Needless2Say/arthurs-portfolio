@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
 import HyperdriveCanvas from "./HyperdriveCanvas";
@@ -22,19 +22,19 @@ function PlanetAnimation() {
 			{[0, 1.2, 2.4].map((delay) => (
 				<div
 					key={delay}
-					className="absolute w-16 h-16 rounded-full border border-purple-400/50"
+					className="absolute w-16 h-16 rounded-full border border-blue-400/50"
 					style={{ animation: `space-ring-expand 3.6s ease-out ${delay}s infinite` }}
 				/>
 			))}
 
 			{/* Outer orbit track + cyan dot */}
 			<div className="absolute w-40 h-40 rounded-full border border-white/5 animate-orbit-cw-lg">
-				<div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-cyan-300 shadow-[0_0_8px_rgba(103,232,249,0.9)]" />
+				<div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(253,224,71,0.9)]" />
 			</div>
 
 			{/* Middle orbit track + purple dot */}
 			<div className="absolute w-28 h-28 rounded-full border border-white/5 animate-orbit-cw-md">
-				<div className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-purple-300 shadow-[0_0_6px_rgba(196,181,253,0.9)]" />
+				<div className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-blue-300 shadow-[0_0_6px_rgba(147,197,253,0.9)]" />
 			</div>
 
 			{/* Inner orbit track + white dot (counter-clockwise) */}
@@ -46,12 +46,12 @@ function PlanetAnimation() {
 			<div
 				className="relative w-14 h-14 rounded-full animate-orb-breathe"
 				style={{
-					background: "radial-gradient(circle at 38% 32%, #c4b5fd 0%, #7c3aed 45%, #1e1b4b 100%)",
-					boxShadow: "0 0 28px rgba(124,58,237,0.7), 0 0 60px rgba(124,58,237,0.3), 0 0 100px rgba(124,58,237,0.1)",
+					background: "radial-gradient(circle at 38% 32%, #93c5fd 0%, #2563eb 45%, #1e3a8a 100%)",
+					boxShadow: "0 0 28px rgba(37,99,235,0.7), 0 0 60px rgba(37,99,235,0.3), 0 0 100px rgba(37,99,235,0.1)",
 				}}
 			>
 				<div
-					className="absolute inset-0 -mx-4 rounded-full border-2 border-purple-400/35"
+					className="absolute inset-0 -mx-4 rounded-full border-2 border-blue-400/35"
 					style={{ top: "50%", transform: "translateY(-50%) rotateX(72deg)" }}
 				/>
 				<div
@@ -155,15 +155,15 @@ export default function HomeLoader() {
 			))}
 
 			{/* Card */}
-			<div className="relative flex flex-col items-center rounded-2xl border border-purple-500/25 bg-black/70 px-8 pt-8 pb-7 shadow-[0_0_80px_rgba(124,58,237,0.12)]">
+			<div className="relative flex flex-col items-center rounded-2xl border border-blue-500/25 bg-black/70 px-8 pt-8 pb-7 shadow-[0_0_80px_rgba(37,99,235,0.12)]">
 				{/* HUD corners */}
-				<span className="pointer-events-none absolute -top-px -left-px  w-4 h-4 border-t-2 border-l-2 rounded-tl-xl border-purple-400/60" />
-				<span className="pointer-events-none absolute -top-px -right-px w-4 h-4 border-t-2 border-r-2 rounded-tr-xl border-purple-400/60" />
-				<span className="pointer-events-none absolute -bottom-px -left-px  w-4 h-4 border-b-2 border-l-2 rounded-bl-xl border-purple-400/60" />
-				<span className="pointer-events-none absolute -bottom-px -right-px w-4 h-4 border-b-2 border-r-2 rounded-br-xl border-purple-400/60" />
+				<span className="pointer-events-none absolute -top-px -left-px  w-4 h-4 border-t-2 border-l-2 rounded-tl-xl border-blue-400/60" />
+				<span className="pointer-events-none absolute -top-px -right-px w-4 h-4 border-t-2 border-r-2 rounded-tr-xl border-blue-400/60" />
+				<span className="pointer-events-none absolute -bottom-px -left-px  w-4 h-4 border-b-2 border-l-2 rounded-bl-xl border-blue-400/60" />
+				<span className="pointer-events-none absolute -bottom-px -right-px w-4 h-4 border-b-2 border-r-2 rounded-br-xl border-blue-400/60" />
 
 				{/* Eyebrow — changes per animation */}
-				<p className="font-mono text-[9px] tracking-[0.45em] uppercase text-purple-400/60 mb-6">
+				<p className="font-mono text-[9px] tracking-[0.45em] uppercase text-blue-400/60 mb-6">
 					{label}
 				</p>
 
@@ -173,15 +173,19 @@ export default function HomeLoader() {
 				</div>
 
 				{/* Energy bar */}
-				<div className="w-48 sm:w-56 h-1 rounded-full bg-white/5 overflow-hidden">
+				<div
+					className="relative w-48 sm:w-56 h-1 rounded-full overflow-hidden"
+					style={{ background: "linear-gradient(90deg, #2563eb 0%, #facc15 100%)" }}
+				>
+					{/* Dark mask shrinks right→left, revealing the gradient */}
 					<div
-						className="h-full rounded-full bg-gradient-to-r from-purple-600 via-cyan-400 to-purple-600"
-						style={{ animation: `energy-bar ${DISPLAY_MS}ms linear forwards` }}
+						className="absolute right-0 top-0 h-full bg-black"
+						style={{ animation: `energy-bar-mask ${DISPLAY_MS}ms linear forwards` }}
 					/>
 				</div>
 
 				{/* Status */}
-				<p className="mt-3 font-mono text-[10px] tracking-[0.35em] uppercase text-purple-300/50 animate-pulse">
+				<p className="mt-3 font-mono text-[10px] tracking-[0.35em] uppercase text-blue-300/50 animate-pulse">
 					LOADING...
 				</p>
 			</div>

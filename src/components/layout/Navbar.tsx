@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -29,10 +29,10 @@ export default function Navbar() {
 						"hover:scale-105 active:scale-95",
 						isActive(link.path)
 							? [
-								"text-yellow-300 bg-purple-600/30",
-								"border border-purple-500/40",
-								"shadow-[0_0_12px_rgba(124,58,237,0.35)]",
-								"hover:bg-purple-600/40 hover:shadow-[0_0_18px_rgba(124,58,237,0.5)]",
+								"text-yellow-300 bg-blue-600/30",
+								"border border-blue-500/40",
+								"shadow-[0_0_12px_rgba(37,99,235,0.35)]",
+								"hover:bg-blue-600/40 hover:shadow-[0_0_18px_rgba(37,99,235,0.5)]",
 							].join(" ")
 							: [
 								"text-slate-200 border border-transparent",
@@ -107,7 +107,7 @@ export default function Navbar() {
 									"transition-colors duration-200 ease-out active:scale-95",
 									"animate-nav-item",
 									isActive(link.path)
-										? "text-yellow-300 bg-purple-600/25"
+										? "text-yellow-300 bg-blue-600/25"
 										: "text-slate-200 hover:text-white hover:bg-white/8"
 								)}
 								style={{ animationDelay: `${i * 40}ms` }}

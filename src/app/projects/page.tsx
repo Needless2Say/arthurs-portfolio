@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import TechBadge from "@/components/ui/TechBadge";
 import Card from "@/components/ui/Card";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -34,10 +34,10 @@ export default function Projects() {
 				{featured.map((project) => (
 					<Reveal key={project.title} className="mb-12" delay={80}>
 						<HudFrame color="yellow" label="featured payload" className="mb-4">
-						<Card glow="purple" className="p-5 sm:p-8">
+						<Card glow="blue" className="p-5 sm:p-8">
 							{/* Header */}
 							<div className="flex items-center gap-3 mb-2">
-								<span className="text-purple-400 font-mono text-xs uppercase tracking-widest">
+								<span className="text-blue-400 font-mono text-xs uppercase tracking-widest">
 									{project.subtitle}
 								</span>
 								<span className="text-xs text-yellow-400 border border-yellow-400/30 rounded-full px-2 py-0.5 font-mono">
@@ -58,7 +58,7 @@ export default function Projects() {
 									{
 										label: "Frontend",
 										color: "nebula" as const,
-										labelColor: "text-purple-400",
+										labelColor: "text-blue-400",
 										items: ["Next.js", "React", "TypeScript", "TailwindCSS"],
 									},
 									{

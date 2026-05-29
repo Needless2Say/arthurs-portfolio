@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 
@@ -82,19 +82,19 @@ export default function SocialLinks({ github, linkedin, email }: SocialLinksProp
 					aria-label="Email"
 					className="group relative flex flex-col items-center gap-2 cursor-pointer"
 				>
-					<div className="relative w-12 h-12 rounded-2xl glass-card border-white/10 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:border-purple-400/50 group-hover:shadow-[0_0_22px_rgba(168,85,247,0.3)]">
-						<span className="absolute inset-0 rounded-2xl border border-purple-500/0 group-hover:border-purple-400/30 transition-all duration-300 scale-100 group-hover:scale-110 opacity-0 group-hover:opacity-100" />
+					<div className="relative w-12 h-12 rounded-2xl glass-card border-white/10 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:border-blue-400/50 group-hover:shadow-[0_0_22px_rgba(59,130,246,0.3)]">
+						<span className="absolute inset-0 rounded-2xl border border-blue-500/0 group-hover:border-blue-400/30 transition-all duration-300 scale-100 group-hover:scale-110 opacity-0 group-hover:opacity-100" />
 						{/* Animated ping for "active" feel */}
 						<span className="absolute top-1.5 right-1.5 flex h-1.5 w-1.5">
-							<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-50" />
-							<span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-purple-500" />
+							<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-50" />
+							<span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-500" />
 						</span>
-						<svg className="w-5 h-5 text-slate-400 group-hover:text-purple-300 transition-colors duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true">
+						<svg className="w-5 h-5 text-slate-400 group-hover:text-blue-300 transition-colors duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true">
 							<rect x="2" y="4" width="20" height="16" rx="2" />
 							<path d="m2 7 10 7 10-7" />
 						</svg>
 					</div>
-					<span className="text-slate-600 group-hover:text-purple-400 font-mono text-[9px] tracking-widest uppercase transition-colors duration-200">
+					<span className="text-slate-600 group-hover:text-blue-400 font-mono text-[9px] tracking-widest uppercase transition-colors duration-200">
 						Email
 					</span>
 				</button>
@@ -114,21 +114,21 @@ export default function SocialLinks({ github, linkedin, email }: SocialLinksProp
 					{emailClosing && (
 						<div className="absolute inset-0 flex items-center justify-center pointer-events-none">
 							{/* Three rings at staggered timings */}
-							<div className="absolute w-80 h-80 rounded-full border-2 border-purple-400/80 animate-collapse-shockwave" />
+							<div className="absolute w-80 h-80 rounded-full border-2 border-blue-400/80 animate-collapse-shockwave" />
 							<div className="absolute w-72 h-72 rounded-full border border-blue-400/60 animate-collapse-shockwave-2" />
 							<div className="absolute w-64 h-64 rounded-full border border-white/35 animate-collapse-shockwave-3" />
 
 							{/* Eight spark particles radiating outward */}
 							<div className="relative w-0 h-0">
 								{([
-									[0,   "bg-purple-300",  "0 0 6px rgba(168,85,247,0.9)"],
-									[45,  "bg-white",       "0 0 6px rgba(255,255,255,0.9)"],
-									[90,  "bg-blue-300",    "0 0 6px rgba(147,197,253,0.9)"],
-									[135, "bg-purple-200",  "0 0 6px rgba(216,180,254,0.9)"],
-									[180, "bg-purple-300",  "0 0 6px rgba(168,85,247,0.9)"],
-									[225, "bg-white",       "0 0 6px rgba(255,255,255,0.9)"],
-									[270, "bg-blue-300",    "0 0 6px rgba(147,197,253,0.9)"],
-									[315, "bg-purple-200",  "0 0 6px rgba(216,180,254,0.9)"],
+									[0,   "bg-yellow-300", "0 0 6px rgba(253,224,71,0.9)"],
+									[45,  "bg-white",      "0 0 6px rgba(255,255,255,0.9)"],
+									[90,  "bg-blue-300",   "0 0 6px rgba(147,197,253,0.9)"],
+									[135, "bg-yellow-200", "0 0 6px rgba(254,240,138,0.9)"],
+									[180, "bg-yellow-300", "0 0 6px rgba(253,224,71,0.9)"],
+									[225, "bg-white",      "0 0 6px rgba(255,255,255,0.9)"],
+									[270, "bg-blue-300",   "0 0 6px rgba(147,197,253,0.9)"],
+									[315, "bg-yellow-200", "0 0 6px rgba(254,240,138,0.9)"],
 								] as [number, string, string][]).map(([angle, color, glow]) => (
 									<div
 										key={angle}
@@ -150,7 +150,7 @@ export default function SocialLinks({ github, linkedin, email }: SocialLinksProp
 						<div
 							className="absolute inset-0 animate-nova-flash pointer-events-none"
 							style={{
-								background: "radial-gradient(ellipse at center, rgba(230,140,255,0.55) 0%, rgba(124,58,237,0.18) 42%, transparent 68%)",
+								background: "radial-gradient(ellipse at center, rgba(250,204,21,0.45) 0%, rgba(37,99,235,0.15) 42%, transparent 68%)",
 								mixBlendMode: "screen",
 							}}
 						/>
@@ -158,18 +158,18 @@ export default function SocialLinks({ github, linkedin, email }: SocialLinksProp
 
 					{/* Dialog */}
 					<div
-						className={`relative glass-card border-purple-500/25 p-5 sm:p-7 w-full max-w-sm text-center ${emailClosing ? "animate-stellar-collapse" : "shadow-[0_0_60px_rgba(124,58,237,0.2)] animate-fade-in-up"}`}
+						className={`relative glass-card border-blue-500/25 p-5 sm:p-7 w-full max-w-sm text-center ${emailClosing ? "animate-stellar-collapse" : "shadow-[0_0_60px_rgba(37,99,235,0.2)] animate-fade-in-up"}`}
 						onClick={(e) => e.stopPropagation()}
 					>
 						{/* HUD corners */}
-						<span className="pointer-events-none absolute -top-px -left-px w-3 h-3 border-t-2 border-l-2 rounded-tl-md border-purple-400/70" />
-						<span className="pointer-events-none absolute -top-px -right-px w-3 h-3 border-t-2 border-r-2 rounded-tr-md border-purple-400/70" />
-						<span className="pointer-events-none absolute -bottom-px -left-px w-3 h-3 border-b-2 border-l-2 rounded-bl-md border-purple-400/70" />
-						<span className="pointer-events-none absolute -bottom-px -right-px w-3 h-3 border-b-2 border-r-2 rounded-br-md border-purple-400/70" />
+						<span className="pointer-events-none absolute -top-px -left-px w-3 h-3 border-t-2 border-l-2 rounded-tl-md border-blue-400/70" />
+						<span className="pointer-events-none absolute -top-px -right-px w-3 h-3 border-t-2 border-r-2 rounded-tr-md border-blue-400/70" />
+						<span className="pointer-events-none absolute -bottom-px -left-px w-3 h-3 border-b-2 border-l-2 rounded-bl-md border-blue-400/70" />
+						<span className="pointer-events-none absolute -bottom-px -right-px w-3 h-3 border-b-2 border-r-2 rounded-br-md border-blue-400/70" />
 
 						{/* Icon */}
-						<div className="mx-auto mb-4 w-12 h-12 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center">
-							<svg className="w-5 h-5 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+						<div className="mx-auto mb-4 w-12 h-12 rounded-full bg-blue-600/20 border border-blue-500/30 flex items-center justify-center">
+							<svg className="w-5 h-5 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
 								<rect x="2" y="4" width="20" height="16" rx="2" />
 								<path d="m2 7 10 7 10-7" />
 							</svg>
@@ -185,7 +185,7 @@ export default function SocialLinks({ github, linkedin, email }: SocialLinksProp
 						{/* Copy button */}
 						<button
 							onClick={handleCopy}
-							className="w-full py-2.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm transition-all duration-200 hover:shadow-[0_0_20px_rgba(124,58,237,0.4)] mb-3 flex items-center justify-center gap-2"
+							className="w-full py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-all duration-200 hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] mb-3 flex items-center justify-center gap-2"
 						>
 							{tooltip.copied ? (
 								<>

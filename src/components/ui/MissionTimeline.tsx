@@ -1,4 +1,4 @@
-import { cn } from "@/utils/cn";
+﻿import { cn } from "@/utils/cn";
 
 type PhaseStatus = "complete" | "online" | "standby";
 
@@ -43,25 +43,25 @@ const PHASES: Phase[] = [
 
 const statusStyles: Record<PhaseStatus, { dot: string; ring: string; label: string; text: string; border: string }> = {
 	complete: {
-		dot: "bg-emerald-500",
-		ring: "bg-emerald-400",
+		dot: "bg-blue-500",
+		ring: "bg-blue-400",
 		label: "complete",
-		text: "text-emerald-300",
-		border: "border-emerald-500/30",
+		text: "text-blue-300",
+		border: "border-blue-500/35",
 	},
 	online: {
-		dot: "bg-purple-500",
-		ring: "bg-purple-400",
+		dot: "bg-yellow-400",
+		ring: "bg-yellow-300",
 		label: "online",
-		text: "text-purple-300",
-		border: "border-purple-500/40",
+		text: "text-yellow-300",
+		border: "border-yellow-400/55",
 	},
 	standby: {
-		dot: "bg-yellow-500",
-		ring: "bg-yellow-400",
+		dot: "bg-slate-500",
+		ring: "bg-slate-400",
 		label: "standby",
-		text: "text-yellow-300",
-		border: "border-yellow-500/30",
+		text: "text-slate-400",
+		border: "border-slate-500/30",
 	},
 };
 
@@ -70,7 +70,7 @@ export default function MissionTimeline() {
 		<section className="relative w-full max-w-3xl mx-auto px-4">
 			{/* Section header */}
 			<div className="text-center mb-10">
-				<p className="text-purple-400 font-mono text-[10px] tracking-[0.4em] uppercase mb-2">
+				<p className="text-blue-400 font-mono text-[10px] tracking-[0.4em] uppercase mb-2">
 					◇ mission control ◇
 				</p>
 				<h2 className="text-3xl sm:text-4xl font-bold gradient-text glow-text mb-2 pb-2">
@@ -88,7 +88,7 @@ export default function MissionTimeline() {
 					className="absolute left-3 top-3 bottom-3 w-px"
 					style={{
 						background:
-							"linear-gradient(to bottom, rgba(16,185,129,0.5) 0%, rgba(124,58,237,0.5) 50%, rgba(250,204,21,0.35) 100%)",
+							"linear-gradient(to bottom, rgba(37,99,235,0.6) 0%, rgba(250,204,21,0.65) 55%, rgba(100,116,139,0.25) 100%)",
 					}}
 				/>
 
@@ -110,7 +110,7 @@ export default function MissionTimeline() {
 								<div
 									className={cn(
 										"glass-card border-white/5 px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/15",
-										live && "shadow-[0_0_24px_rgba(124,58,237,0.12)]"
+										live && "shadow-[0_0_24px_rgba(250,204,21,0.14)] border-yellow-400/20"
 									)}
 								>
 									<div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1 mb-1.5">

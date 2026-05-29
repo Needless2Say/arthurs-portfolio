@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 
@@ -47,7 +47,7 @@ export default function TypewriterText() {
 	return (
 		<>
 			{displayed}
-			<span className="animate-pulse text-purple-400">|</span>
+			<span className="animate-pulse text-blue-400">|</span>
 		</>
 	);
 }

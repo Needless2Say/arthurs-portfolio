@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import me_pic from "@/../public/me_pic.jpg";
 import mission_home    from "@/../public/mission_control_home.jpg";
@@ -71,7 +71,7 @@ export default async function About() {
 				{/* ===== Hero: Photo + Bio ===== */}
 				<Reveal className="flex flex-col lg:flex-row gap-10 mb-16 items-start">
 					<div className="flex-shrink-0 mx-auto lg:mx-0">
-						<div className="relative w-44 h-60 rounded-xl overflow-hidden border border-purple-500/20 shadow-[0_0_40px_rgba(124,58,237,0.15)]">
+						<div className="relative w-44 h-60 rounded-xl overflow-hidden border border-blue-500/20 shadow-[0_0_40px_rgba(37,99,235,0.15)]">
 							<Image src={me_pic} alt="Arthur Krieger" fill className="object-cover" />
 						</div>
 					</div>
@@ -80,7 +80,7 @@ export default async function About() {
 						<h1 className="text-4xl font-bold text-white glow-text mb-2 pb-2">
 							{PERSONAL_INFO.name}
 						</h1>
-						<p className="text-purple-400 font-mono text-sm mb-5">
+						<p className="text-blue-400 font-mono text-sm mb-5">
 							{PERSONAL_INFO.title}
 						</p>
 						<p className="text-slate-300 text-base leading-relaxed mb-6">
@@ -107,21 +107,21 @@ export default async function About() {
 					</Reveal>
 
 					<div className="relative">
-						<div className="absolute left-4 top-2 bottom-2 w-px bg-gradient-to-b from-purple-600/50 via-blue-600/30 to-transparent" />
+						<div className="absolute left-4 top-2 bottom-2 w-px bg-gradient-to-b from-blue-600/50 via-blue-600/30 to-transparent" />
 						<div className="space-y-6">
 							{EXPERIENCE.map((exp, i) => (
 								<Reveal key={i} className="relative pl-12" delay={i * 90}>
-									<div className="absolute left-4 top-5 w-4 h-4 rounded-full bg-[#09090f] border-2 border-purple-500 -translate-x-1/2 flex items-center justify-center">
-										<div className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+									<div className="absolute left-4 top-5 w-4 h-4 rounded-full bg-[#09090f] border-2 border-blue-500 -translate-x-1/2 flex items-center justify-center">
+										<div className="w-1.5 h-1.5 rounded-full bg-blue-400" />
 									</div>
 
-									<Card glow="purple">
+									<Card glow="blue">
 										<div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3">
 											<div>
 												<h3 className="text-white font-bold text-base">
 													{exp.role}
 												</h3>
-												<p className="text-purple-300 text-sm font-medium">
+												<p className="text-blue-300 text-sm font-medium">
 													{exp.company}
 												</p>
 												<p className="text-slate-500 text-xs">
@@ -137,7 +137,7 @@ export default async function About() {
 										<ul className="space-y-1.5 mb-4">
 											{exp.bullets.map((bullet, j) => (
 												<li key={j} className="text-slate-400 text-sm flex gap-2">
-													<span className="text-purple-500 mt-0.5 flex-shrink-0">
+													<span className="text-blue-500 mt-0.5 flex-shrink-0">
 														›
 													</span>
 													{bullet}
@@ -170,9 +170,9 @@ export default async function About() {
 									<div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
 										<div>
 											<h3 className="text-white font-bold">{edu.school}</h3>
-											<p className="text-blue-300 text-sm mt-0.5">{edu.degree}</p>
+											<p className="text-blue-500 text-sm mt-0.5">{edu.degree}</p>
 											{edu.minor && (
-												<p className="text-slate-400 text-sm">
+												<p className="text-blue-300 text-sm">
 													{edu.minor}
 												</p>
 											)}
@@ -277,7 +277,7 @@ export default async function About() {
 				<section>
 					<Reveal>
 						<div className="mb-10">
-							<p className="font-mono text-[10px] tracking-[0.4em] uppercase text-cyan-400/50 mb-2">
+							<p className="font-mono text-[10px] tracking-[0.4em] uppercase text-yellow-400/50 mb-2">
 								◇ ALL STATIONS ACTIVE ◇
 							</p>
 							<h2 className="text-3xl md:text-4xl font-bold gradient-text mb-3 pb-2">
@@ -286,7 +286,7 @@ export default async function About() {
 							<p className="text-slate-400 text-base mt-2">
 								Where the work gets done — Home Base and Chicago HQ.
 							</p>
-							<div className="h-px mt-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-transparent" />
+							<div className="h-px mt-4 animate-gradient-line" />
 						</div>
 					</Reveal>
 
@@ -296,13 +296,13 @@ export default async function About() {
 							{ src: mission_chicago, label: "CHICAGO HQ", location: "Downtown Chicago, IL", delay: 100 },
 						] as const).map((station, i) => (
 							<Reveal key={i} delay={station.delay}>
-								<div className="relative group rounded-xl overflow-hidden border border-cyan-500/20 shadow-[0_0_40px_rgba(6,182,212,0.08)] bg-black/40 transition-all duration-300 hover:border-cyan-400/40 hover:shadow-[0_0_50px_rgba(6,182,212,0.15)]">
+								<div className="relative group rounded-xl overflow-hidden border border-yellow-500/20 shadow-[0_0_40px_rgba(234,179,8,0.08)] bg-black/40 transition-all duration-300 hover:border-yellow-400/40 hover:shadow-[0_0_50px_rgba(234,179,8,0.15)]">
 
-									{/* HUD corner brackets */}
-									<span className="pointer-events-none absolute top-2 left-2  z-10 w-4 h-4 border-t-2 border-l-2 border-cyan-400/70 rounded-tl-sm transition-all duration-300 group-hover:border-cyan-300" />
-									<span className="pointer-events-none absolute top-2 right-2 z-10 w-4 h-4 border-t-2 border-r-2 border-cyan-400/70 rounded-tr-sm transition-all duration-300 group-hover:border-cyan-300" />
-									<span className="pointer-events-none absolute bottom-[2.75rem] left-2  z-10 w-4 h-4 border-b-2 border-l-2 border-cyan-400/70 rounded-bl-sm transition-all duration-300 group-hover:border-cyan-300" />
-									<span className="pointer-events-none absolute bottom-[2.75rem] right-2 z-10 w-4 h-4 border-b-2 border-r-2 border-cyan-400/70 rounded-br-sm transition-all duration-300 group-hover:border-cyan-300" />
+									{/* HUD corner brackets — blue lines, yellow glow outline */}
+									<span className="pointer-events-none absolute top-2 left-2  z-10 w-4 h-4 border-t-2 border-l-2 border-blue-400 rounded-tl-sm transition-all duration-300 group-hover:border-blue-300" style={{ filter: "drop-shadow(0 0 3px rgba(250,204,21,0.85))" }} />
+									<span className="pointer-events-none absolute top-2 right-2 z-10 w-4 h-4 border-t-2 border-r-2 border-blue-400 rounded-tr-sm transition-all duration-300 group-hover:border-blue-300" style={{ filter: "drop-shadow(0 0 3px rgba(250,204,21,0.85))" }} />
+									<span className="pointer-events-none absolute bottom-[2.75rem] left-2  z-10 w-4 h-4 border-b-2 border-l-2 border-blue-400 rounded-bl-sm transition-all duration-300 group-hover:border-blue-300" style={{ filter: "drop-shadow(0 0 3px rgba(250,204,21,0.85))" }} />
+									<span className="pointer-events-none absolute bottom-[2.75rem] right-2 z-10 w-4 h-4 border-b-2 border-r-2 border-blue-400 rounded-br-sm transition-all duration-300 group-hover:border-blue-300" style={{ filter: "drop-shadow(0 0 3px rgba(250,204,21,0.85))" }} />
 
 									{/* Image */}
 									<div className="relative w-full aspect-video">
@@ -326,13 +326,13 @@ export default async function About() {
 									</div>
 
 									{/* Status bar */}
-									<div className="flex items-center justify-between px-4 py-2.5 bg-black/65 border-t border-cyan-500/10">
+									<div className="flex items-center justify-between px-4 py-2.5 bg-black/65 border-t border-yellow-500/10">
 										<div className="flex items-center gap-2">
 											<span className="relative flex h-1.5 w-1.5">
 												<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
 												<span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
 											</span>
-											<span className="font-mono text-[10px] tracking-[0.35em] text-cyan-400/80 uppercase">
+											<span className="font-mono text-[10px] tracking-[0.35em] text-yellow-400/80 uppercase">
 												{station.label}
 											</span>
 										</div>

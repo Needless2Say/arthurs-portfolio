@@ -1,4 +1,4 @@
-import { cn } from "@/utils/cn";
+﻿import { cn } from "@/utils/cn";
 
 interface SectionHeaderProps {
 	title: string;
@@ -21,7 +21,7 @@ export default function SectionHeader({
 			{subtitle && <p className="text-slate-400 text-base mt-2">{subtitle}</p>}
 			<div
 				className={cn(
-					"h-px mt-4 bg-gradient-to-r from-purple-600 via-blue-500 to-transparent",
+					"h-px mt-4 animate-gradient-line",
 					align === "center" && "mx-auto w-28"
 				)}
 			/>

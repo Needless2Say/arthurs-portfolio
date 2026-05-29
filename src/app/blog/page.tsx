@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Card from "@/components/ui/Card";
 import TechBadge from "@/components/ui/TechBadge";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -29,8 +29,8 @@ export default function Blog() {
 				{BLOG_POSTS.length > 0 ? (
 					<div className="space-y-4">
 						{BLOG_POSTS.map((post) => (
-							<Card key={post.slug} glow="purple" className="group cursor-default">
-								<h2 className="text-white font-bold text-lg mb-2 group-hover:text-purple-300 transition-colors">
+							<Card key={post.slug} glow="blue" className="group cursor-default">
+								<h2 className="text-white font-bold text-lg mb-2 group-hover:text-blue-300 transition-colors">
 									{post.title}
 								</h2>
 
@@ -67,8 +67,8 @@ export default function Blog() {
 						</p>
 						<div className="inline-flex items-center gap-2.5 glass-card px-5 py-2.5 border-white/5">
 							<span className="relative flex h-1.5 w-1.5">
-								<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75" />
-								<span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-purple-500" />
+								<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+								<span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-500" />
 							</span>
 							<span className="text-slate-500 font-mono text-xs tracking-widest">signal pending...</span>
 						</div>

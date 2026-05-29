@@ -1,16 +1,16 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef } from "react";
 
 export default function ScrollProgress() {
-	const barRef = useRef<HTMLDivElement>(null);
+	const maskRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		const update = () => {
-			if (!barRef.current) return;
+			if (!maskRef.current) return;
 			const total = document.documentElement.scrollHeight - window.innerHeight;
 			const pct = total > 0 ? (window.scrollY / total) * 100 : 0;
-			barRef.current.style.width = `${pct}%`;
+			maskRef.current.style.width = `${100 - pct}%`;
 		};
 		window.addEventListener("scroll", update, { passive: true });
 		update();
@@ -18,11 +18,15 @@ export default function ScrollProgress() {
 	}, []);
 
 	return (
-		<div className="fixed top-0 left-0 right-0 h-[2px] z-[60] bg-transparent pointer-events-none">
+		<div
+			className="fixed top-0 left-0 right-0 h-[2px] z-[60] pointer-events-none"
+			style={{ background: "linear-gradient(to right, #2563eb 0%, #facc15 100%)" }}
+		>
+			{/* Mask anchored to the right — shrinks as you scroll, revealing the gradient */}
 			<div
-				ref={barRef}
-				className="h-full bg-gradient-to-r from-purple-600 via-blue-400 to-purple-500"
-				style={{ width: "0%" }}
+				ref={maskRef}
+				className="absolute right-0 top-0 h-full"
+				style={{ width: "100%", backgroundColor: "#09090f" }}
 			/>
 		</div>
 	);

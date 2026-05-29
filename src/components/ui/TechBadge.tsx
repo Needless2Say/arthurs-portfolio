@@ -1,4 +1,4 @@
-import { cn } from "@/utils/cn";
+﻿import { cn } from "@/utils/cn";
 import type { BadgeColor } from "@/types/portfolio";
 
 interface TechBadgeProps {
@@ -8,11 +8,11 @@ interface TechBadgeProps {
 }
 
 const colorMap: Record<BadgeColor, string> = {
-	nebula: "bg-purple-950/60 text-purple-300 border-purple-700/50",
-	cosmic: "bg-blue-950/60 text-blue-300 border-blue-700/50",
-	stellar: "bg-yellow-950/60 text-yellow-300 border-yellow-700/50",
-	green: "bg-emerald-950/60 text-emerald-300 border-emerald-700/50",
-	gray: "bg-slate-800/60 text-slate-300 border-slate-600/50",
+	nebula:  "bg-yellow-950/60 text-yellow-300 border-yellow-700/50",    // Languages → Maize
+	cosmic:  "bg-blue-950/60 text-blue-300 border-blue-700/50",          // Frontend → Michigan Blue
+	stellar: "bg-violet-950/60 text-violet-300 border-violet-700/50",     // Data & Cloud → Violet
+	green:   "bg-emerald-950/60 text-emerald-300 border-emerald-700/50",
+	gray:    "bg-slate-800/60 text-slate-300 border-slate-600/50",
 	default: "bg-slate-800/60 text-slate-300 border-slate-600/50",
 };
 
