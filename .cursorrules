@@ -1,0 +1,14 @@
+# arthurs-portfolio — Cursor Rules
+
+## General
+- Keep it simple — no over-engineering for a portfolio site
+- Named exports preferred over default exports (except Next.js `page.tsx` / `layout.tsx`)
+- No `any` type — use proper TypeScript types
+- TailwindCSS utility classes only — no custom CSS unless clearly necessary
+
+## Naming
+- Components: PascalCase (`HeroSection.tsx` → `export function HeroSection`)
+- Utils: camelCase or kebab-case files
+- Constants: `UPPER_SNAKE_CASE`
+
+See `README.md` for project overview.

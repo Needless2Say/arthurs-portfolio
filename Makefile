@@ -181,8 +181,8 @@ clean-install: clean install ## Clean then reinstall (fresh dependency install)
 # CodeQL Security Scanning
 # ========================================
 
-CODEQL_DB      := ../codeql-dbs/arthurs-portfolio
-CODEQL_RESULTS := ../codeql-results
+CODEQL_DB      := ../codeql/codeql-dbs/arthurs-portfolio
+CODEQL_RESULTS := ../codeql/codeql-results
 CODEQL_LANG    := javascript-typescript
 CODEQL_PACK    := codeql/javascript-queries
 
