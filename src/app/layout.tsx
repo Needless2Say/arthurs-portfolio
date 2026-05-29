@@ -136,10 +136,14 @@ export default function RootLayout({
 				<Script async src="https://www.googletagmanager.com/gtag/js?id=G-98X0KCB8Z9" />
 				<Script id="google-analytics">
 					{`
-						window.dataLayer = window.dataLayer || [];
-						function gtag(){dataLayer.push(arguments);}
-						gtag('js', new Date());
-						gtag('config', 'G-98X0KCB8Z9');
+						if (localStorage.getItem('ga-opt-out') === '1') {
+							window['ga-disable-G-98X0KCB8Z9'] = true;
+						} else {
+							window.dataLayer = window.dataLayer || [];
+							function gtag(){dataLayer.push(arguments);}
+							gtag('js', new Date());
+							gtag('config', 'G-98X0KCB8Z9');
+						}
 					`}
 				</Script>
 			</head>
