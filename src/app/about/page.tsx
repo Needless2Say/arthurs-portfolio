@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import me_pic from "@/../public/me_pic.jpg";
+import mission_home    from "@/../public/mission_control_home.jpg";
+import mission_chicago from "@/../public/mission_control_chicago.jpg";
 import { PERSONAL_INFO, EDUCATION, EXPERIENCE } from "@/constants/personal-info";
 import { SKILL_GROUPS } from "@/constants/skills";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -222,7 +224,7 @@ export default async function About() {
 				</section>
 
 				{/* ===== GitHub Activity ===== */}
-				<section>
+				<section className="mb-16">
 					<Reveal>
 						<SectionHeader title="GitHub" />
 					</Reveal>
@@ -269,6 +271,79 @@ export default async function About() {
 							</div>
 						</div>
 					</Reveal>
+				</section>
+
+				{/* ===== Mission Control ===== */}
+				<section>
+					<Reveal>
+						<div className="mb-10">
+							<p className="font-mono text-[10px] tracking-[0.4em] uppercase text-cyan-400/50 mb-2">
+								◇ all stations active ◇
+							</p>
+							<h2 className="text-3xl md:text-4xl font-bold gradient-text mb-3">
+								Mission Control
+							</h2>
+							<p className="text-slate-400 text-base mt-2">
+								Where the work gets done — home base and Chicago HQ.
+							</p>
+							<div className="h-px mt-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-transparent" />
+						</div>
+					</Reveal>
+
+					<div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+						{([
+							{ src: mission_home,    label: "HOME BASE",   location: "Home, IL",           delay: 0  },
+							{ src: mission_chicago, label: "CHICAGO HQ",  location: "Downtown Chicago, IL", delay: 100 },
+						] as const).map((station, i) => (
+							<Reveal key={i} delay={station.delay}>
+								<div className="relative group rounded-xl overflow-hidden border border-cyan-500/20 shadow-[0_0_40px_rgba(6,182,212,0.08)] bg-black/40 transition-all duration-300 hover:border-cyan-400/40 hover:shadow-[0_0_50px_rgba(6,182,212,0.15)]">
+
+									{/* HUD corner brackets */}
+									<span className="pointer-events-none absolute top-2 left-2  z-10 w-4 h-4 border-t-2 border-l-2 border-cyan-400/70 rounded-tl-sm transition-all duration-300 group-hover:border-cyan-300" />
+									<span className="pointer-events-none absolute top-2 right-2 z-10 w-4 h-4 border-t-2 border-r-2 border-cyan-400/70 rounded-tr-sm transition-all duration-300 group-hover:border-cyan-300" />
+									<span className="pointer-events-none absolute bottom-[2.75rem] left-2  z-10 w-4 h-4 border-b-2 border-l-2 border-cyan-400/70 rounded-bl-sm transition-all duration-300 group-hover:border-cyan-300" />
+									<span className="pointer-events-none absolute bottom-[2.75rem] right-2 z-10 w-4 h-4 border-b-2 border-r-2 border-cyan-400/70 rounded-br-sm transition-all duration-300 group-hover:border-cyan-300" />
+
+									{/* Image */}
+									<div className="relative w-full aspect-video">
+										<Image
+											src={station.src}
+											alt={`${station.label} — Arthur Krieger's workspace`}
+											fill
+											className="object-cover"
+											sizes="(max-width: 640px) 100vw, 50vw"
+										/>
+										{/* Scanline overlay */}
+										<div
+											className="absolute inset-0 pointer-events-none z-[1]"
+											style={{ background: "repeating-linear-gradient(0deg, rgba(0,0,0,0.04) 0px, rgba(0,0,0,0.04) 1px, transparent 1px, transparent 3px)" }}
+										/>
+										{/* Vignette */}
+										<div
+											className="absolute inset-0 pointer-events-none z-[1]"
+											style={{ background: "radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.55) 100%)" }}
+										/>
+									</div>
+
+									{/* Status bar */}
+									<div className="flex items-center justify-between px-4 py-2.5 bg-black/65 border-t border-cyan-500/10">
+										<div className="flex items-center gap-2">
+											<span className="relative flex h-1.5 w-1.5">
+												<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+												<span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+											</span>
+											<span className="font-mono text-[10px] tracking-[0.35em] text-cyan-400/80 uppercase">
+												{station.label}
+											</span>
+										</div>
+										<span className="font-mono text-[10px] tracking-wider text-slate-500">
+											{station.location}
+										</span>
+									</div>
+								</div>
+							</Reveal>
+						))}
+					</div>
 				</section>
 
 			</div>
