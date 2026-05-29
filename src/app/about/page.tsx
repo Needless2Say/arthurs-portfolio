@@ -10,7 +10,15 @@ import Reveal from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
 	title: "About",
-	description: "Learn about Arthur Krieger — CS + Data Science, University of Michigan.",
+	description:
+		"Arthur Krieger — Software/Platform Engineer at Charles Schwab, University of Michigan CS + Data Science graduate (2025, GPA 3.75). Founder of KriegerDataForge. Experienced in data pipelines, full-stack development, ML, and fitness technology. Based in Chicago, IL.",
+	alternates: { canonical: "https://needless2say.github.io/arthurs-portfolio/about" },
+	openGraph: {
+		title: "About Arthur Krieger | KriegerDataForge",
+		description:
+			"Software/Platform Engineer at Charles Schwab. UMich CS + Data Science 2025. Founder of KriegerDataForge. Experience at Schwab, Revantage (Blackstone), and Wayne State University research.",
+		url: "https://needless2say.github.io/arthurs-portfolio/about",
+	},
 };
 
 interface GitHubUser {

@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
 	title: "404 — Lost in the Void",
 	description: "These coordinates aren't on the map.",
+	robots: { index: false, follow: false },
 };
 
 export default function NotFound() {
