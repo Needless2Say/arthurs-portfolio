@@ -11,8 +11,10 @@
 name: Deploy Next.js site to Pages
 
 on:
-  push:
-    branches: ["main"]
+  # Manual dispatch only — no auto-deploy on push.
+  # The "github-pages" environment below requires reviewer approval before
+  # the deploy job runs (configure reviewers in this repo's Settings →
+  # Environments → github-pages → Required reviewers).
   workflow_dispatch:
 
 permissions:
