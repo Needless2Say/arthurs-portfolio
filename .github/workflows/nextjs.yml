@@ -16,11 +16,11 @@ on:
   # the deploy job runs (configure reviewers in this repo's Settings →
   # Environments → github-pages → Required reviewers).
   workflow_dispatch:
-    # inputs:
-    #   version:
-    #     description: 'Version to deploy (e.g. 0.1.0) — specify an older version to roll back'
-    #     required: true
-    #     type: string
+    inputs:
+      version:
+        description: 'Version to deploy (e.g. 0.1.0) — specify an older version to roll back'
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -40,8 +40,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-        # with:
-        #   ref: v${{ inputs.version }}
+        with:
+          ref: v${{ inputs.version }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v6

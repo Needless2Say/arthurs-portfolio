@@ -98,3 +98,8 @@ jobs:
         # Fails only on high or critical vulnerabilities in production
         # dependencies. Dev-only packages are excluded via --omit=dev.
         run: make ci-npm-audit
+
+  version-check:
+    name: Version bump check
+    if: github.event_name == 'pull_request'
+    uses: Needless2Say/kriegerdataforge-cicd/.github/workflows/bump-version-check.yml@main
