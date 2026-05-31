@@ -16,6 +16,11 @@ on:
   # the deploy job runs (configure reviewers in this repo's Settings →
   # Environments → github-pages → Required reviewers).
   workflow_dispatch:
+    # inputs:
+    #   version:
+    #     description: 'Version to deploy (e.g. 0.1.0) — specify an older version to roll back'
+    #     required: true
+    #     type: string
 
 permissions:
   contents: read
@@ -35,6 +40,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        # with:
+        #   ref: v${{ inputs.version }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -55,6 +62,10 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          NEXT_PUBLIC_EMAILJS_SERVICE_ID:  ${{ secrets.NEXT_PUBLIC_EMAILJS_SERVICE_ID }}
+          NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: ${{ secrets.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID }}
+          NEXT_PUBLIC_EMAILJS_PUBLIC_KEY:  ${{ secrets.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
