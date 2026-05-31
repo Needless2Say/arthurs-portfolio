@@ -59,7 +59,7 @@ body {
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
-	animation: gradient-shift 6s linear infinite;
+	animation: gradient-shift 30s linear infinite;
 }
 
 .glow-text {
@@ -277,7 +277,7 @@ body {
 .animate-gradient-line {
 	background: linear-gradient(90deg, #2563eb 0%, #facc15 25%, #3b82f6 50%, #facc15 75%, #2563eb 100%);
 	background-size: 300% auto;
-	animation: gradient-shift 4s linear infinite;
+	animation: gradient-shift 16s linear infinite;
 }
 
 /* ─── Reduced motion ─────────────────────────────────── */

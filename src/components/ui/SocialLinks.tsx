@@ -1,6 +1,7 @@
 ﻿"use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 interface SocialLinksProps {
 	github: string;
@@ -18,6 +19,9 @@ export default function SocialLinks({ github, linkedin, email }: SocialLinksProp
 	const [emailOpen, setEmailOpen] = useState(false);
 	const [emailClosing, setEmailClosing] = useState(false);
 	const [tooltip, setTooltip] = useState<TooltipState>({ copied: false });
+	const [mounted, setMounted] = useState(false);
+
+	useEffect(() => { setMounted(true); }, []);
 
 	function closeEmail() {
 		setEmailClosing(true);
@@ -101,8 +105,8 @@ export default function SocialLinks({ github, linkedin, email }: SocialLinksProp
 
 			</div>
 
-			{/* Email popup modal */}
-			{emailOpen && (
+			{/* Email popup modal — portalled to document.body to escape stacking contexts */}
+			{emailOpen && mounted && createPortal(
 				<div
 					className="fixed inset-0 z-[150] flex items-center justify-center px-4"
 					onClick={closeEmail}
@@ -223,7 +227,8 @@ export default function SocialLinks({ github, linkedin, email }: SocialLinksProp
 							</svg>
 						</button>
 					</div>
-				</div>
+				</div>,
+				document.body
 			)}
 		</>
 	);

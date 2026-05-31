@@ -5,6 +5,7 @@ import { ROUTES } from "@/constants/routes";
 import { PERSONAL_INFO } from "@/constants/personal-info";
 import TypewriterText from "@/components/ui/TypewriterText";
 import HomeLoader from "@/components/ui/HomeLoader";
+import HomeContentReveal from "@/components/ui/HomeContentReveal";
 import MissionTimeline from "@/components/ui/MissionTimeline";
 import SocialLinks from "@/components/ui/SocialLinks";
 import mission_chicago from "@/../public/mission_control_chicago.jpg";
@@ -34,6 +35,7 @@ export default function Home() {
 		<>
 		<HomeLoader />
 
+		<HomeContentReveal>
 		<div className="min-h-screen flex flex-col items-center justify-center px-4 pt-20 pb-8">
 			<div className="text-center max-w-3xl mx-auto">
 
@@ -218,6 +220,7 @@ export default function Home() {
 				</div>
 			</section>
 		</div>
+		</HomeContentReveal>
 		</>
 	);
 }
