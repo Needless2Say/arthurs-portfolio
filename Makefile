@@ -153,10 +153,13 @@ docker-build: ## Build Docker dev image and force-recreate container
 	docker compose build
 	docker compose up -d --force-recreate --renew-anon-volumes
 
-docker-build-no-cache: ## Build Docker dev image with no cache
+docker-build-no-cache: ## Build Docker dev image with no cache (also purges named volumes so node_modules is fresh)
+	@printf "$(GREEN)Tearing down containers and named volumes...$(NC)\n"
+	docker compose down -v
 	@printf "$(GREEN)Building Docker dev image (no cache)...$(NC)\n"
 	docker compose build --no-cache
-	docker compose up -d --force-recreate --renew-anon-volumes
+	@printf "$(GREEN)Starting container with fresh volumes...$(NC)\n"
+	docker compose up -d
 
 docker-down: ## Stop the portfolio container
 	@printf "$(GREEN)Stopping portfolio container...$(NC)\n"
