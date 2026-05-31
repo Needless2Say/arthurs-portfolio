@@ -113,6 +113,7 @@ export default function HomeLoader() {
 		hideIdRef.current = setTimeout(() => {
 			setPhase("hidden");
 			sessionStorage.setItem(STORAGE_KEY, "1");
+			window.dispatchEvent(new CustomEvent("loader-done"));
 		}, DISPLAY_MS + FADE_MS);
 
 		return () => {
@@ -125,6 +126,7 @@ export default function HomeLoader() {
 		if (fadeIdRef.current) clearTimeout(fadeIdRef.current);
 		if (hideIdRef.current) clearTimeout(hideIdRef.current);
 		setPhase("fading");
+		window.dispatchEvent(new CustomEvent("loader-done"));
 		hideIdRef.current = setTimeout(() => {
 			setPhase("hidden");
 			sessionStorage.setItem(STORAGE_KEY, "1");
