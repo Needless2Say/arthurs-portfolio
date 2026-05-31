@@ -3,6 +3,7 @@ import Link from "next/link";
 import SectionHeader from "@/components/ui/SectionHeader";
 import CopyButton from "@/components/ui/CopyButton";
 import Reveal from "@/components/ui/Reveal";
+import ContactForm from "@/components/ui/ContactForm";
 import { PERSONAL_INFO } from "@/constants/personal-info";
 
 export const metadata: Metadata = {
@@ -104,6 +105,25 @@ export default function Contact() {
 					<p className="text-center text-slate-600 text-xs mt-12 font-mono">
 						Based in Chicago, IL · Open to remote & hybrid roles
 					</p>
+				</Reveal>
+
+				{/* ── Direct message form ── */}
+				<Reveal delay={contacts.length * 80 + 80}>
+					<div className="mt-12">
+						<div className="mb-6">
+							<p className="text-blue-400/60 font-mono text-[10px] tracking-[0.4em] uppercase mb-2">
+								◇ send a message ◇
+							</p>
+							<h2 className="text-2xl font-bold gradient-text glow-text pb-2">
+								Write to me directly
+							</h2>
+							<p className="text-slate-500 text-sm mt-1">
+								Fill out the form and it lands straight in my inbox.
+							</p>
+							<div className="h-px mt-4 animate-gradient-line" />
+						</div>
+						<ContactForm />
+					</div>
 				</Reveal>
 			</div>
 		</div>
