@@ -2,7 +2,8 @@
         docker-up docker-up-build docker-build docker-build-no-cache docker-down docker-logs \
         ci ci-lint ci-typecheck ci-build ci-npm-audit \
         codeql-db codeql-scan-security codeql-scan-quality codeql-scan-all \
-        codeql-scan-security-csv codeql-scan-quality-csv codeql-scan-csv-all
+        codeql-scan-security-csv codeql-scan-quality-csv codeql-scan-csv-all \
+        .ensure-venv venv
 .DEFAULT_GOAL := help
 
 # ========================================
@@ -14,6 +15,19 @@ GREEN  := \033[0;32m
 YELLOW := \033[1;33m
 RED    := \033[0;31m
 NC     := \033[0m
+
+PYTHON_VERSION ?= 3.13
+
+ifeq ($(OS),Windows_NT)
+    VENV_BIN := .venv/Scripts
+    PY_CMD   := py -$(PYTHON_VERSION)
+else
+    VENV_BIN := .venv/bin
+    PY_CMD   := python$(PYTHON_VERSION)
+endif
+
+PYTHON := $(VENV_BIN)/python
+PIP    := $(VENV_BIN)/pip
 
 # ========================================
 # Help
@@ -251,3 +265,32 @@ codeql-scan-quality-csv: ## Run quality scan (CSV)
 	@printf "$(YELLOW)Columns: name, description, severity, message, path, start_line, start_col, end_line, end_col$(NC)\n"
 
 codeql-scan-csv-all: codeql-scan-security-csv codeql-scan-quality-csv ## Run all CodeQL query suites (CSV)
+
+# ============================================================
+# Python Environment (for version bump scripts)
+# ============================================================
+
+.ensure-venv:
+	@[ -d "$(VENV_BIN)" ] || $(MAKE) --no-print-directory venv
+
+venv: ## Create Python virtual environment (used by bump-* targets)
+	@printf "$(GREEN)Creating Python virtual environment...$(NC)\n"
+	@rm -rf .venv
+	$(PY_CMD) -m venv .venv
+	$(PYTHON) -m pip install --upgrade pip
+	@printf "$(GREEN)Virtual environment created at .venv$(NC)\n"
+
+# ============================================================
+# Version Bumping
+# ============================================================
+
+.PHONY: bump-patch bump-minor bump-major
+
+bump-patch: .ensure-venv ## Bump patch version (0.0.X) — updates VERSION and package.json
+	@$(PYTHON) scripts/bump_version.py patch
+
+bump-minor: .ensure-venv ## Bump minor version (0.X.0) — updates VERSION and package.json
+	@$(PYTHON) scripts/bump_version.py minor
+
+bump-major: .ensure-venv ## Bump major version (X.0.0) — updates VERSION and package.json
+	@$(PYTHON) scripts/bump_version.py major
