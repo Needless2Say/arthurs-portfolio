@@ -33,24 +33,55 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # ── Deployer authorization gate ───────────────────────────────────────────
+  # Runs BEFORE build/deploy and BEFORE the github-pages Environment approval is
+  # requested. Verifies the user who dispatched this run is an approved deployer
+  # for this repo, per the central allow-list in kriegerdataforge-cicd
+  # (scripts/deployer_registry.json). Fails closed. This site deploys to GitHub
+  # Pages (no dev/prod), so the registry keys it under the "github-pages" env.
+  authorize:
+    name: Authorize deployer
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out deployer registry (kriegerdataforge-cicd)
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          repository: Needless2Say/kriegerdataforge-cicd
+          ref: main
+          sparse-checkout: scripts
+          path: _kdf_cicd
+          # Default token works when the cicd repo is public. If it is private,
+          # add a repo/org secret CICD_REGISTRY_PAT (read-only); we fall back to github.token.
+          token: ${{ secrets.CICD_REGISTRY_PAT || github.token }}
+
+      - name: Verify deployer is approved
+        run: python3 _kdf_cicd/scripts/check_deployer.py
+        env:
+          DEPLOY_REPO: ${{ github.repository }}
+          DEPLOY_ACTOR: ${{ github.triggering_actor }}
+          DEPLOY_ENVIRONMENT: github-pages
+
   build:
     name: Build static export
+    needs: authorize
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
           ref: v${{ inputs.version }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: "22"
           cache: "npm"
 
       - name: Restore Next.js build cache
-        uses: actions/cache@v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: .next/cache
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
@@ -68,7 +99,7 @@ jobs:
           NEXT_PUBLIC_EMAILJS_PUBLIC_KEY:  ${{ secrets.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY }}
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:
           path: ./out
 
@@ -83,4 +114,4 @@ jobs:
     steps:
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5
