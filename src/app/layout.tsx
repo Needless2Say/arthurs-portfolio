@@ -105,7 +105,8 @@ export default function RootLayout({
 				    - 'unsafe-inline' is required on script-src because a static export
 				      emits inline bootstrap scripts that cannot be nonced.
 				  Allowlisted: Google Analytics (googletagmanager + google-analytics)
-				  and the EmailJS contact-form POST (api.emailjs.com). If GA or the form
+				  and the EmailJS contact-form POST (api.emailjs.com), and YouTube
+					  iframe embeds on /life + /projects. If GA, the form, or the videos
 				  break, the origins below are the first place to look.
 				*/}
 				<meta
@@ -115,12 +116,12 @@ export default function RootLayout({
 						"base-uri 'self'",
 						"object-src 'none'",
 						"frame-ancestors 'none'",
-						"frame-src 'none'",
+						"frame-src https://www.youtube.com https://www.youtube-nocookie.com",
 						"img-src 'self' data: https:",
 						"font-src 'self' data:",
 						"style-src 'self' 'unsafe-inline'",
 						"script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
-						"connect-src 'self' https://api.emailjs.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com",
+						"connect-src 'self' https://api.emailjs.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net",
 						"form-action 'self' https://api.emailjs.com",
 					].join("; ")}
 				/>
