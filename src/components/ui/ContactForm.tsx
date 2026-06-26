@@ -9,14 +9,55 @@ const SERVICE_ID  = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID  ?? "";
 const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? "";
 const PUBLIC_KEY  = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY  ?? "";
 
+// PL-070: best-effort client-side abuse controls (honeypot + send cooldown). The
+// authoritative quota/abuse guard is the EmailJS dashboard (Allowed Origins +
+// rate limit) — see README — since any client control is bypassable.
+const COOLDOWN_MS = 45_000;
+const LAST_SENT_KEY = "contact_last_sent";
+
+function readLastSent(): number {
+	try {
+		return Number(localStorage.getItem(LAST_SENT_KEY)) || 0;
+	} catch {
+		return 0;
+	}
+}
+
+function writeLastSent(ts: number): void {
+	try {
+		localStorage.setItem(LAST_SENT_KEY, String(ts));
+	} catch {
+		/* localStorage unavailable (private mode) — cooldown is best-effort */
+	}
+}
+
 export default function ContactForm() {
 	const formRef = useRef<HTMLFormElement>(null);
+	const honeypotRef = useRef<HTMLInputElement>(null);
 	const [status, setStatus] = useState<FormStatus>("idle");
 	const [errorMsg, setErrorMsg] = useState("");
 
 	async function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
 		if (!formRef.current) return;
+
+		// Honeypot: a human never fills the off-screen "company" field. If it's
+		// set, the submitter is almost certainly a bot — silently feign success
+		// (so it doesn't learn it was filtered) and send nothing.
+		if (honeypotRef.current?.value) {
+			setStatus("success");
+			formRef.current.reset();
+			return;
+		}
+
+		// Client-side cooldown — throttles rapid resubmits from one browser.
+		const sinceLast = Date.now() - readLastSent();
+		if (sinceLast < COOLDOWN_MS) {
+			const wait = Math.ceil((COOLDOWN_MS - sinceLast) / 1000);
+			setErrorMsg(`Please wait ${wait}s before sending another message.`);
+			setStatus("error");
+			return;
+		}
 
 		if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
 			setErrorMsg("Email service not configured — please reach out directly.");
@@ -29,6 +70,7 @@ export default function ContactForm() {
 
 		try {
 			await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, { publicKey: PUBLIC_KEY });
+			writeLastSent(Date.now());
 			setStatus("success");
 			formRef.current.reset();
 		} catch (err: unknown) {
@@ -44,6 +86,20 @@ export default function ContactForm() {
 
 	return (
 		<form ref={formRef} onSubmit={handleSubmit} className="space-y-4" noValidate>
+			{/* Honeypot — off-screen, hidden from humans & assistive tech; bots that
+			    auto-fill it are silently dropped in handleSubmit (PL-070). */}
+			<div aria-hidden="true" className="absolute -left-[9999px] top-0 h-0 w-0 overflow-hidden">
+				<label htmlFor="company">Company (leave this field blank)</label>
+				<input
+					ref={honeypotRef}
+					id="company"
+					name="company"
+					type="text"
+					tabIndex={-1}
+					autoComplete="off"
+				/>
+			</div>
+
 			{/* Name + Email row */}
 			<div className="grid sm:grid-cols-2 gap-4">
 				<div>

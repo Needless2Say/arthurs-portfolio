@@ -1,6 +1,6 @@
 {
   "name": "personal_website",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -24,5 +24,8 @@
     "eslint-config-next": "15.5.18",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "postcss": "^8.5.10"
   }
 }
