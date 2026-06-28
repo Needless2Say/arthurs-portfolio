@@ -103,7 +103,6 @@ Don't skip the plan-approval gate; don't self-merge. The supporting kit:
   [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md)).
 - [`docs/agent/templates/`](docs/agent/templates/) — copy-paste **design-spec**, **ADR**, and
   **epic-tracker** templates. ADRs land in `docs/CHANGELOG_AND_DECISION_LOG.md` (create if absent).
-- Role prompts: [`prompts/`](./prompts).
 
 ### Before opening a PR (this repo)
 
@@ -113,10 +112,6 @@ Don't skip the plan-approval gate; don't self-merge. The supporting kit:
 - [ ] No secrets in source — EmailJS keys only in `.env.local`; `.env.local.example` updated if a new var was added.
 - [ ] Version bumped when shipping a change: `make bump-patch` (minor/major as warranted) — updates `VERSION` + `package.json`.
 - [ ] Architectural change? Add an ADR (`docs/CHANGELOG_AND_DECISION_LOG.md`) and get owner approval first.
-
-## Prompts
-
-Role-organized prompts live in [`prompts/`](./prompts) — `dev/` (component/page implementation, bug fixes), `architect/` (page/layout architecture), `design/`, `code_review/`, `tester/`, `docs/`, and `prompt_generators/`. Start from each role's `_template.md`.
 
 ## Security — read [`skills.md`](./skills.md)
 
