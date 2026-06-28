@@ -1,14 +1,10 @@
-# arthurs-portfolio — Cursor Rules
+# arthurs-portfolio — Cursor rules
 
-## General
-- Keep it simple — no over-engineering for a portfolio site
-- Named exports preferred over default exports (except Next.js `page.tsx` / `layout.tsx`)
-- No `any` type — use proper TypeScript types
-- TailwindCSS utility classes only — no custom CSS unless clearly necessary
+The canonical agent guide for this repo is **AGENTS.md**. Read [`AGENTS.md`](./AGENTS.md) first —
+it covers the repo's vision & purpose, tech stack, module map, critical rules, and required reading.
 
-## Naming
-- Components: PascalCase (`HeroSection.tsx` → `export function HeroSection`)
-- Utils: camelCase or kebab-case files
-- Constants: `UPPER_SNAKE_CASE`
+For every task, follow:
 
-See `README.md` for project overview.
+- [`WORKFLOW.md`](./WORKFLOW.md) — the tiered task workflow (Quick / Standard / Epic; plan → owner
+  approves → implement → `make ci` green → PR → GitHub CI green → owner merges).
+- [`skills.md`](./skills.md) — the security playbook (read before any security-sensitive work).

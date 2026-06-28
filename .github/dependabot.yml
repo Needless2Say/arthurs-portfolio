@@ -1,0 +1,13 @@
+version: 2
+updates:
+  # Keep GitHub Actions current — auto-PRs SHA-pin bumps so the commit-pinned
+  # actions (AUDIT §4) don't go stale. Dependabot updates both the SHA and its
+  # `# vX` version comment for actions pinned by hash.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    labels:
+      - "dependencies"
+      - "github-actions"

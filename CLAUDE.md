@@ -1,36 +1,14 @@
-# arthurs-portfolio — Agent Quick-Start
+# arthurs-portfolio — Agent instructions
 
-## App Vision & Purpose
+**The canonical agent guide for this repo is [`AGENTS.md`](./AGENTS.md). Read it first.**
 
-Personal portfolio site showcasing Arthur's projects, skills, and background.
-Simple, fast, and clean — a Next.js static site with no complex business logic.
+It covers this repo's vision & purpose, tech stack, module map, critical rules, **required reading**,
+and the commands you'll need.
 
-## Tech Stack
+Then, for every task:
 
-- Next.js 15.5 · App Router · React 19 · TypeScript · TailwindCSS
+- Follow the standard workflow in [`WORKFLOW.md`](./WORKFLOW.md) — pick a lane (Quick / Standard / Epic),
+  **plan → owner approves** → implement → `make ci` green locally → PR → confirm GitHub CI is green → owner merges.
+- Before any security-sensitive work, read the security playbook in [`skills.md`](./skills.md).
 
-## Read Before You Code
-
-- `README.md` — project setup and run instructions
-- Explore `src/` to understand the existing component and page structure before making changes.
-
-## Critical Rules
-
-1. Keep it simple — no over-engineering for a portfolio site.
-2. **No `any` type** — use proper TypeScript types.
-3. Named exports preferred over default exports (except Next.js `page.tsx` / `layout.tsx`).
-
-## Commands
-
-| Task       | Command          |
-|------------|------------------|
-| Dev server | `npm run dev`    |
-| Build      | `npm run build`  |
-| Lint       | `npm run lint`   |
-
-## Prompts
-
-AI prompts for development tasks are in `prompts/`:
-
-- `prompts/dev/` — component and page implementation
-- `prompts/architect/` — page and layout architecture
+Everything an agent needs lives in those files — this file is just the entry point Claude Code loads.

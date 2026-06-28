@@ -1,7 +1,7 @@
 # CI Pipeline — Arthur's Portfolio
 #
 # Runs lint, type-check, static export build verification, and npm audit on
-# every push to main and on every PR targeting main.  Three jobs run in parallel:
+# every PR targeting main.  Three jobs run in parallel:
 #   • lint-and-typecheck — ESLint + tsc --noEmit
 #   • build             — next build (static export, verifies the site compiles)
 #   • npm-audit         — flags high/critical CVEs in production dependencies
@@ -11,8 +11,6 @@
 name: CI
 
 on:
-  push:
-    branches: ["main"]
   pull_request:
     branches: ["main"]
     types: [opened, synchronize, reopened]
@@ -25,81 +23,39 @@ concurrency:
 # Minimal permissions — read-only is sufficient for all jobs here.
 permissions:
   contents: read
+  pull-requests: read
 
 jobs:
   lint-and-typecheck:
-    name: Lint · Type-check
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: "22"
-          cache: "npm"
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Lint
-        run: make ci-lint
-
-      - name: Type-check
-        run: make ci-typecheck
+    uses: Needless2Say/kriegerdataforge-cicd/.github/workflows/ci-nextjs-lint-typecheck.yml@main
 
   build:
-    name: Build (Static Export)
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: "22"
-          cache: "npm"
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: make ci-build
-
-      - name: Upload static export
-        uses: actions/upload-artifact@v7
-        with:
-          name: static-export
-          path: out/
-          retention-days: 3
+    uses: Needless2Say/kriegerdataforge-cicd/.github/workflows/ci-nextjs-build.yml@main
+    with:
+      upload_artifact: true
 
   npm-audit:
-    name: npm audit
+    uses: Needless2Say/kriegerdataforge-cicd/.github/workflows/ci-npm-audit.yml@main
+
+  secret-scan:
+    uses: Needless2Say/kriegerdataforge-cicd/.github/workflows/secret-scan.yml@main
+
+  version-check:
+    name: Version check
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
-          node-version: "22"
-          cache: "npm"
+          repository: Needless2Say/kriegerdataforge-cicd
+          ref: main
+          path: .cicd
 
-      - name: Install dependencies
-        run: npm ci
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
+        with:
+          python-version: "3.13"
 
-      - name: Audit for high/critical CVEs
-        # Fails only on high or critical vulnerabilities in production
-        # dependencies. Dev-only packages are excluded via --omit=dev.
-        run: make ci-npm-audit
-
-  version-check:
-    name: Version bump check
-    if: github.event_name == 'pull_request'
-    uses: Needless2Say/kriegerdataforge-cicd/.github/workflows/bump-version-check.yml@main
+      - name: Run version check
+        run: python .cicd/scripts/common/check_version.py --skip-init --check-package-json
