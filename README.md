@@ -32,6 +32,28 @@ No database. No auth. No backend API calls except the EmailJS contact form.
 
 ---
 
+## Security notes
+
+This is a static site on GitHub Pages, which **cannot send HTTP response headers**,
+so the usual header-based protections are partial:
+
+- **CSP** is applied via a `<meta http-equiv="Content-Security-Policy">` in
+  `src/app/layout.tsx` (PL-071). It allowlists Google Analytics and the EmailJS
+  POST; `script-src` keeps `'unsafe-inline'` because a static export's inline
+  bootstrap can't be nonced. Header-only directives (`frame-ancestors`,
+  `X-Frame-Options`) are ignored in `<meta>`, so clickjacking can't be fully
+  blocked on this host.
+- **Contact form abuse (PL-070):** `ContactForm.tsx` has an off-screen honeypot
+  and a client-side send cooldown, but those are best-effort. The authoritative
+  controls are EmailJS **dashboard** settings — set **Allowed Origins** to
+  `https://needless2say.github.io` and enable EmailJS rate limiting (see
+  `.env.local.example`).
+- **Dependencies (PL-073):** `package.json` pins `postcss` via `overrides` to a
+  patched `>=8.5.10` because `next` still bundles the vulnerable `8.4.31`
+  (build-time only on a static export). `npm audit --omit=dev` is clean.
+
+---
+
 ## Project Structure
 
 ```text
