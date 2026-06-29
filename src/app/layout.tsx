@@ -104,6 +104,9 @@ export default function RootLayout({
 				      <meta> (clickjacking can't be fully blocked on this host).
 				    - 'unsafe-inline' is required on script-src because a static export
 				      emits inline bootstrap scripts that cannot be nonced.
+				    - 'unsafe-eval' is added ONLY in development (process.env.NODE_ENV),
+				      because Next.js Fast Refresh / HMR evaluates code via eval(); it is
+				      never emitted in the production build, so the deployed CSP is strict.
 				  Allowlisted: Google Analytics (googletagmanager + google-analytics)
 				  and the EmailJS contact-form POST (api.emailjs.com), and YouTube
 					  iframe embeds on /life + /projects. If GA, the form, or the videos
@@ -120,7 +123,7 @@ export default function RootLayout({
 						"img-src 'self' data: https:",
 						"font-src 'self' data:",
 						"style-src 'self' 'unsafe-inline'",
-						"script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
+						`script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com`,
 						"connect-src 'self' https://api.emailjs.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net",
 						"form-action 'self' https://api.emailjs.com",
 					].join("; ")}

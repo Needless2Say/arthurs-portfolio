@@ -1,10 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { setupFullscreenCanvas } from "@/utils/fullscreenCanvas";
 
-const W = 320;
-const H = 200;
-const STAR_COUNT = 320;
 const CYCLE_MS = 3200;
 
 interface Star {
@@ -27,13 +25,6 @@ function randomStar(zMin = 0.05, zMax = 1.0): Star {
 	};
 }
 
-function project(star: Star): [number, number] {
-	return [
-		(star.x / star.z) * (W / 2) + W / 2,
-		(star.y / star.z) * (H / 2) + H / 2,
-	];
-}
-
 export default function HyperdriveCanvas() {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -43,16 +34,23 @@ export default function HyperdriveCanvas() {
 		const ctx = canvas.getContext("2d");
 		if (!ctx) return;
 		const c = ctx; // narrow type once so inner functions see non-null
+		const { dims, cleanup } = setupFullscreenCanvas(canvas);
 
-		const stars: Star[] = Array.from({ length: STAR_COUNT }, () => randomStar());
+		// Density scales with viewport area so large screens stay full of streaks.
+		const starCount = Math.round(Math.min(1700, Math.max(420, (dims.w * dims.h) / 1500)));
+		const stars: Star[] = Array.from({ length: starCount }, () => randomStar());
 		let origin: number | null = null;
 		let animId: number;
 
 		c.fillStyle = "#00000a";
-		c.fillRect(0, 0, W, H);
+		c.fillRect(0, 0, dims.w, dims.h);
 
 		function frame(ts: number) {
 			if (origin === null) origin = ts;
+			const W = dims.w, H = dims.h;
+			const cx0 = W / 2, cy0 = H / 2;
+			// Gentle line-width boost on larger viewports so streaks read at distance.
+			const lwScale = Math.min(2.4, Math.max(1, Math.min(W, H) / 460));
 			const t = ((ts - origin) % CYCLE_MS) / CYCLE_MS; // 0 → 1 each cycle
 
 			// Exponential speed ramp — almost imperceptible at t=0, violent at t≈0.85
@@ -64,25 +62,27 @@ export default function HyperdriveCanvas() {
 			c.fillRect(0, 0, W, H);
 
 			for (const star of stars) {
-				const [prevX, prevY] = project(star);
+				const prevX = (star.x / star.z) * cx0 + cx0;
+				const prevY = (star.y / star.z) * cy0 + cy0;
 
 				star.z -= speed;
 
 				// Recycle stars that go off-screen or past the camera
 				if (
 					star.z < 0.008 ||
-					prevX < -80 || prevX > W + 80 ||
-					prevY < -60 || prevY > H + 60
+					prevX < -120 || prevX > W + 120 ||
+					prevY < -120 || prevY > H + 120
 				) {
 					Object.assign(star, randomStar(0.85, 1.0));
 					continue;
 				}
 
-				const [cx, cy] = project(star);
+				const cx = (star.x / star.z) * cx0 + cx0;
+				const cy = (star.y / star.z) * cy0 + cy0;
 				const nearness  = 1 - star.z;           // 0=far, 1=near
 				const brightness = Math.pow(nearness, 1.4);
 				const alpha      = Math.min(0.25 + brightness * 0.75, 1);
-				const lineWidth  = Math.max(0.4, brightness * 2.8);
+				const lineWidth  = Math.max(0.5, brightness * 2.8 * lwScale);
 
 				// Blue-white colour: warm white early, icy blue at peak
 				const rg  = Math.floor(160 + brightness * 95);
@@ -117,15 +117,13 @@ export default function HyperdriveCanvas() {
 		}
 
 		animId = requestAnimationFrame(frame);
-		return () => cancelAnimationFrame(animId);
+		return () => { cancelAnimationFrame(animId); cleanup(); };
 	}, []);
 
 	return (
 		<canvas
 			ref={canvasRef}
-			width={W}
-			height={H}
-			className="w-64 sm:w-72 h-auto rounded-md"
+			className="block w-full h-full"
 			style={{ imageRendering: "auto" }}
 		/>
 	);
