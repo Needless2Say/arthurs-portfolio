@@ -67,15 +67,17 @@ function HyperdriveAnimation() {
 	return <HyperdriveCanvas />;
 }
 
-// Each entry: the animation component + the eyebrow label shown in the card
-const ANIMATIONS: Array<{ label: string; Component: () => React.JSX.Element }> = [
-	{ label: "◇ initializing systems ◇",   Component: PlanetAnimation },
-	{ label: "◇ entering hyperspace ◇",    Component: HyperdriveAnimation },
-	{ label: "◇ event horizon detected ◇", Component: () => <BlackHoleCanvas /> },
-	{ label: "◇ wormhole opening ◇",        Component: () => <WormholeCanvas /> },
-	{ label: "◇ pulsar signal acquired ◇",  Component: () => <PulsarCanvas /> },
-	{ label: "◇ nebula sector ◇",           Component: () => <NebulaCanvas /> },
-	{ label: "◇ punch it chewie ◇",         Component: () => <FalconCanvas /> },
+// Each entry: the animation component + the eyebrow label.
+// `fill` = canvas animations that paint the whole viewport; non-fill (the CSS
+// PlanetAnimation) is centered and scaled up to read at full-screen size.
+const ANIMATIONS: Array<{ label: string; fill: boolean; Component: () => React.JSX.Element }> = [
+	{ label: "◇ initializing systems ◇",   fill: false, Component: PlanetAnimation },
+	{ label: "◇ entering hyperspace ◇",    fill: true,  Component: HyperdriveAnimation },
+	{ label: "◇ event horizon detected ◇", fill: true,  Component: () => <BlackHoleCanvas /> },
+	{ label: "◇ wormhole opening ◇",        fill: true,  Component: () => <WormholeCanvas /> },
+	{ label: "◇ pulsar signal acquired ◇",  fill: true,  Component: () => <PulsarCanvas /> },
+	{ label: "◇ nebula sector ◇",           fill: true,  Component: () => <NebulaCanvas /> },
+	{ label: "◇ punch it chewie ◇",         fill: true,  Component: () => <FalconCanvas /> },
 ];
 
 // ── Loader ────────────────────────────────────────────────────
@@ -135,20 +137,33 @@ export default function HomeLoader() {
 
 	if (phase === "hidden") return null;
 
-	const { label, Component } = ANIMATIONS[animIndex];
+	const { label, fill, Component } = ANIMATIONS[animIndex];
 
 	return (
 		<div
 			onClick={dismiss}
-			className={`fixed inset-0 z-[200] flex flex-col items-center justify-center bg-black cursor-pointer select-none transition-opacity duration-700 ${
+			className={`fixed inset-0 z-[200] overflow-hidden bg-black cursor-pointer select-none transition-opacity duration-700 ${
 				phase === "fading" ? "opacity-0" : "opacity-100"
 			}`}
 		>
-			{/* Scattered background stars */}
+			{/* Full-screen animation layer */}
+			{fill ? (
+				<div className="absolute inset-0">
+					<Component />
+				</div>
+			) : (
+				<div className="absolute inset-0 flex items-center justify-center">
+					<div className="scale-[2.6] sm:scale-[3.6]">
+						<Component />
+					</div>
+				</div>
+			)}
+
+			{/* Scattered ambient stars (subtle, over the animation) */}
 			{STARS.map((s, i) => (
 				<span
 					key={i}
-					className="absolute w-0.5 h-0.5 rounded-full bg-white"
+					className="absolute z-[5] w-0.5 h-0.5 rounded-full bg-white"
 					style={{
 						top: s.top, left: s.left,
 						animation: `star-blink ${s.dur} ease-in-out ${s.delay} infinite`,
@@ -156,46 +171,35 @@ export default function HomeLoader() {
 				/>
 			))}
 
-			{/* Card */}
-			<div className="relative flex flex-col items-center rounded-2xl border border-blue-500/25 bg-black/70 px-8 pt-8 pb-7 shadow-[0_0_80px_rgba(37,99,235,0.12)]">
-				{/* HUD corners */}
-				<span className="pointer-events-none absolute -top-px -left-px  w-4 h-4 border-t-2 border-l-2 rounded-tl-xl border-blue-400/60" />
-				<span className="pointer-events-none absolute -top-px -right-px w-4 h-4 border-t-2 border-r-2 rounded-tr-xl border-blue-400/60" />
-				<span className="pointer-events-none absolute -bottom-px -left-px  w-4 h-4 border-b-2 border-l-2 rounded-bl-xl border-blue-400/60" />
-				<span className="pointer-events-none absolute -bottom-px -right-px w-4 h-4 border-b-2 border-r-2 rounded-br-xl border-blue-400/60" />
-
-				{/* Eyebrow — changes per animation */}
-				<p className="font-mono text-[9px] tracking-[0.45em] uppercase text-blue-400/60 mb-6">
-					{label}
-				</p>
-
-				{/* Chosen animation */}
-				<div className="mb-6">
-					<Component />
-				</div>
-
-				{/* Energy bar */}
+			{/* Top loading bar — thick, full width, fills over the load duration */}
+			<div
+				className="absolute top-0 left-0 right-0 z-10 h-1.5"
+				style={{
+					background: "linear-gradient(90deg, #2563eb 0%, #facc15 100%)",
+					boxShadow: "0 0 14px rgba(37,99,235,0.55)",
+				}}
+			>
+				{/* Dark mask shrinks right→left, revealing the gradient */}
 				<div
-					className="relative w-48 sm:w-56 h-1 rounded-full overflow-hidden"
-					style={{ background: "linear-gradient(90deg, #2563eb 0%, #facc15 100%)" }}
-				>
-					{/* Dark mask shrinks right→left, revealing the gradient */}
-					<div
-						className="absolute right-0 top-0 h-full bg-black"
-						style={{ animation: `energy-bar-mask ${DISPLAY_MS}ms linear forwards` }}
-					/>
-				</div>
-
-				{/* Status */}
-				<p className="mt-3 font-mono text-[10px] tracking-[0.35em] uppercase text-blue-300/50 animate-pulse">
-					LOADING...
-				</p>
+					className="absolute right-0 top-0 h-full bg-black"
+					style={{ animation: `energy-bar-mask ${DISPLAY_MS}ms linear forwards` }}
+				/>
 			</div>
 
-			{/* Skip hint */}
-			<p className="mt-8 text-slate-700 font-mono text-[10px] tracking-widest uppercase">
-				tap anywhere to skip
+			{/* Eyebrow — changes per animation */}
+			<p className="absolute top-7 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap font-mono text-[10px] sm:text-xs tracking-[0.45em] uppercase text-blue-300/80 [text-shadow:0_0_12px_rgba(0,0,0,0.95)]">
+				{label}
 			</p>
+
+			{/* Status + skip hint */}
+			<div className="absolute bottom-10 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3 text-center">
+				<p className="font-mono text-[10px] tracking-[0.35em] uppercase text-blue-300/70 animate-pulse [text-shadow:0_0_12px_rgba(0,0,0,0.95)]">
+					LOADING...
+				</p>
+				<p className="font-mono text-[10px] tracking-widest uppercase text-slate-500 [text-shadow:0_0_12px_rgba(0,0,0,0.95)]">
+					tap anywhere to skip
+				</p>
+			</div>
 		</div>
 	);
 }

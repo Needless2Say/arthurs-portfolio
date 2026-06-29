@@ -1,28 +1,10 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { setupFullscreenCanvas } from "@/utils/fullscreenCanvas";
 
-const W = 320, H = 200;
-const CX = W / 2, CY = H / 2 + 8;
-const TILT      = 0.36;
-const R_HORIZON = 22;
-const R_IN      = 28;
-const R_OUT     = 85;
-const N         = 300;
-
-let _s = 7;
-const sr = () => { _s = ((_s * 1664525 + 1013904223) >>> 0); return _s / 0xffffffff; };
-const BG: [number, number, number][] = Array.from({ length: 90 }, () => [sr() * W, sr() * H, 0.15 + sr() * 0.6]);
+const TILT = 0.36;
 
 interface Pt { a: number; r: number; spd: number; sz: number }
-const mkPt = (): Pt => {
-	const r = R_IN + Math.random() * (R_OUT - R_IN);
-	return {
-		a:   Math.random() * Math.PI * 2,
-		r,
-		spd: 1.5 / Math.sqrt(r),
-		sz:  1.2 + (1 - (r - R_IN) / (R_OUT - R_IN)) * 2.4, // 3.6 inner → 1.2 outer
-	};
-};
 
 export default function BlackHoleCanvas() {
 	const ref = useRef<HTMLCanvasElement>(null);
@@ -30,14 +12,36 @@ export default function BlackHoleCanvas() {
 		const cv = ref.current; if (!cv) return;
 		const ctx = cv.getContext("2d"); if (!ctx) return;
 		const c = ctx;
+		const { dims, cleanup } = setupFullscreenCanvas(cv);
+
+		// Scale geometry to fill the viewport; counts grow with area for density.
+		const S = Math.max(dims.w / 320, dims.h / 200);
+		const R_HORIZON = 22 * S, R_IN = 28 * S, R_OUT = 85 * S;
+		const szScale = Math.min(2.4, S);
+		const N = Math.round(300 * Math.min(3, S));
+
+		const bgCount = Math.round(Math.min(900, (dims.w * dims.h) / 2400));
+		const BG: [number, number, number][] = Array.from({ length: bgCount }, () => [Math.random() * dims.w, Math.random() * dims.h, 0.15 + Math.random() * 0.6]);
+
+		const mkPt = (): Pt => {
+			const r = R_IN + Math.random() * (R_OUT - R_IN);
+			return {
+				a:   Math.random() * Math.PI * 2,
+				r,
+				spd: 1.5 / Math.sqrt(r / S),
+				sz:  (1.2 + (1 - (r - R_IN) / (R_OUT - R_IN)) * 2.4) * szScale, // 3.6 inner → 1.2 outer
+			};
+		};
 		const pts: Pt[] = Array.from({ length: N }, mkPt);
 		let last: number | null = null, id: number;
 
-		c.fillStyle = "#00000a"; c.fillRect(0, 0, W, H);
+		c.fillStyle = "#00000a"; c.fillRect(0, 0, dims.w, dims.h);
 
 		function frame(ts: number) {
 			if (last === null) last = ts;
 			const dt = Math.min((ts - last) / 1000, 0.05); last = ts;
+			const W = dims.w, H = dims.h;
+			const CX = W / 2, CY = H / 2 + 8 * S;
 
 			// Slow fade so particles linger visibly
 			c.fillStyle = "rgba(0,0,6,0.13)"; c.fillRect(0, 0, W, H);
@@ -106,12 +110,12 @@ export default function BlackHoleCanvas() {
 			c.globalAlpha = 1;
 
 			// Photon-sphere orange glow ring
-			const lens = c.createRadialGradient(CX, CY, R_HORIZON, CX, CY, R_HORIZON + 18);
+			const lens = c.createRadialGradient(CX, CY, R_HORIZON, CX, CY, R_HORIZON + 18 * S);
 			lens.addColorStop(0,   "rgba(255,150,40,0.55)");
 			lens.addColorStop(0.4, "rgba(220,70,0,0.2)");
 			lens.addColorStop(1,   "rgba(0,0,0,0)");
 			c.fillStyle = lens;
-			c.beginPath(); c.arc(CX, CY, R_HORIZON + 18, 0, Math.PI * 2); c.fill();
+			c.beginPath(); c.arc(CX, CY, R_HORIZON + 18 * S, 0, Math.PI * 2); c.fill();
 
 			// Event horizon — pure black
 			c.fillStyle = "#000";
@@ -121,8 +125,8 @@ export default function BlackHoleCanvas() {
 		}
 
 		id = requestAnimationFrame(frame);
-		return () => cancelAnimationFrame(id);
+		return () => { cancelAnimationFrame(id); cleanup(); };
 	}, []);
 
-	return <canvas ref={ref} width={W} height={H} className="w-64 sm:w-72 h-auto rounded-md" style={{ imageRendering: "auto" }} />;
+	return <canvas ref={ref} className="block w-full h-full" style={{ imageRendering: "auto" }} />;
 }

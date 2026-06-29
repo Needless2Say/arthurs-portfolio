@@ -1,17 +1,11 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { setupFullscreenCanvas } from "@/utils/fullscreenCanvas";
 
-const W = 320, H = 200;
-const CX = W / 2, CY = H / 2;
 const CYCLE_MS   = 3800;
-const STAR_COUNT = 280;
 
 interface Star { x: number; y: number; z: number; px: number; py: number }
 const newStar = (): Star => ({ x: (Math.random() - 0.5) * 2, y: (Math.random() - 0.5) * 2, z: 0.1 + Math.random() * 0.9, px: -1, py: -1 });
-
-function projectStar(s: Star): [number, number] {
-	return [(s.x / s.z) * (W / 2) + W / 2, (s.y / s.z) * (H / 2) + H / 2];
-}
 
 export default function FalconCanvas() {
 	const ref = useRef<HTMLCanvasElement>(null);
@@ -19,14 +13,19 @@ export default function FalconCanvas() {
 		const cv = ref.current; if (!cv) return;
 		const ctx = cv.getContext("2d"); if (!ctx) return;
 		const c = ctx;
+		const { dims, cleanup } = setupFullscreenCanvas(cv);
 
-		const stars: Star[] = Array.from({ length: STAR_COUNT }, newStar);
+		const starCount = Math.round(Math.min(1500, Math.max(380, (dims.w * dims.h) / 1700)));
+		const stars: Star[] = Array.from({ length: starCount }, newStar);
 		let origin: number | null = null, id: number;
 
-		c.fillStyle = "#000005"; c.fillRect(0, 0, W, H);
+		c.fillStyle = "#000005"; c.fillRect(0, 0, dims.w, dims.h);
 
 		function frame(ts: number) {
 			if (origin === null) origin = ts;
+			const W = dims.w, H = dims.h;
+			const cx0 = W / 2, cy0 = H / 2;
+			const lwScale = Math.min(2.4, Math.max(1, Math.min(W, H) / 460));
 			const t    = ((ts - origin) % CYCLE_MS) / CYCLE_MS; // 0→1 per cycle
 			const jump = t > 0.82; // last 18% = hyperspace jump
 
@@ -39,15 +38,17 @@ export default function FalconCanvas() {
 
 			// Hyperspace star streaks
 			for (const s of stars) {
-				const [px, py] = projectStar(s);
+				const px = (s.x / s.z) * cx0 + cx0;
+				const py = (s.y / s.z) * cy0 + cy0;
 				s.z -= starSpeed;
-				if (s.z < 0.008 || px < -80 || px > W + 80 || py < -60 || py > H + 60) {
+				if (s.z < 0.008 || px < -120 || px > W + 120 || py < -120 || py > H + 120) {
 					Object.assign(s, newStar()); s.z = 0.88 + Math.random() * 0.12; continue;
 				}
-				const [cx2, cy2] = projectStar(s);
+				const cx2 = (s.x / s.z) * cx0 + cx0;
+				const cy2 = (s.y / s.z) * cy0 + cy0;
 				const near  = 1 - s.z;
 				const alpha = Math.min(1, 0.2 + near * 0.8);
-				const lw    = Math.max(0.3, near * 2.2);
+				const lw    = Math.max(0.4, near * 2.2 * lwScale);
 				const rg    = (150 + near * 105) | 0;
 				c.strokeStyle = `rgba(${rg},${rg},255,${alpha})`;
 				c.lineWidth   = lw;
@@ -69,8 +70,8 @@ export default function FalconCanvas() {
 		}
 
 		id = requestAnimationFrame(frame);
-		return () => cancelAnimationFrame(id);
+		return () => { cancelAnimationFrame(id); cleanup(); };
 	}, []);
 
-	return <canvas ref={ref} width={W} height={H} className="w-64 sm:w-72 h-auto rounded-md" style={{ imageRendering: "auto" }} />;
+	return <canvas ref={ref} className="block w-full h-full" style={{ imageRendering: "auto" }} />;
 }

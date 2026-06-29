@@ -2,21 +2,48 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { NAV_LINKS } from "@/constants/routes";
 import { cn } from "@/utils/cn";
+
+// Mirror the home loader's session flag + timing so the navbar stays hidden
+// behind the full-screen loader and appears with the page content.
+const LOADER_KEY = "home_loader_v2";
+const LOADER_MS = 2500 + 700;
 
 export default function Navbar() {
 	const pathname = usePathname();
 	const [open, setOpen] = useState(false);
+	// Hidden only while the home loader is on screen; visible everywhere else.
+	const [hidden, setHidden] = useState(false);
 	// Increments each time the menu opens so nav-item-in replays even on re-open.
 	const menuKeyRef = useRef(0);
+
+	useEffect(() => {
+		if (pathname !== "/" || sessionStorage.getItem(LOADER_KEY)) {
+			setHidden(false);
+			return;
+		}
+		setHidden(true);
+		const reveal = () => setHidden(false);
+		const t = setTimeout(reveal, LOADER_MS);
+		window.addEventListener("loader-done", reveal);
+		return () => {
+			clearTimeout(t);
+			window.removeEventListener("loader-done", reveal);
+		};
+	}, [pathname]);
 
 	const isActive = (path: string) =>
 		path === "/" ? pathname === "/" : pathname.startsWith(path);
 
 	return (
-		<nav className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4">
+		<nav
+			className={cn(
+				"fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4 transition-opacity duration-500",
+				hidden ? "opacity-0 pointer-events-none" : "opacity-100",
+			)}
+		>
 			{/* ── Desktop ── */}
 			<div className="hidden sm:flex items-center gap-0.5 rounded-2xl bg-slate-900/85 backdrop-blur-xl border border-slate-600/40 px-2 py-1.5 shadow-xl shadow-black/30">
 				{NAV_LINKS.map((link) => (
