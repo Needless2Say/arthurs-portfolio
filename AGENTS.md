@@ -75,7 +75,7 @@ is "tasteful, fast, and correct," not "infinitely extensible."
 ## Required reading
 
 1. [`README.md`](./README.md) — what the site is, pages, tech stack, build/deploy, env vars.
-2. [`docs/ANALYTICS_OPT_OUT.md`](docs/ANALYTICS_OPT_OUT.md) — GA4 self-exclusion (`localStorage` opt-out flag) — read before touching analytics.
+2. [`docs/ANALYTICS_OPT_OUT.md`](docs/guides/ANALYTICS_OPT_OUT.md) — GA4 self-exclusion (`localStorage` opt-out flag) — read before touching analytics.
 3. [`CONTRIBUTING.md`](./CONTRIBUTING.md) — owner-only workflow + code standards.
 4. `src/constants/` and `src/types/portfolio.ts` — the content/data model; most "edits" are data changes here, not new components.
 5. Explore `src/components/` and `src/app/` to match existing patterns before changing anything.

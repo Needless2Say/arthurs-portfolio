@@ -10,8 +10,8 @@ Keep changes **simple and proportionate**. The owner's bar here is "tasteful, fa
 correct," not "infinitely extensible." Most "edits" are content/data changes in
 `src/constants/`, not new components.
 
-> Read [`AGENTS.md`](../AGENTS.md) first (vision, tech stack, module map, critical rules),
-> then [`WORKFLOW.md`](../WORKFLOW.md) for the per-task loop, and [`skills.md`](../skills.md)
+> Read [`AGENTS.md`](../../AGENTS.md) first (vision, tech stack, module map, critical rules),
+> then [`WORKFLOW.md`](../../WORKFLOW.md) for the per-task loop, and [`skills.md`](../../skills.md)
 > for anything security-sensitive. This guide is the hands-on setup companion to those.
 
 ---
@@ -62,7 +62,7 @@ cp .env.local.example .env.local
 #   NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
 ```
 
-[`.env.local.example`](../.env.local.example) walks through creating the EmailJS service,
+[`.env.local.example`](../../.env.local.example) walks through creating the EmailJS service,
 template, and public key. **Never commit `.env.local`**, and never hardcode personal
 info or keys in source (`AGENTS.md` critical rule #7).
 
@@ -162,17 +162,17 @@ or runtime env reads); honor `basePath`/`assetPrefix` for links and assets;
 
 ## 7. Pick a lane & the plan → approve → PR flow
 
-Every task follows the tiered loop in [`WORKFLOW.md`](../WORKFLOW.md). Pick a lane:
+Every task follows the tiered loop in [`WORKFLOW.md`](../../WORKFLOW.md). Pick a lane:
 
 - **Quick** — tiny, no-behavior change (typo, content tweak, a constant) → implement →
   `make ci` green → PR.
 - **Standard** — a one-repo feature → orient → **plan & owner approves** → implement →
   `make ci` green (+ version bump) → PR → **GitHub CI green** → **owner merges**.
 - **Epic** — complex/novel design or anything spanning repos → the design gate +
-  cross-repo coordination in [`docs/agent/DESIGN_AND_EPICS.md`](agent/DESIGN_AND_EPICS.md).
+  cross-repo coordination in [`docs/agent/DESIGN_AND_EPICS.md`](../agent/DESIGN_AND_EPICS.md).
 
 **Don't skip the plan-approval gate; don't self-merge.** This is a private, owner-only repo
-(see [`CONTRIBUTING.md`](../CONTRIBUTING.md)).
+(see [`CONTRIBUTING.md`](../../CONTRIBUTING.md)).
 
 ### Before opening a PR
 
@@ -185,7 +185,7 @@ Every task follows the tiered loop in [`WORKFLOW.md`](../WORKFLOW.md). Pick a la
       `VERSION` **and** `package.json` in lockstep.
 - [ ] Architectural change? Add an ADR (`docs/CHANGELOG_AND_DECISION_LOG.md`) and get owner
       approval first.
-- [ ] The PR checklist in [`.github/PULL_REQUEST_TEMPLATE.md`](../.github/PULL_REQUEST_TEMPLATE.md).
+- [ ] The PR checklist in [`.github/PULL_REQUEST_TEMPLATE.md`](../../.github/PULL_REQUEST_TEMPLATE.md).
 
 Deployment is automatic: pushing to `main` triggers GitHub Actions, which builds the static
 export and publishes it to GitHub Pages. No manual deploy steps.
@@ -194,8 +194,8 @@ export and publishes it to GitHub Pages. No manual deploy steps.
 
 ## 8. Security
 
-This repo follows the KDF ecosystem **security playbook** in [`skills.md`](../skills.md) and
-the disclosure process in [`SECURITY.md`](../SECURITY.md). It's the lowest-risk repo — the
+This repo follows the KDF ecosystem **security playbook** in [`skills.md`](../../skills.md) and
+the disclosure process in [`SECURITY.md`](../../SECURITY.md). It's the lowest-risk repo — the
 relevant surface is standard web hardening: the `<meta>` CSP in `src/app/layout.tsx`,
 contact-form abuse controls, and build-time dependency CVEs. **Never commit secret values**;
 found a real issue → flag it via the Security tab, don't open a public issue.
@@ -204,8 +204,8 @@ found a real issue → flag it via the Security tab, don't open a public issue.
 
 ## 9. Getting unblocked
 
-1. **Re-read the source of truth** — [`AGENTS.md`](../AGENTS.md) (required reading list),
-   [`WORKFLOW.md`](../WORKFLOW.md), [`README.md`](../README.md), and
+1. **Re-read the source of truth** — [`AGENTS.md`](../../AGENTS.md) (required reading list),
+   [`WORKFLOW.md`](../../WORKFLOW.md), [`README.md`](../../README.md), and
    [`docs/ANALYTICS_OPT_OUT.md`](ANALYTICS_OPT_OUT.md) before touching analytics.
 2. **Match existing patterns** in `src/components/` and `src/app/` before inventing new ones.
 3. **Build/lint failing?** Run the individual `make` target (`make lint`, `make typecheck`,
