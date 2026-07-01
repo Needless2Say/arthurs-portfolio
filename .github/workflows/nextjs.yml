@@ -52,9 +52,9 @@ jobs:
           ref: main
           sparse-checkout: scripts
           path: _kdf_cicd
-          # Default token works when the cicd repo is public. If it is private,
-          # add a repo/org secret CICD_REGISTRY_PAT (read-only); we fall back to github.token.
-          token: ${{ secrets.CICD_REGISTRY_PAT || github.token }}
+          # The cicd repo is public, so the workflow's github.token (a read-only
+          # checkout of another public repo) is sufficient here.
+          token: ${{ github.token }}
 
       - name: Verify deployer is approved
         run: python3 _kdf_cicd/scripts/check_deployer.py
