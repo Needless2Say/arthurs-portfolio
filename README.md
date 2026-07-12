@@ -4,6 +4,19 @@ Personal portfolio website built with Next.js and deployed to GitHub Pages. Show
 
 ---
 
+## Documentation & the agentic workflow kit
+
+All documentation lives under [`docs/`](docs/), indexed one line per doc at [**`docs/README.md`**](docs/README.md). Each subdirectory carries its own README explaining what belongs there and how to use it:
+
+| Directory | Purpose |
+| --- | --- |
+| [`docs/agent/`](docs/agent/) | **The agentic-workflow kit** — the shared operating standard synced across every KDF repo (never edit locally) |
+| [`docs/guides/`](docs/guides/README.md) | How-to and operational walkthroughs — contributor onboarding and the GA4 analytics self-exclusion |
+
+**How to work here:** read [`AGENTS.md`](AGENTS.md) (this repo's vision + critical rules) → [`WORKFLOW.md`](WORKFLOW.md) (the three-lane task loop) → [`skills.md`](skills.md) (the security playbook, before any security-sensitive work). Those plus `docs/agent/` are the agentic-workflow kit — centrally synced from `kriegerdataforge-cicd`; never edit the synced copies locally.
+
+---
+
 ## Pages
 
 | Page     | Path       | Description                          |
