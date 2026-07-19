@@ -7,8 +7,9 @@ A `localStorage` flag prevents GA from firing on any browser where you've set it
 
 ## Opt yourself out (disable tracking)
 
-Open browser DevTools on **your live portfolio site** (`arthurkrieger.com` or wherever it's deployed),
-go to the **Console** tab, and run:
+Open browser DevTools on **the live portfolio site**
+(`https://needless2say.github.io/arthurs-portfolio`) — the flag is stored per **origin**,
+so it must be set while you're on that exact site — go to the **Console** tab, and run:
 
 ```js
 localStorage.setItem('ga-opt-out', '1')

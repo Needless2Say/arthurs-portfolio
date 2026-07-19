@@ -11,7 +11,7 @@ All documentation lives under [`docs/`](docs/), indexed one line per doc at [**`
 | Directory | Purpose |
 | --- | --- |
 | [`docs/agent/`](docs/agent/) | **The agentic-workflow kit** — the shared operating standard synced across every KDF repo (never edit locally) |
-| [`docs/guides/`](docs/guides/README.md) | How-to and operational walkthroughs — contributor onboarding and the GA4 analytics self-exclusion |
+| [`docs/guides/`](docs/guides/README.md) | How-to and operational walkthroughs — contributor onboarding, the deployment pipeline, and the GA4 analytics self-exclusion |
 
 **How to work here:** read [`AGENTS.md`](AGENTS.md) (this repo's vision + critical rules) → [`WORKFLOW.md`](WORKFLOW.md) (the three-lane task loop) → [`skills.md`](skills.md) (the security playbook, before any security-sensitive work). Those plus `docs/agent/` are the agentic-workflow kit — centrally synced from `kriegerdataforge-cicd`; never edit the synced copies locally.
 
@@ -23,9 +23,10 @@ All documentation lives under [`docs/`](docs/), indexed one line per doc at [**`
 | -------- | ---------- | ------------------------------------ |
 | Home     | `/`        | Landing page                         |
 | About    | `/about`   | Background and skills                |
+| Life     | `/life`    | Life outside of work                 |
 | Projects | `/projects`| Project showcase                     |
 | Resume   | `/resume`  | Work experience and education        |
-| Blog     | `/blog`    | Writing                              |
+| Blog     | `/blog`    | Writing (no posts yet)               |
 | Contact  | `/contact` | Contact form (EmailJS, no backend)   |
 
 ---
@@ -51,11 +52,14 @@ This is a static site on GitHub Pages, which **cannot send HTTP response headers
 so the usual header-based protections are partial:
 
 - **CSP** is applied via a `<meta http-equiv="Content-Security-Policy">` in
-  `src/app/layout.tsx` (PL-071). It allowlists Google Analytics and the EmailJS
-  POST; `script-src` keeps `'unsafe-inline'` because a static export's inline
-  bootstrap can't be nonced. Header-only directives (`frame-ancestors`,
-  `X-Frame-Options`) are ignored in `<meta>`, so clickjacking can't be fully
-  blocked on this host.
+  `src/app/layout.tsx` (PL-071). It allowlists Google Analytics
+  (`googletagmanager.com` in `script-src` plus the GA collection hosts in
+  `connect-src`), the EmailJS POST (`api.emailjs.com`), and YouTube iframe
+  embeds used on `/life` and `/projects` (`frame-src` `www.youtube.com` /
+  `www.youtube-nocookie.com`); `script-src` keeps `'unsafe-inline'` because a
+  static export's inline bootstrap can't be nonced. Header-only directives
+  (`frame-ancestors`, `X-Frame-Options`) are ignored in `<meta>`, so
+  clickjacking can't be fully blocked on this host.
 - **Contact form abuse (PL-070):** `ContactForm.tsx` has an off-screen honeypot
   and a client-side send cooldown, but those are best-effort. The authoritative
   controls are EmailJS **dashboard** settings — set **Allowed Origins** to
@@ -75,13 +79,19 @@ src/
 │   ├── about/
 │   ├── blog/
 │   ├── contact/
+│   ├── life/
 │   ├── projects/
 │   ├── resume/
 │   ├── layout.tsx
-│   └── page.tsx
-└── components/
-    ├── layout/
-    └── ui/
+│   ├── page.tsx
+│   ├── robots.ts
+│   └── sitemap.ts
+├── components/
+│   ├── layout/
+│   └── ui/
+├── constants/
+├── types/
+└── utils/
 ```
 
 ---
@@ -107,13 +117,18 @@ Docker is also available for containerized development — see `Dockerfile` and 
 npm run build
 ```
 
-Outputs to `out/`. Deployed automatically on every push to `main` via GitHub Actions.
+Outputs to `out/`. Deploying that build is a separate, manual, gated step — see
+[Deployment](#deployment) below.
 
 **Lint:**
 
 ```bash
 npm run lint
 ```
+
+**CI:** every PR runs five gates — lint-and-typecheck, build, npm-audit,
+secret-scan, and version-check. `make ci` mirrors the code-quality subset
+locally (lint, typecheck, build, npm audit).
 
 ---
 
@@ -127,4 +142,12 @@ EmailJS keys (service ID, template ID, public key) must be set as environment va
 
 ## Deployment
 
-Deployment is fully automated. Pushing to `main` triggers a GitHub Actions workflow that builds the static export and publishes it to GitHub Pages. No manual steps required.
+The site **never auto-deploys** — no push or merge publishes anything. The real chain:
+
+1. Merge a PR to `main` with the version bump (`VERSION` + `package.json` + `package-lock.json`).
+2. `release.yml` automatically creates the git tag `v{VERSION}` and a GitHub Release.
+3. An **approved deployer** manually runs the **"Deploy Next.js site to Pages"** workflow with the version to deploy.
+4. Two gates run: the deployer allow-list check (fails closed) and the `github-pages` environment reviewer approval.
+5. The workflow builds **from the tag** `v{version}` and publishes to GitHub Pages — dispatching an older version is the rollback path.
+
+Full walkthrough: [`docs/guides/DEPLOYMENT.md`](docs/guides/DEPLOYMENT.md).

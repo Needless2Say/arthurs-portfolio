@@ -36,7 +36,9 @@ non-public channel and mark the message **SECURITY**.
 
 ## Scope
 
-**In scope for `arthurs-portfolio`:** Standard web-hardening concerns for a static/SSR Next.js site deployed to GitHub Pages: the `<meta>` Content-Security-Policy in `src/app/layout.tsx`, contact-form abuse controls (`ContactForm.tsx` honeypot + send-cooldown, and the authoritative EmailJS dashboard Allowed-Origins / rate-limit settings), XSS/injection in rendered content, and build-time dependency CVEs. There is no auth, no payments, no backend, and no secrets of consequence (the EmailJS public key is intentionally client-exposed).
+**In scope for `arthurs-portfolio`:** Standard web-hardening concerns for a **fully static** Next.js site (static export — there is no server and no SSR) deployed to GitHub Pages: the `<meta>` Content-Security-Policy in `src/app/layout.tsx`, contact-form abuse controls (`ContactForm.tsx` honeypot + send-cooldown, and the authoritative EmailJS dashboard Allowed-Origins / rate-limit settings), XSS/injection in rendered content, and build-time dependency CVEs. There is no auth, no payments, no backend, and no secrets of consequence (the EmailJS public key is intentionally client-exposed).
+
+Note that GitHub Pages sends **no security response headers at all** — every header-based control (HSTS, `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`) is structurally absent on this host, not merely unconfigured. The `<meta>` CSP is the only available control, and header-only directives such as `frame-ancestors` are ignored in `<meta>` form, so clickjacking cannot be fully blocked here. Reports that a header is "missing" are therefore expected behavior for this host unless they demonstrate a concrete exploit.
 
 **Generally out of scope** (across the ecosystem):
 
@@ -55,5 +57,5 @@ fixes land on `main` and are rolled out via the standard deploy pipeline.
 ## Handling Secrets
 
 Secret rotation and git-history hygiene are owner-operated. Contributors must never commit
-secret values; pre-commit `gitleaks` and CI secret-scanning are the backstops. See the
-ecosystem security playbook (`skills.md`) where present.
+secret values; the CI secret-scan (gitleaks, run on every PR) is the backstop — this repo
+has no pre-commit hooks. See the ecosystem security playbook (`skills.md`) where present.

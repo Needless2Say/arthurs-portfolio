@@ -121,9 +121,10 @@ check-all: ## Run lint + typecheck
 	@printf "$(GREEN)All checks passed!$(NC)\n"
 
 # ========================================
-# CI Checks — mirrors .github/workflows/ci.yml
+# CI Checks — mirrors the code-quality subset of .github/workflows/ci.yml
 # ========================================
 # Run these locally before pushing to catch the same issues CI will flag.
+# GitHub CI additionally runs secret-scan and version-check on every PR.
 
 ci-lint: ## CI: ESLint
 	@printf "$(GREEN)CI [1/4]: lint...$(NC)\n"
@@ -286,11 +287,11 @@ venv: ## Create Python virtual environment (used by bump-* targets)
 
 .PHONY: bump-patch bump-minor bump-major
 
-bump-patch: .ensure-venv ## Bump patch version (0.0.X) — updates VERSION and package.json
+bump-patch: .ensure-venv ## Bump patch version (0.0.X) — updates VERSION, package.json, and package-lock.json
 	@$(PYTHON) scripts/bump_version.py patch
 
-bump-minor: .ensure-venv ## Bump minor version (0.X.0) — updates VERSION and package.json
+bump-minor: .ensure-venv ## Bump minor version (0.X.0) — updates VERSION, package.json, and package-lock.json
 	@$(PYTHON) scripts/bump_version.py minor
 
-bump-major: .ensure-venv ## Bump major version (X.0.0) — updates VERSION and package.json
+bump-major: .ensure-venv ## Bump major version (X.0.0) — updates VERSION, package.json, and package-lock.json
 	@$(PYTHON) scripts/bump_version.py major

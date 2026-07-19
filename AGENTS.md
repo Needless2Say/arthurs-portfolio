@@ -29,7 +29,7 @@ is "tasteful, fast, and correct," not "infinitely extensible."
 - **Language:** TypeScript (strict; no `any`)
 - **Contact:** `@emailjs/browser` — client-side email, no backend
 - **Analytics:** Google Analytics (GA4) with a `localStorage` opt-out flag
-- **Deploy:** GitHub Pages via GitHub Actions (push to `main` → build → publish)
+- **Deploy:** GitHub Pages via GitHub Actions — **manual, gated dispatch** that builds from the release tag; merges never auto-deploy (see [`docs/guides/DEPLOYMENT.md`](docs/guides/DEPLOYMENT.md))
 - **Tooling:** ESLint (`eslint-config-next`), Makefile, Docker (dev), Python venv only for version-bump scripts
 
 ## Module map
@@ -110,26 +110,36 @@ Don't skip the plan-approval gate; don't self-merge. The supporting kit:
 - [ ] Static export still works: `out/` builds clean and links/assets respect `basePath` (`/arthurs-portfolio`).
 - [ ] No `any`; named exports (except `page.tsx`/`layout.tsx`); Tailwind utilities (no stray CSS).
 - [ ] No secrets in source — EmailJS keys only in `.env.local`; `.env.local.example` updated if a new var was added.
-- [ ] Version bumped when shipping a change: `make bump-patch` (minor/major as warranted) — updates `VERSION` + `package.json`.
+- [ ] Version bumped when shipping a change: `make bump-patch` (minor/major as warranted) — updates `VERSION` + `package.json` + `package-lock.json` in lockstep.
 - [ ] Architectural change? Add an ADR (`docs/CHANGELOG_AND_DECISION_LOG.md`) and get owner approval first.
 
 ## Security — read [`skills.md`](./skills.md)
 
-This repo follows the KriegerDataForge ecosystem **security playbook** in [`skills.md`](./skills.md).
-**Before any security-sensitive work** — auth/OIDC/tokens, BFF/proxy/CSP/cookies, backend authz/endpoints,
-secrets/env/config, Terraform/infra, CI/CD, or dependencies — open `skills.md` and follow the **scenario**
-that matches your task.
+This repo follows the KriegerDataForge ecosystem **security playbook** in [`skills.md`](./skills.md) —
+open it and follow the matching **scenario** before any security-sensitive work. This is the
+**lowest-risk repo in the family** (static export: no auth, no backend, no server, no secrets of
+consequence), so the surface that actually applies here is:
 
-Non-negotiables (full detail + the scenario rules are in `skills.md`):
+- **The `<meta>` CSP** in `src/app/layout.tsx` (PL-071) — GitHub Pages sends no response headers,
+  so this tag is the only CSP control available. Keep its allowlists tight (GA script/collection
+  hosts, the EmailJS POST, YouTube `frame-src` for `/life` + `/projects`) and don't weaken
+  directives casually.
+- **EmailJS public-key hygiene** — the `NEXT_PUBLIC_*` values are client-exposed identifiers by
+  design, but they still live only in `.env.local` (local) / repo Actions secrets (CI), never
+  hardcoded. The **EmailJS dashboard is authoritative** for abuse controls: Allowed Origins =
+  `https://needless2say.github.io` + dashboard rate limiting.
+- **Contact-form abuse controls** — the `ContactForm.tsx` honeypot + send cooldown are
+  best-effort client-side layers; keep them, but never mistake them for the authoritative
+  dashboard controls above.
+- **Dependency CVEs** — `npm audit --audit-level=high --omit=dev` gates CI; `package.json`
+  `overrides` pin patched transitive deps (e.g. `postcss`).
+- **Deploy-pipeline integrity** — deploys are manual and twice-gated (deployer allow-list +
+  `github-pages` environment approval) and build from the release tag; never add an auto-deploy
+  trigger ([`docs/guides/DEPLOYMENT.md`](docs/guides/DEPLOYMENT.md)).
+- **Secrets never touch git or logs** — placeholders in `.env.local.example`; the owner rotates.
+  Found a security issue? **Verify it's real, then flag it** — and **pause for owner approval
+  before any architectural, destructive, or behavior-changing edit**.
 
-- **Fail closed, never open.** The **server is authoritative** — recompute security/$-relevant values
-  (totals, prices, roles, status); never trust client-sent ones.
-- **Never trust client input** for a security decision — IPs (use the edge header, not raw `X-Forwarded-For`),
-  hostnames / `request.url` (the internal bind, not the browser host), `Origin`, ownership (exact check, not a
-  substring/regex).
-- **Secrets never touch git or logs** — real values only in gitignored files; `.example` holds placeholders;
-  never echo a secret; the owner rotates.
-- **Least privilege** — closed request schemas + field allow-lists (no blind `setattr`), distinct per-client
-  OIDC audiences, validated `iss`/`aud`.
-- Found a security issue? **Verify it's real, then flag it** — and **pause for owner approval before any
-  architectural, destructive, or behavior-changing edit** (OIDC protocol changes get a design note first).
+The ecosystem-wide rules on server-authoritative computation, client-input distrust, OIDC
+audiences, and BFF/proxy/cookie handling **don't apply here — there is no server**; they live in
+[`skills.md`](./skills.md) should a task ever grow real backend surface.

@@ -30,6 +30,15 @@ correct," not "infinitely extensible." Most "edits" are content/data changes in
 You do **not** need Python or Docker to develop the site — they're only for the
 version-bump scripts and containerized dev, respectively.
 
+> **Windows note (line endings):** this repo has **no `.gitattributes`**, and
+> `scripts/bump_version.py` writes its files in Python text mode (no `newline=`), so on
+> Windows it writes **CRLF** line endings into `VERSION`, `package.json`, and
+> `package-lock.json`. With git's common Windows default `core.autocrlf=true` this is
+> masked (git normalizes back to LF on commit) — but with `autocrlf` off you would commit
+> CRLF churn. If a `make bump-*` run suddenly shows whole-file diffs, this is why; flag it
+> to the owner rather than hand-editing. (The candidate code fix — newline-preserving
+> writes + a `.gitattributes` — is an owner decision.)
+
 ---
 
 ## 2. Clone & install
@@ -103,7 +112,8 @@ make serve-static   # serves out/ at http://localhost:4173
 
 ## 5. Quality checks & local CI
 
-Run the **full local CI** before opening a PR — it mirrors `.github/workflows/ci.yml`:
+Run the **full local CI** before opening a PR — it mirrors the **code-quality subset** of
+`.github/workflows/ci.yml`:
 
 ```bash
 make ci
@@ -115,6 +125,12 @@ make ci
 2. **typecheck** — `tsc --noEmit` (strict TypeScript, **no `any`**)
 3. **build** — `next build` (the static export to `out/`)
 4. **npm audit** — `npm audit --audit-level=high --omit=dev`
+
+GitHub CI runs **five gates** on every PR: the four above (as `lint-and-typecheck`,
+`build`, `npm-audit`) **plus** `secret-scan` (gitleaks) and `version-check` (VERSION
+bumped vs `main` and in lockstep with `package.json`) — those last two run in CI only.
+CI is `pull_request`-only: direct pushes to `main` run no CI, which is one reason all
+changes go through PRs.
 
 Individual targets if you want to iterate faster:
 
@@ -146,7 +162,7 @@ Makefile) if you want a local security pass.
 | `src/types/`               | TypeScript types (`portfolio.ts`)                                       |
 | `src/utils/`               | Helpers (`cn.ts` classname merge)                                       |
 | `public/`                  | Static assets — résumé PDF, images, sprite GIFs                         |
-| `docs/`                    | This guide + `ANALYTICS_OPT_OUT.md` (GA4 self-exclusion)                |
+| `docs/`                    | This guide + `DEPLOYMENT.md` (release → gated deploy) + `ANALYTICS_OPT_OUT.md` (GA4 self-exclusion) |
 | `scripts/`                 | `bump_version.py`, `spritesheet_to_gif.py`                              |
 | `.github/workflows/`       | `ci.yml`, `nextjs.yml` (Pages deploy), `release.yml`                    |
 
@@ -182,13 +198,17 @@ Every task follows the tiered loop in [`WORKFLOW.md`](../../WORKFLOW.md). Pick a
 - [ ] No secrets in source — EmailJS keys only in `.env.local`; update `.env.local.example`
       if you added a new var.
 - [ ] Version bumped: `make bump-patch` (or `bump-minor` / `bump-major`) — updates
-      `VERSION` **and** `package.json` in lockstep.
+      `VERSION`, `package.json`, **and** `package-lock.json` in lockstep.
 - [ ] Architectural change? Add an ADR (`docs/CHANGELOG_AND_DECISION_LOG.md`) and get owner
       approval first.
 - [ ] The PR checklist in [`.github/PULL_REQUEST_TEMPLATE.md`](../../.github/PULL_REQUEST_TEMPLATE.md).
 
-Deployment is automatic: pushing to `main` triggers GitHub Actions, which builds the static
-export and publishes it to GitHub Pages. No manual deploy steps.
+Deployment is **not** automatic — merging deploys nothing. Merging a version-bump PR makes
+`release.yml` create the tag `v{VERSION}` + a GitHub Release; an **approved deployer** then
+manually dispatches the "Deploy Next.js site to Pages" workflow with the version input
+(deployer allow-list + `github-pages` environment approval), which builds **from that tag**.
+Dispatching an older version is the rollback path. Full walkthrough:
+[`DEPLOYMENT.md`](DEPLOYMENT.md).
 
 ---
 

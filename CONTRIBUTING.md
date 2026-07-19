@@ -6,7 +6,7 @@ This is a private, owner-only repository. There are no external contributors.
 
 ## Development Workflow
 
-For small fixes, work directly on `main`. For larger changes, use a feature branch and open a PR before merging.
+All changes — including small fixes — go through a feature branch and a PR; never commit directly to `main` (see `WORKFLOW.md` and `AGENTS.md`: the owner merges). CI runs only on pull requests, so a direct push to `main` would run **no CI at all**.
 
 ---
 
@@ -31,14 +31,18 @@ For small fixes, work directly on `main`. For larger changes, use a feature bran
 
 ## Before Pushing
 
-Lint must pass:
+Run the local CI mirror:
 
 ```bash
-npm run lint
+make ci        # lint → typecheck → build → npm audit
 ```
+
+On the PR, GitHub CI (`.github/workflows/ci.yml`) runs **five gates**: lint-and-typecheck, build, npm-audit, secret-scan, and version-check (VERSION bumped vs `main` and in lockstep with `package.json`). `make ci` mirrors the code-quality subset; secret-scan and version-check run in CI only.
 
 ---
 
 ## Deployment
 
-Deployment is automatic. Pushing to `main` triggers GitHub Actions, which builds the static export and publishes it to GitHub Pages. No manual steps required.
+The site **never auto-deploys**. Merging a version-bump PR makes `release.yml` create the tag `v{VERSION}` + a GitHub Release; an approved deployer then manually dispatches the "Deploy Next.js site to Pages" workflow with the version input, which passes the deployer allow-list check and the `github-pages` environment approval, and builds **from that tag** (dispatching an older version = rollback).
+
+Full walkthrough: [`docs/guides/DEPLOYMENT.md`](docs/guides/DEPLOYMENT.md).

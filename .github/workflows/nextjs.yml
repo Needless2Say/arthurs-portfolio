@@ -1,7 +1,8 @@
 # Deploy — Arthur's Portfolio → GitHub Pages
 #
-# Builds the Next.js static export and deploys it to GitHub Pages on every
-# push to main and on manual dispatch.
+# Manual dispatch only — builds from the release tag (v{version} input); gated
+# by the deployer allow-list + github-pages environment approval. Never runs
+# on push.
 #
 # configure-pages is intentionally omitted: basePath, assetPrefix, and
 # images.unoptimized are already set in next.config.ts and configure-pages
