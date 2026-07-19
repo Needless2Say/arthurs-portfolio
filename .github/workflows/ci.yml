@@ -1,12 +1,12 @@
 # CI Pipeline — Arthur's Portfolio
 #
-# Runs lint, type-check, static export build verification, and npm audit on
-# every PR targeting main.  Three jobs run in parallel:
+# Runs on every PR targeting main (pull_request only — direct pushes to main
+# run no CI). Five jobs run in parallel:
 #   • lint-and-typecheck — ESLint + tsc --noEmit
-#   • build             — next build (static export, verifies the site compiles)
-#   • npm-audit         — flags high/critical CVEs in production dependencies
-#
-# Security scanning is handled by a separate codeql.yml workflow (if added).
+#   • build              — next build (static export, verifies the site compiles)
+#   • npm-audit          — flags high/critical CVEs in production dependencies
+#   • secret-scan        — gitleaks secret scanning (shared cicd workflow)
+#   • version-check      — VERSION bumped vs main and in lockstep with package.json
 
 name: CI
 
