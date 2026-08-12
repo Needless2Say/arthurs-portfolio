@@ -343,9 +343,9 @@ ci-npm-audit: ## CI: npm audit for CVEs
 #
 # Skips (does not fail) when origin/$(BASE_BRANCH) is not fetched locally, because a missing
 # ref is a checkout problem, not a version problem -- CI still enforces it either way.
-ci-version-check: _ensure-venv ## CI: version consistency + strict +1 increment vs origin/main (vendored scripts/check_version.py)
+ci-version-check: _ensure-venv ## CI: version consistency + strict +1 increment vs origin/main (vendored scripts/kdf_scripts/check_version.py)
 	@printf "$(GREEN)CI: version check...$(NC)\n"
-	@PYTHONUTF8=1 $(PYTHON) scripts/check_version.py --base-branch "$(if $(BASE_BRANCH),$(BASE_BRANCH),main)"
+	@PYTHONUTF8=1 $(PYTHON) scripts/kdf_scripts/check_version.py --base-branch "$(if $(BASE_BRANCH),$(BASE_BRANCH),main)"
 ci: ci-lint ci-style ci-typecheck ci-build ci-npm-audit ci-version-check ## Run all CI checks locally
 	@printf "$(GREEN)========================================$(NC)\n"
 	@printf "$(GREEN)  All CI checks passed!$(NC)\n"
@@ -358,7 +358,7 @@ ci: ci-lint ci-style ci-typecheck ci-build ci-npm-audit ci-version-check ## Run 
 # PYTHONUTF8=1 is parity with the other repos, whose bump scripts print a U+2705 that crashes
 # cp1252 on Windows AFTER writing the files. Harmless where the script is ASCII; it keeps a
 # future emoji from turning a successful bump into an apparent failure.
-_BUMP := PYTHONUTF8=1 $(PYTHON) scripts/bump_version.py
+_BUMP := PYTHONUTF8=1 $(PYTHON) scripts/kdf_scripts/bump_version.py
 
 bump-patch: _ensure-venv ## Bump the patch version (0.0.X) -- VERSION + package.json + package-lock.json
 	@$(_BUMP) patch
