@@ -14,6 +14,8 @@ correct," not "infinitely extensible." Most "edits" are content/data changes in
 > then [`WORKFLOW.md`](../../WORKFLOW.md) for the per-task loop, and [`skills.md`](../../skills.md)
 > for anything security-sensitive. This guide is the hands-on setup companion to those.
 
+Unfamiliar term or acronym anywhere in these docs? It is defined in [`docs/reference/GLOSSARY.md`](../reference/GLOSSARY.md).
+
 ---
 
 ## 1. Prerequisites
