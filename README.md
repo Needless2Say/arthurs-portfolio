@@ -12,6 +12,7 @@ All documentation lives under [`docs/`](docs/), indexed one line per doc at [**`
 | --- | --- |
 | [`docs/agent/`](docs/agent/) | **The agentic-workflow kit** — the shared operating standard synced across every KDF repo (never edit locally) |
 | [`docs/guides/`](docs/guides/README.md) | How-to and operational walkthroughs — contributor onboarding, the deployment pipeline, and the GA4 analytics self-exclusion |
+| [`docs/reference/GLOSSARY.md`](docs/reference/GLOSSARY.md) | The glossary. Every term and acronym these docs assume, defined inline |
 
 **How to work here:** read [`AGENTS.md`](AGENTS.md) (this repo's vision + critical rules) → [`WORKFLOW.md`](WORKFLOW.md) (the three-lane task loop) → [`skills.md`](skills.md) (the security playbook, before any security-sensitive work). Those plus `docs/agent/` are the agentic-workflow kit — centrally synced from `kriegerdataforge-cicd`; never edit the synced copies locally.
 

@@ -11,3 +11,7 @@ How-to and operational walkthroughs.
 - [Google Analytics Self-Exclusion](guides/ANALYTICS_OPT_OUT.md)
 - [Contributor Onboarding — arthurs-portfolio](guides/CONTRIBUTOR_ONBOARDING.md)
 - [Deployment — release → tag → gated manual deploy](guides/DEPLOYMENT.md)
+
+## Reference
+
+- [Glossary](reference/GLOSSARY.md). Every term and acronym these docs assume, defined inline (new 2026-08-22)
