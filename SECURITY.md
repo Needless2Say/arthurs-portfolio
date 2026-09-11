@@ -1,8 +1,8 @@
 # Security Policy
 
-> Part of the **KriegerDataForge (KDF)** ecosystem — a centralized SSO/OIDC auth platform
-> and the apps built on it. We take security seriously; this repo (`arthurs-portfolio`) follows the
-> ecosystem-wide disclosure process below.
+> Part of the **KriegerDataForge (KDF)** ecosystem. A centralized SSO/OIDC auth platform
+> and the apps built on it. We take security seriously. This repo (`arthurs-portfolio`) follows the
+> ecosystem wide disclosure process below.
 
 ## Reporting a Vulnerability
 
@@ -19,8 +19,8 @@ non-public channel and mark the message **SECURITY**.
 ### What to include
 
 - A clear description of the vulnerability and its impact
-- Step-by-step reproduction (PoC, request/response, or affected endpoint/route)
-- Affected version/commit and configuration (no secret **values** — reference names only)
+- Step by step reproduction (PoC, request/response, or affected endpoint/route)
+- Affected version/commit and configuration (no secret **values**, reference names only)
 - Any suggested remediation, if you have one
 
 > ⚠️ Never include live secret values, private keys, or real user data in a report. Reference
@@ -28,34 +28,34 @@ non-public channel and mark the message **SECURITY**.
 
 ## Our Commitment
 
-- **Acknowledgement:** within **3 business days**.
-- **Triage & severity:** within **7 business days**, using a P0–P3 model
+- **Acknowledgement.** Within **3 business days**.
+- **Triage & severity.** Within **7 business days**, using a P0–P3 model
   (P0 = active exposure / launch blocker → P3 = hardening).
-- **Fix & disclosure:** we aim to remediate P0/P1 issues before any public disclosure and
+- **Fix & disclosure.** We aim to remediate P0/P1 issues before any public disclosure and
   will coordinate a disclosure timeline with you. We credit reporters who wish to be named.
 
 ## Scope
 
-**In scope for `arthurs-portfolio`:** Standard web-hardening concerns for a **fully static** Next.js site (static export — there is no server and no SSR) deployed to GitHub Pages: the `<meta>` Content-Security-Policy in `src/app/layout.tsx`, contact-form abuse controls (`ContactForm.tsx` honeypot + send-cooldown, and the authoritative EmailJS dashboard Allowed-Origins / rate-limit settings), XSS/injection in rendered content, and build-time dependency CVEs. There is no auth, no payments, no backend, and no secrets of consequence (the EmailJS public key is intentionally client-exposed).
+**In scope for `arthurs-portfolio`:** Standard web hardening concerns for a **fully static** Next.js site (static export, there is no server and no SSR) deployed to GitHub Pages. The `<meta>` Content-Security-Policy in `src/app/layout.tsx`, contact form abuse controls (`ContactForm.tsx` honeypot + send cooldown, and the authoritative EmailJS dashboard Allowed Origins / rate limit settings), XSS/injection in rendered content, and build time dependency CVEs. There is no auth, no payments, no backend, and no secrets of consequence (the EmailJS public key is intentionally client exposed).
 
-Note that GitHub Pages sends **no security response headers at all** — every header-based control (HSTS, `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`) is structurally absent on this host, not merely unconfigured. The `<meta>` CSP is the only available control, and header-only directives such as `frame-ancestors` are ignored in `<meta>` form, so clickjacking cannot be fully blocked here. Reports that a header is "missing" are therefore expected behavior for this host unless they demonstrate a concrete exploit.
+Note that GitHub Pages sends **no security response headers at all**. Every header based control (HSTS, `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`) is structurally absent on this host, not merely unconfigured. The `<meta>` CSP is the only available control, and header only directives such as `frame-ancestors` are ignored in `<meta>` form, so clickjacking cannot be fully blocked here. Reports that a header is "missing" are therefore expected behavior for this host unless they demonstrate a concrete exploit.
 
 **Generally out of scope** (across the ecosystem):
 
 - Findings that require a compromised host, a malicious dependency you introduced, or
   physical access
 - Automated scanner output without a demonstrated, exploitable impact
-- Missing best-practice headers/flags with no concrete exploit
+- Missing best practice headers/flags with no concrete exploit
 - Social engineering, spam, or volumetric DoS
-- Issues in third-party services we integrate but do not control
+- Issues in third party services we integrate but do not control
 
 ## Supported Versions
 
-This project ships from `main`; only the latest released version is supported. Security
+This project ships from `main`, only the latest released version is supported. Security
 fixes land on `main` and are rolled out via the standard deploy pipeline.
 
 ## Handling Secrets
 
-Secret rotation and git-history hygiene are owner-operated. Contributors must never commit
-secret values; the CI secret-scan (gitleaks, run on every PR) is the backstop — this repo
+Secret rotation and git history hygiene are owner-operated. Contributors must never commit
+secret values. The CI secret-scan (gitleaks, run on every PR) is the backstop. This repo
 has no pre-commit hooks. See the ecosystem security playbook (`skills.md`) where present.

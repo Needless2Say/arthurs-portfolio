@@ -14,8 +14,9 @@ Run from the arthurs-portfolio root:
     py scripts/spritesheet_to_gif.py
 """
 
-from PIL import Image
 import os, sys
+
+from PIL import Image
 
 # -- Config -------------------------------------------------------------------
 SHEET_PATH  = "public/goku-kamehameha-pixel-art.png"
@@ -23,22 +24,22 @@ OUT_GIF     = "public/goku_kamehameha.gif"
 OUT_WEBP    = "public/goku_kamehameha.webp"
 OUT_PREVIEW = "public/goku_preview.png"   # tiled preview to verify frame cuts
 
-# Columns per row  (define each row explicitly to handle the non-uniform layout)
+# columns per row  (define each row explicitly to handle the non-uniform layout)
 ROWS_LAYOUT = [6, 6, 6, 6, 4]
 
-FPS         = 10    # frames per second
-SCALE       = 0.5   # resize before saving  (0.5 = half size, crisp pixel art)
+FPS          = 10    # frames per second
+SCALE        = 0.5   # resize before saving  (0.5 = half size, crisp pixel art)
 SAVE_PREVIEW = True # set False to skip the preview image
+
+
 # -----------------------------------------------------------------------------
-
-
 def load_frames(sheet_path, rows_layout, scale):
     sheet = Image.open(sheet_path)
     sw, sh = sheet.size
     num_rows = len(rows_layout)
     max_cols = max(rows_layout)
 
-    # Derive frame size from the maximum-column count and total row count
+    # derive frame size from the maximum-column count and total row count
     fw = sw // max_cols
     fh = sh // num_rows
     tw = int(fw * scale)
@@ -52,7 +53,7 @@ def load_frames(sheet_path, rows_layout, scale):
     for row_idx, cols in enumerate(rows_layout):
         y = row_idx * fh
         for col in range(cols):
-            x = col * fw
+            x     = col * fw
             frame = sheet.crop((x, y, x + fw, y + fh))
             if scale != 1.0:
                 frame = frame.resize((tw, th), Image.NEAREST)
@@ -61,12 +62,14 @@ def load_frames(sheet_path, rows_layout, scale):
     return frames, tw, th
 
 
-def save_preview(frames, path, cols=6):
-    """Tile all frames into one image so you can visually verify the cuts."""
+def save_preview(frames, path, cols = 6):
+    """
+    Tile all frames into one image so you can visually verify the cuts.
+    """
     if not frames:
         return
     fw, fh = frames[0].size
-    rows = (len(frames) + cols - 1) // cols
+    rows   = (len(frames) + cols - 1) // cols
     canvas = Image.new("RGB", (fw * cols, fh * rows), (30, 30, 30))
     for i, frame in enumerate(frames):
         x = (i % cols) * fw
@@ -79,27 +82,24 @@ def save_preview(frames, path, cols=6):
 def save_webp(frames, path, fps):
     frames[0].save(
         path,
-        save_all=True,
-        append_images=frames[1:],
-        duration=1000 // fps,
-        loop=0,
-        lossless=True,
+        save_all = True,
+        append_images = frames[1:],
+        duration = 1000 // fps,
+        loop = 0,
+        lossless = True,
     )
     print(f"  WebP    -> {path}  ({os.path.getsize(path) // 1024} KB)")
 
 
 def save_gif(frames, path, fps):
-    gif_frames = [
-        f.convert("P", palette=Image.ADAPTIVE, dither=Image.Dither.NONE)
-        for f in frames
-    ]
+    gif_frames = [f.convert("P", palette = Image.ADAPTIVE, dither = Image.Dither.NONE) for f in frames]
     gif_frames[0].save(
         path,
-        save_all=True,
-        append_images=gif_frames[1:],
-        duration=1000 // fps,
-        loop=0,
-        optimize=False,
+        save_all = True,
+        append_images = gif_frames[1:],
+        duration = 1000 // fps,
+        loop = 0,
+        optimize = False,
     )
     print(f"  GIF     -> {path}  ({os.path.getsize(path) // 1024} KB)")
 

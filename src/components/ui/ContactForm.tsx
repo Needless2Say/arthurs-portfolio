@@ -9,7 +9,7 @@ const SERVICE_ID  = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID  ?? "";
 const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? "";
 const PUBLIC_KEY  = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY  ?? "";
 
-// PL-070: best-effort client-side abuse controls (honeypot + send cooldown). The
+// Best-effort client-side abuse controls (honeypot + send cooldown). The
 // authoritative quota/abuse guard is the EmailJS dashboard (Allowed Origins +
 // rate limit) — see README — since any client control is bypassable.
 const COOLDOWN_MS = 45_000;
@@ -87,7 +87,7 @@ export default function ContactForm() {
 	return (
 		<form ref={formRef} onSubmit={handleSubmit} className="space-y-4" noValidate>
 			{/* Honeypot — off-screen, hidden from humans & assistive tech; bots that
-			    auto-fill it are silently dropped in handleSubmit (PL-070). */}
+			    auto-fill it are silently dropped in handleSubmit. */}
 			<div aria-hidden="true" className="absolute -left-[9999px] top-0 h-0 w-0 overflow-hidden">
 				<label htmlFor="company">Company (leave this field blank)</label>
 				<input

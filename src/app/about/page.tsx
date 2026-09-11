@@ -13,12 +13,12 @@ import Reveal from "@/components/ui/Reveal";
 export const metadata: Metadata = {
 	title: "About",
 	description:
-		"Arthur Krieger — Software/Platform Engineer at Charles Schwab, University of Michigan CS + Data Science graduate (2025, GPA 3.75). Founder of KriegerDataForge. Experienced in data pipelines, full-stack development, ML, and fitness technology. Based in Chicago, IL.",
+		"Arthur Krieger — Software/Platform Engineer at Charles Schwab, University of Michigan CS + Data Science graduate (2025, GPA 3.75). Founder of KriegerDataForge, a multi-tenant data platform with its own OAuth 2.0 / OIDC identity provider. Experienced in data pipelines, full-stack development, platform engineering, and infrastructure as code. Based in Chicago, IL.",
 	alternates: { canonical: "https://needless2say.github.io/arthurs-portfolio/about" },
 	openGraph: {
 		title: "About Arthur Krieger | KriegerDataForge",
 		description:
-			"Software/Platform Engineer at Charles Schwab. UMich CS + Data Science 2025. Founder of KriegerDataForge. Experience at Schwab, Revantage (Blackstone), and Wayne State University research.",
+			"Software/Platform Engineer at Charles Schwab. UMich CS + Data Science 2025. Founder of KriegerDataForge, a multi-tenant data platform. Experience at Schwab, Revantage (Blackstone), and Wayne State University research.",
 		url: "https://needless2say.github.io/arthurs-portfolio/about",
 	},
 };
@@ -239,7 +239,7 @@ export default async function About() {
 							<div className="flex-grow">
 								<p className="text-white font-bold text-lg mb-0.5">Needless2Say</p>
 								<p className="text-slate-400 text-sm mb-4 leading-relaxed">
-									Building full-stack apps, data pipelines, and ML experiments on the KriegerDataForge platform.
+									Building the KriegerDataForge platform. An OIDC identity provider, a shared Python SDK, a Terraform control plane, and the products on top of them.
 								</p>
 
 								{gh && (

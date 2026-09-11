@@ -97,7 +97,7 @@ export default function RootLayout({
 		<html lang="en">
 			<head>
 				{/*
-				  PL-071: Content-Security-Policy via <meta>. GitHub Pages is a static
+				  Content-Security-Policy via <meta>. GitHub Pages is a static
 				  host and cannot send real HTTP headers, so this is a best-effort,
 				  partial mitigation:
 				    - frame-ancestors / X-Frame-Options are header-only and ignored in

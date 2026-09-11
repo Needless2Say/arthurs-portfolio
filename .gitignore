@@ -39,3 +39,24 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# -- Python (managed: keep these together) ----------------------------------
+# Every repo runs Python whatever the app is written in: the Makefile's
+# bump-*, ci-version-check and ci-style lanes execute the vendored
+# scripts/kdf_scripts/ copies from a local virtual environment.
+__pycache__/
+*.pyc
+
+# Virtual environments. `python -m venv` self-ignores from 3.11 (it writes
+# a .gitignore containing `*`); virtualenv and older interpreters do not.
+# /env/ is ROOT-ANCHORED on purpose -- a bare env/ also matches tracked
+# application source such as src/core/config/env/.
+.venv/
+venv/
+/env/
+
+# Python tool caches
+.kdf-fmt-cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

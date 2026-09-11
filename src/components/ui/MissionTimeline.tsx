@@ -34,9 +34,16 @@ const PHASES: Phase[] = [
 	},
 	{
 		id: "04",
+		title: "Platform Build",
+		subtitle: "KriegerDataForge · identity provider, then storefront launch, then the fitness app",
+		period: "2026 →",
+		status: "online",
+	},
+	{
+		id: "05",
 		title: "Trajectory Open",
 		subtitle: "Next mission · open to opportunities and conversations",
-		period: "2026 →",
+		period: "Ongoing",
 		status: "standby",
 	},
 ];
