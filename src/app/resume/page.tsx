@@ -3,8 +3,9 @@ import Card from "@/components/ui/Card";
 import SectionHeader from "@/components/ui/SectionHeader";
 import TechBadge from "@/components/ui/TechBadge";
 import Reveal from "@/components/ui/Reveal";
-import { PERSONAL_INFO, EDUCATION, EXPERIENCE, CERTIFICATIONS } from "@/constants/personal-info";
+import { PERSONAL_INFO, EDUCATION, EXPERIENCE, CERTIFICATIONS, SPEAKING } from "@/constants/personal-info";
 import { SKILL_GROUPS } from "@/constants/skills";
+import { PROJECTS } from "@/constants/projects";
 
 export const metadata: Metadata = {
 	title: "Resume",
@@ -39,13 +40,13 @@ export default function Resume() {
 					</a>
 				</Reveal>
 
-				{/* Objective */}
+				{/* Summary */}
 				<section className="mb-12">
 					<Reveal>
-						<SectionHeader title="Objective" />
+						<SectionHeader title="Summary" />
 					</Reveal>
 					<Reveal delay={60}>
-						<p className="text-slate-300 leading-relaxed text-sm">{PERSONAL_INFO.objective}</p>
+						<p className="text-slate-300 leading-relaxed text-sm">{PERSONAL_INFO.summary}</p>
 					</Reveal>
 				</section>
 
@@ -88,6 +89,42 @@ export default function Resume() {
 									<div className="flex flex-wrap gap-1.5">
 										{exp.tech.map((t) => (
 											<TechBadge key={t} label={t} color="nebula" />
+										))}
+									</div>
+								</Card>
+							</Reveal>
+						))}
+					</div>
+				</section>
+
+				{/* Projects */}
+				<section className="mb-12">
+					<Reveal>
+						<SectionHeader title="Projects" />
+					</Reveal>
+
+					<div className="space-y-4">
+						{PROJECTS.filter((p) => p.summary).map((project, i) => (
+							<Reveal key={project.title} delay={i * 80}>
+								<Card glow="blue">
+									<div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
+										<div>
+											<h3 className="text-white font-bold text-sm">
+												{project.title}
+											</h3>
+											<p className="text-blue-300 text-xs">
+												{project.subtitle}
+											</p>
+										</div>
+									</div>
+
+									<p className="text-slate-400 text-xs leading-relaxed mb-3">
+										{project.summary}
+									</p>
+
+									<div className="flex flex-wrap gap-1.5">
+										{project.techStack.map((t) => (
+											<TechBadge key={t} label={t} color="cosmic" />
 										))}
 									</div>
 								</Card>
@@ -169,7 +206,7 @@ export default function Resume() {
 				</section>
 
 				{/* Certifications */}
-				<section>
+				<section className="mb-12">
 					<Reveal>
 						<SectionHeader title="Certifications" />
 					</Reveal>
@@ -186,6 +223,62 @@ export default function Resume() {
 							</Reveal>
 						))}
 					</ul>
+				</section>
+
+				{/* Speaking */}
+				<section>
+					<Reveal>
+						<SectionHeader title="Speaking" />
+					</Reveal>
+
+					<div className="space-y-4">
+						{SPEAKING.map((item, i) => (
+							<Reveal key={item.title} delay={i * 80}>
+								<Card glow="blue">
+									<div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
+										<div>
+											<h3 className="text-white font-bold text-sm">
+												{item.title}
+											</h3>
+											<p className="text-blue-300 text-xs">
+												{item.org}
+											</p>
+										</div>
+
+										<span className="text-slate-500 font-mono text-xs mt-1 sm:mt-0 whitespace-nowrap">
+											{item.date}
+										</span>
+									</div>
+
+									<p className="text-slate-400 text-xs leading-relaxed">
+										{item.detail}
+									</p>
+
+									{item.videos && (
+										<div className="mt-4 grid sm:grid-cols-2 gap-4">
+											{item.videos.map((video) => (
+												<div key={video.id}>
+													<p className="text-slate-500 font-mono text-[10px] uppercase tracking-widest mb-1.5">
+														{video.label}
+													</p>
+													<div className="glass-card overflow-hidden border-white/5 rounded-xl">
+														<iframe
+															src={`https://www.youtube.com/embed/${video.id}`}
+															title={`${item.title} — ${video.label}`}
+															allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+															referrerPolicy="strict-origin-when-cross-origin"
+															allowFullScreen
+															className="w-full aspect-video"
+														/>
+													</div>
+												</div>
+											))}
+										</div>
+									)}
+								</Card>
+							</Reveal>
+						))}
+					</div>
 				</section>
 
 			</div>

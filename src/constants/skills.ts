@@ -21,6 +21,7 @@ export const SKILL_GROUPS: SkillGroup[] = [
 			"Next.js",
 			"React",
 			"Tailwind CSS",
+			"Zod",
 			"Jinja"
 		],
 	},
@@ -30,7 +31,23 @@ export const SKILL_GROUPS: SkillGroup[] = [
 		skills: [
 			"FastAPI",
 			"REST APIs",
+			"SQLModel",
+			"SQLAlchemy",
+			"Pydantic",
 			"Alembic"
+		],
+	},
+	{
+		label: "Auth & Security",
+		color: "nebula",
+		skills: [
+			"OAuth 2.0",
+			"OIDC",
+			"JWT / JWKS",
+			"PKCE",
+			"argon2id",
+			"OWASP",
+			"Bandit"
 		],
 	},
 	{
@@ -39,13 +56,39 @@ export const SKILL_GROUPS: SkillGroup[] = [
 		skills: [
 			"Snowflake",
 			"Databricks",
+			"PostgreSQL",
+			"GCP",
 			"Azure",
 			"AWS",
+			"Vercel",
 			"Streamlit",
 			"Pandas",
 			"PyTorch",
 			"TensorFlow",
-			"PostgreSQL",
+		],
+	},
+	{
+		label: "DevOps & Infrastructure",
+		color: "green",
+		skills: [
+			"Terraform",
+			"GitHub Actions",
+			"Docker",
+			"CI/CD",
+			"Bitbucket",
+			"Bamboo"
+		],
+	},
+	{
+		label: "Testing & Quality",
+		color: "cosmic",
+		skills: [
+			"pytest",
+			"Playwright",
+			"Ruff",
+			"mypy",
+			"ESLint",
+			"CodeQL"
 		],
 	},
 	{
@@ -55,7 +98,7 @@ export const SKILL_GROUPS: SkillGroup[] = [
 			"Git / GitHub",
 			"Jira",
 			"Confluence",
-			"Docker",
+			"Agile / Scrum",
 			"Power BI",
 			"Excel"
 		],

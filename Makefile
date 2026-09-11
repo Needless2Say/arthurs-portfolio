@@ -130,7 +130,14 @@ BASE_BRANCH ?= main
 # same thing. They used to be two identical copies, which is how a pair silently
 # drifts apart -- `lint` called `next lint` here long after `ci-lint` had moved on.
 LINT_CMD      := npm run lint
-TYPECHECK_CMD := npx tsc --noEmit
+
+# `next typegen` first, deliberately. tsconfig.json includes next-env.d.ts and
+# .next/types/**, and both are gitignored, so a fresh checkout has neither and tsc
+# cannot resolve the image imports (TS2307 on every .png/.jpg). This used to work by
+# accident: `lint` ran `next lint`, which generated next-env.d.ts as a side effect.
+# Migrating lint to the ESLint CLI removed that side effect and broke CI typecheck.
+# typegen is Next's supported way to emit those types without a full build.
+TYPECHECK_CMD := npx next typegen && npx tsc --noEmit
 
 # ============================================================
 # Canned recipes
@@ -157,7 +164,7 @@ help: ## Show this help message
 
 ##@ Setup & Dependencies
 
-.PHONY: _ensure-venv _ensure-env-local venv setup install clean-install
+.PHONY: _ensure-venv _ensure-env-local _warn-packages-pat venv setup install clean-install
 
 # Internal: create the Python venv on demand (bump-*, ci-style and the sprite script only).
 _ensure-venv:
@@ -175,6 +182,28 @@ _ensure-env-local:
 		printf "$(YELLOW)Fill in the NEXT_PUBLIC_EMAILJS_* values or the contact form stays inert.$(NC)\n"; \
 	fi
 
+# Internal: advisory, not fatal. git has legitimate credential fallbacks (Credential
+# Manager, ssh), so a naked `pip install` of kdf-fmt can succeed WITHOUT the PAT on a
+# machine that has cached credentials -- which is exactly how a missing one goes
+# unnoticed until a clean checkout, or CI, fails with an opaque auth error instead.
+_warn-packages-pat:
+	@if [ -z "$$GH_PACKAGES_PAT" ]; then \
+		printf "$(YELLOW)WARNING: GH_PACKAGES_PAT is not set.$(NC)\n"; \
+		printf "$(YELLOW)  kdf-fmt installs from a PRIVATE repo over git+https, so the style$(NC)\n"; \
+		printf "$(YELLOW)  check needs it on a machine git has no credentials for.$(NC)\n"; \
+		printf "$(YELLOW)  Add it to .env.local:   GH_PACKAGES_PAT=github_pat_xxxx$(NC)\n"; \
+		printf "$(YELLOW)  Fine-grained PAT, Contents: Read -- NOT the classic GH_NPM_TOKEN.$(NC)\n"; \
+		printf "$(YELLOW)  Continuing -- succeeds only if git already has credentials.$(NC)\n"; \
+	fi
+	@case "$$GH_PACKAGES_PAT" in \
+		""|github_pat_*) ;; \
+		ghp_*) \
+			printf "$(YELLOW)WARNING: GH_PACKAGES_PAT is a classic PAT (ghp_...).$(NC)\n"; \
+			printf "$(YELLOW)  Expected a fine-grained token here; the classic one is GH_NPM_TOKEN.$(NC)\n" ;; \
+		*) \
+			printf "$(YELLOW)WARNING: GH_PACKAGES_PAT does not look like a fine-grained PAT.$(NC)\n" ;; \
+	esac
+
 venv: ## Create the Python virtual environment (bump-*, ci-style and the sprite script)
 	@printf "$(GREEN)Creating Python virtual environment...$(NC)\n"
 	@rm -rf .venv
@@ -182,7 +211,7 @@ venv: ## Create the Python virtual environment (bump-*, ci-style and the sprite 
 	$(PYTHON) -m pip install --upgrade pip
 	@printf "$(GREEN)Virtual environment created at .venv$(NC)\n"
 
-setup: _ensure-env-local install ## Full bootstrap -- .env.local + all dependencies
+setup: _ensure-env-local _ensure-venv install ## Full bootstrap -- .env.local + Python venv + all dependencies
 	$(call banner,arthurs-portfolio - setup complete)
 	@printf "$(YELLOW)Next:$(NC)\n"
 	@printf "  1. Fill NEXT_PUBLIC_EMAILJS_* in .env.local (contact form)\n"
@@ -269,7 +298,7 @@ docker-validate: _ensure-env-local ## Validate docker-compose.yml parses and res
 
 ##@ Build & Preview
 
-.PHONY: build serve-static
+.PHONY: build serve-static resume-pdf
 
 # These two stay on the host deliberately. out/ IS what GitHub Pages serves, so previewing the
 # real export is closer to production than any dev server -- the opposite of the usual
@@ -278,6 +307,11 @@ docker-validate: _ensure-env-local ## Validate docker-compose.yml parses and res
 build: ## Build the static export (outputs to out/)
 	@printf "$(GREEN)Building static export...$(NC)\n"
 	npm run build
+
+resume-pdf: build ## Regenerate public/Arthur_Krieger_Resume.pdf from the /resume/print page
+	@printf "$(GREEN)Rendering /resume/print to public/Arthur_Krieger_Resume.pdf...$(NC)\n"
+	bash scripts/generate_resume_pdf.sh
+	@printf "$(GREEN)Done. Run 'make build' again so out/ picks up the new PDF.$(NC)\n"
 
 serve-static: ## Serve out/ locally to preview exactly what GitHub Pages will serve
 	@printf "$(GREEN)Serving static build at http://localhost:$(PREVIEW_PORT)$(NC)\n"
@@ -319,7 +353,7 @@ ci-lint: ## CI: ESLint
 # kdf-fmt owns Python formatting/style (ADR D-003). This is a TypeScript repo, so the gate
 # covers scripts/ only (config: kdf-fmt.toml). Installed on demand -- there is no requirements
 # file here to carry the pin, so ci.yml's kdf_fmt_ref is the single source.
-ci-style: _ensure-venv ## CI: kdf-fmt style check for the Python scripts
+ci-style: _ensure-venv _warn-packages-pat ## CI: kdf-fmt style check for the Python scripts
 	@printf "$(GREEN)CI [2/6]: kdf-fmt style...$(NC)\n"
 	@$(PYTHON) -c "import kdf_fmt" 2>/dev/null || $(PIP_GIT_AUTH) $(PYTHON) -m pip install --quiet \
 		"kdf-fmt @ git+https://github.com/Needless2Say/kriegerdataforge-fmt.git@$(shell grep -oE 'kdf_fmt_ref:[[:space:]]*v[0-9.]+' .github/workflows/ci.yml | head -1 | grep -oE 'v[0-9.]+')"
