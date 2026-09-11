@@ -36,6 +36,9 @@ export default function ResumePrint() {
 					.rp { padding: 0 !important; }
 					.rp-section { break-inside: auto; }
 					.rp-entry { break-inside: avoid; }
+					/* A section heading must never be the last thing on a page. */
+					.rp-section > h2 { break-after: avoid; }
+					.rp-section > h2 + div > .rp-entry:first-child { break-before: avoid; }
 					/*
 					  globals.css sets min-height 100vh and overflow-x hidden on body for
 					  the site. Neither belongs in paged media, where they can add stray

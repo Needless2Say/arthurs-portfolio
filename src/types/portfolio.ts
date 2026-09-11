@@ -65,7 +65,6 @@ export interface Project {
 		youtube?: string[];
 	};
 	featured?: boolean;
-	diagram?: "metadata-reconciliation";
 }
 
 export interface SpeakingVideo {

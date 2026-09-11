@@ -17,6 +17,16 @@ SQL) because it carries the value and reveals nothing.
 > rather than "destructive schema deployments". Nothing currently live uses it, verified across
 > `src/`, the built `out/` HTML, and the resume PDF.
 
+> **Implementation detail, before publishing any of this.** Decided 2026-09-11. Public-facing copy,
+> meaning the site and the resume PDF, describes this system at outcome level only. Keep the problem,
+> the impact numbers, the ownership, the timeline, and design philosophy such as "provably
+> recoverable" and "the failure mode is inaction rather than corruption". Do not publish the
+> composition someone could rebuild from: the named phases, content hash change detection, the
+> control table, the set based state flip, the eight check count, the golden hash parity test,
+> registry driven onboarding, or the spreadsheet to catalog generator and its issue template. The
+> architecture diagram was removed from the projects page for the same reason and lives only in git
+> history. This document keeps the full detail on purpose, it is internal.
+
 ---
 
 ## Version 1. Portfolio, long form

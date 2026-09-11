@@ -1,6 +1,6 @@
 ﻿import type { Metadata } from "next";
 import Image from "next/image";
-import me_pic from "@/../public/me_pic.jpg";
+import me_pic from "@/../public/me_pic.png";
 import mission_home    from "@/../public/mission_control_home.jpg";
 import mission_chicago from "@/../public/mission_control_chicago.jpg";
 import { PERSONAL_INFO, EDUCATION, EXPERIENCE } from "@/constants/personal-info";

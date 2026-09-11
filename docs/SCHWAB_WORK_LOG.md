@@ -189,9 +189,17 @@ Adding a new feature is now creating a new self contained folder under `features
 
 **Description manager for the Data Governance Dashboard.** MVP delivered September 2025.
 
+> **Superseded, do not publish.** Confirmed 2026-09-11. The metadata reconciliation system
+> replaced this. It is history, not current work, so it stays out of the portfolio and the
+> resume. Keep it here for interview context only.
+
 Built with Streamlit and Snowpark Python against Snowflake, replacing a manual and error prone SQL script process for managing object and column descriptions. Used adaptive design techniques to handle large column sets through pagination. Translated high level governance needs into functional specifications and working software independently, then demoed it live to the enterprise data governance team, a team external to the Platform team, and won them over on the tool's utility for their workflows.
 
 **Performance optimizations for the description manager.** October 23, 2025.
+
+> **Superseded, do not publish.** Confirmed 2026-09-11. The metadata reconciliation system
+> replaced this. It is history, not current work, so it stays out of the portfolio and the
+> resume. Keep it here for interview context only.
 
 Proactively identified performance bottlenecks after delivery rather than waiting for complaints. Designed and implemented a Streamlit specific caching layer to minimize redundant Snowflake metadata queries, engineered efficient data flow to cache frequently accessed database schemas, table definitions, and column metadata across user sessions, and profiled the workflow to find high latency operations and target caching where it mattered most.
 
@@ -303,6 +311,10 @@ Learned and applied the platform's per environment `.tfvars` variable file patte
 Validated the full end to end proof of concept architecture, on-prem Linux to cloud bucket to Snowflake ICEBERG to the Flask app to the outbound bucket back to Snowflake ICEBERG. This moves the platform from pure data management toward hosting active computational workloads.
 
 **Data contracts sync from UAT to lower environments and PROD.** March 19, 2026. Low priority.
+
+> **Superseded, do not publish.** Confirmed 2026-09-11. The metadata reconciliation system
+> replaced this. It is history, not current work, so it stays out of the portfolio and the
+> resume. Keep it here for interview context only.
 
 Data contracts are JSON documents stored in a Snowflake table that exists separately in all five environments. Built a Python script, plus `ci.yml`, `cd.yml`, and `cd-scheduled.yml` workflows, to sync the contracts from UAT outward. The lower environment sync runs on a schedule every Monday at 4PM CST, while PROD is a separate manual run gated on user validation, so the two never run together.
 

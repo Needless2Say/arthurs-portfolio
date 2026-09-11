@@ -5,7 +5,6 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import Reveal from "@/components/ui/Reveal";
 import HudFrame from "@/components/ui/HudFrame";
 import ProjectStatusBadge from "@/components/ui/ProjectStatusBadge";
-import MetadataFlowDiagram from "@/components/ui/MetadataFlowDiagram";
 import { PROJECTS } from "@/constants/projects";
 import type { Project, ProjectCategory } from "@/types/portfolio";
 
@@ -113,9 +112,6 @@ function FeaturedProject({ project }: { project: Project }) {
 				</Card>
 			</HudFrame>
 
-			{/* Architecture diagram */}
-			{project.diagram === "metadata-reconciliation" && <MetadataFlowDiagram />}
-
 			{/* YouTube embeds */}
 			{project.links.youtube && (
 				<div className="mt-4 grid sm:grid-cols-2 gap-4">
@@ -190,10 +186,13 @@ function ProjectSection({
 	title,
 	subtitle,
 	projects,
+	gridLabel,
 }: {
 	title: string;
 	subtitle: string;
 	projects: Project[];
+	/** Caption above the non-featured grid. Differs per section. */
+	gridLabel: string;
 }) {
 	if (projects.length === 0) return null;
 
@@ -213,7 +212,7 @@ function ProjectSection({
 			{rest.length > 0 && (
 				<div>
 					<Reveal>
-						<p className="text-slate-600 font-mono text-sm mb-4">{"// more from this ecosystem"}</p>
+						<p className="text-slate-600 font-mono text-sm mb-4">{gridLabel}</p>
 					</Reveal>
 
 					<div className="grid sm:grid-cols-2 gap-4">
@@ -246,12 +245,14 @@ export default function Projects() {
 					title="Professional Work"
 					subtitle="Production systems built on the job, running in a Fortune 500 data platform. Described without internal names or proprietary detail."
 					projects={professional}
+					gridLabel="// also shipped on the job"
 				/>
 
 				<ProjectSection
 					title="Personal Work"
 					subtitle="KriegerDataForge, the multi-tenant data platform I design, build, and operate on my own, and the products running on it."
 					projects={personal}
+					gridLabel="// more from this ecosystem"
 				/>
 			</div>
 		</div>
