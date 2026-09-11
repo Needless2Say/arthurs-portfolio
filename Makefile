@@ -130,7 +130,14 @@ BASE_BRANCH ?= main
 # same thing. They used to be two identical copies, which is how a pair silently
 # drifts apart -- `lint` called `next lint` here long after `ci-lint` had moved on.
 LINT_CMD      := npm run lint
-TYPECHECK_CMD := npx tsc --noEmit
+
+# `next typegen` first, deliberately. tsconfig.json includes next-env.d.ts and
+# .next/types/**, and both are gitignored, so a fresh checkout has neither and tsc
+# cannot resolve the image imports (TS2307 on every .png/.jpg). This used to work by
+# accident: `lint` ran `next lint`, which generated next-env.d.ts as a side effect.
+# Migrating lint to the ESLint CLI removed that side effect and broke CI typecheck.
+# typegen is Next's supported way to emit those types without a full build.
+TYPECHECK_CMD := npx next typegen && npx tsc --noEmit
 
 # ============================================================
 # Canned recipes
