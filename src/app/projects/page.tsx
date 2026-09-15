@@ -49,6 +49,7 @@ function FeaturedProject({ project }: { project: Project }) {
 			<HudFrame
 				color={project.category === "professional" ? "emerald" : "yellow"}
 				label={CATEGORY_META[project.category].frame}
+				corners={false}
 				className="mb-4"
 			>
 				<Card glow="blue" className="p-5 sm:p-8">
