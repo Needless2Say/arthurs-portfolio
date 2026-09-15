@@ -175,11 +175,6 @@ export default function Home() {
 				</div>
 
 				<div className="relative group rounded-xl overflow-hidden border border-yellow-500/20 shadow-[0_0_60px_rgba(234,179,8,0.08)] bg-black/40 transition-all duration-300 hover:border-yellow-400/40 hover:shadow-[0_0_80px_rgba(234,179,8,0.15)] max-w-2xl mx-auto">
-					{/* HUD corners — blue lines, yellow glow outline */}
-					<span className="pointer-events-none absolute top-2 left-2  z-10 w-4 h-4 border-t-2 border-l-2 border-blue-400 rounded-tl-sm transition-all duration-300 group-hover:border-blue-300" style={{ filter: "drop-shadow(0 0 3px rgba(250,204,21,0.85))" }} />
-					<span className="pointer-events-none absolute top-2 right-2 z-10 w-4 h-4 border-t-2 border-r-2 border-blue-400 rounded-tr-sm transition-all duration-300 group-hover:border-blue-300" style={{ filter: "drop-shadow(0 0 3px rgba(250,204,21,0.85))" }} />
-					<span className="pointer-events-none absolute bottom-[2.75rem] left-2  z-10 w-4 h-4 border-b-2 border-l-2 border-blue-400 rounded-bl-sm transition-all duration-300 group-hover:border-blue-300" style={{ filter: "drop-shadow(0 0 3px rgba(250,204,21,0.85))" }} />
-					<span className="pointer-events-none absolute bottom-[2.75rem] right-2 z-10 w-4 h-4 border-b-2 border-r-2 border-blue-400 rounded-br-sm transition-all duration-300 group-hover:border-blue-300" style={{ filter: "drop-shadow(0 0 3px rgba(250,204,21,0.85))" }} />
 
 					{/* Image */}
 					<div className="relative w-full aspect-video">
