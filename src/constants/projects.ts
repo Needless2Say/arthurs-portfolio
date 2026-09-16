@@ -3,16 +3,16 @@ import type { Project } from "@/types/portfolio";
 export const PROJECTS: Project[] = [
 	{
 		title: "KriegerDataForge",
-		summary: "A multi-tenant data platform spanning 18 repositories, built and operated solo. An OAuth 2.0 and OIDC identity provider issuing RS256 JWTs with a JWKS endpoint for cross-app SSO, a shared Python SDK every tenant backend installs instead of reimplementing auth, a Terraform control plane declaring every environment, and a centralized CI/CD library inherited by every repo.",
-		subtitle: "Multi-Tenant Platform Ecosystem",
+		summary: "A personal platform I built to ship my own apps faster, spanning 18 repositories. An OAuth 2.0 and OIDC identity provider issuing RS256 JWTs with a JWKS endpoint for cross-app SSO, a shared Python SDK each app backend installs instead of reimplementing auth, a Terraform control plane declaring every environment, and a centralized CI/CD library inherited by every repo.",
+		subtitle: "Personal Platform Ecosystem",
 		category: "personal",
 		status: "in-development",
-		description: "A multi-tenant data platform I design, build, and operate on my own, spread across 18 repositories. At its center is an OAuth 2.0 and OIDC identity provider that issues RS256 JWTs and publishes a JWKS endpoint, so every product on the platform shares one account and one sign in. Around that sit a shared Python SDK that tenant backends install instead of reimplementing auth, a Terraform control plane that declares every environment, and a centralized CI/CD library where deploy behavior, security gates, and version discipline are defined once and inherited everywhere. Two first party products are being built on it today, a boutique e-commerce storefront and a free nutrition tracker.",
+		description: "The platform I build my own apps on, designed and operated entirely by me across 18 repositories. It exists so that starting a new app is a day of setup instead of a month. At its center is an OAuth 2.0 and OIDC identity provider that issues RS256 JWTs and publishes a JWKS endpoint, so every app I build shares one account and one sign in. Around that sit a shared Python SDK each app backend installs instead of reimplementing auth, a Terraform control plane that declares every environment, and a centralized CI/CD library where deploy behavior, security gates, and version discipline are defined once and inherited everywhere. Two apps are being built on it today, a boutique e-commerce storefront and a free nutrition tracker.",
 		highlights: [
 			"One identity provider and one shared user table give true SSO across every app on the platform",
 			"Three isolated environments, sandbox, dev, and prod, sharing no keys, databases, or service keys",
 			"Every deploy is a manual dispatch behind an environment approval gate and a fail closed authorization gate",
-			"Tenant backends carry no auth code at all, they verify the hub's JWKS through the shared SDK",
+			"My app backends carry no auth code at all, they verify the hub's JWKS through the shared SDK",
 		],
 		techStack: [
 			"Next.js",
@@ -220,10 +220,10 @@ export const PROJECTS: Project[] = [
 		subtitle: "Python Platform Library · KriegerDataForge",
 		category: "personal",
 		status: "in-development",
-		description: "The shared Python library every tenant backend installs, so building on the platform is one dependency line rather than a rewrite. Its core job is stateless RS256 token verification against the identity provider's JWKS with no database round trip. On top of that it ships a FastAPI application factory, auth dependencies, ownership checks, pagination, rate limiting, observability, SQLModel database infrastructure, blob storage, email, and log injection sanitization. It runs inside every app on the platform, so a weakness here would ship everywhere at once, which is why it carries the heaviest test suite in the ecosystem.",
+		description: "The shared Python library every app backend installs, so building on the platform is one dependency line rather than a rewrite. Its core job is stateless RS256 token verification against the identity provider's JWKS with no database round trip. On top of that it ships a FastAPI application factory, auth dependencies, ownership checks, pagination, rate limiting, observability, SQLModel database infrastructure, blob storage, email, and log injection sanitization. It runs inside every app on the platform, so a weakness here would ship everywhere at once, which is why it carries the heaviest test suite in the ecosystem.",
 		highlights: [
 			"Stateless JWT verification against the hub JWKS, no database round trip per request",
-			"Batteries included FastAPI foundation so no tenant repo reimplements platform plumbing",
+			"Batteries included FastAPI foundation so no app repo reimplements platform plumbing",
 		],
 		techStack: [
 			"Python",
@@ -259,7 +259,7 @@ export const PROJECTS: Project[] = [
 		subtitle: "Web Application · KriegerDataForge",
 		category: "personal",
 		status: "planned",
-		description: "A searchable game catalog queued up as a future tenant app, browsing and filtering titles by genre, platform, and rating. Like every other app on the platform it will own no identity of its own, delegating sign in to the KDF identity provider and standing up its own service behind the shared SDK.",
+		description: "A searchable game catalog queued up as a future app on the platform, browsing and filtering titles by genre, platform, and rating. Like every other app on the platform it will own no identity of its own, delegating sign in to the KDF identity provider and standing up its own service behind the shared SDK.",
 		techStack: [
 			"Next.js",
 			"React",

@@ -11,12 +11,12 @@ import type { Project, ProjectCategory } from "@/types/portfolio";
 export const metadata: Metadata = {
 	title: "Projects",
 	description:
-		"Projects built by Arthur Krieger — professional data platform engineering work, plus KriegerDataForge, a multi-tenant data platform with its own OAuth 2.0 / OIDC identity provider, a shared Python SDK, a Terraform control plane, an e-commerce storefront, and a free nutrition tracker. Built with Next.js, React, TypeScript, FastAPI, Python, PostgreSQL, Snowflake, Terraform, and more.",
+		"Projects built by Arthur Krieger — professional data platform engineering work, plus KriegerDataForge, a personal platform he uses to ship his own apps faster, with its own OAuth 2.0 / OIDC identity provider, a shared Python SDK, a Terraform control plane, an e-commerce storefront, and a free nutrition tracker. Built with Next.js, React, TypeScript, FastAPI, Python, PostgreSQL, Snowflake, Terraform, and more.",
 	alternates: { canonical: "https://needless2say.github.io/arthurs-portfolio/projects" },
 	openGraph: {
 		title: "Projects | Arthur Krieger & KriegerDataForge",
 		description:
-			"Professional data platform engineering, plus a multi-tenant data platform with its own OIDC identity provider, shared Python SDK, Terraform control plane, e-commerce storefront, and nutrition tracker.",
+			"Professional data platform engineering, plus a personal platform with its own OIDC identity provider, shared Python SDK, Terraform control plane, e-commerce storefront, and nutrition tracker.",
 		url: "https://needless2say.github.io/arthurs-portfolio/projects",
 	},
 };
@@ -251,7 +251,7 @@ export default function Projects() {
 
 				<ProjectSection
 					title="Personal Work"
-					subtitle="KriegerDataForge, the multi-tenant data platform I design, build, and operate on my own, and the products running on it."
+					subtitle="KriegerDataForge, the platform I build my own apps on, and the apps running on it."
 					projects={personal}
 					gridLabel="// more from this ecosystem"
 				/>
