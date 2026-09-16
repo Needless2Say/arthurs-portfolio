@@ -13,12 +13,12 @@ import mission_chicago from "@/../public/mission_control_chicago.jpg";
 export const metadata: Metadata = {
 	title: "Arthur Krieger | Software Engineer & KriegerDataForge Founder",
 	description:
-		"Arthur Krieger — Software/Platform Engineer at Charles Schwab, CS + Data Science from the University of Michigan (2025). Founder of KriegerDataForge, a multi-tenant data platform with its own OAuth 2.0 / OIDC identity provider, shared Python SDK, and Terraform control plane. Building from Chicago, IL. Open to new opportunities.",
+		"Arthur Krieger — Software/Platform Engineer at Charles Schwab, CS + Data Science from the University of Michigan (2025). Creator of KriegerDataForge, a personal platform he uses to ship his own apps faster, with its own OAuth 2.0 / OIDC identity provider, shared Python SDK, and Terraform control plane. Building from Chicago, IL. Open to new opportunities.",
 	alternates: { canonical: "https://needless2say.github.io/arthurs-portfolio" },
 	openGraph: {
 		title: "Arthur Krieger | Software Engineer & KriegerDataForge Founder",
 		description:
-			"Software/Platform Engineer at Charles Schwab. Founder of KriegerDataForge, a multi-tenant data platform with its own OIDC identity provider, shared Python SDK, and Terraform control plane. Based in Chicago, IL.",
+			"Software/Platform Engineer at Charles Schwab. Creator of KriegerDataForge, a personal platform for shipping his own apps faster, with its own OIDC identity provider, shared Python SDK, and Terraform control plane. Based in Chicago, IL.",
 		url: "https://needless2say.github.io/arthurs-portfolio",
 	},
 };
