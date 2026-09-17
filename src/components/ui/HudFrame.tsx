@@ -40,7 +40,7 @@ export default function HudFrame({
 			{label && (
 				<div className="pointer-events-none absolute -top-2.5 left-4 flex items-center gap-1.5 px-2 py-0.5 bg-[#09090f] z-10">
 					<span className={cn("w-1 h-1 rounded-full animate-pulse", dot)} />
-					<span className={cn("font-mono text-[9px] tracking-[0.25em] uppercase", text)}>
+					<span className={cn("font-mono text-[10px] tracking-[0.25em] uppercase", text)}>
 						{label}
 					</span>
 				</div>

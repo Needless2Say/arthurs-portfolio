@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Card from "@/components/ui/Card";
 import Reveal from "@/components/ui/Reveal";
+import ClipSlideshow from "@/components/ui/ClipSlideshow";
+import { getClips, getClipSetName } from "@/utils/clips";
 
 export const metadata: Metadata = {
 	title: "Life",
@@ -59,6 +61,10 @@ const SONGS = [
 ];
 
 export default function Life() {
+	// Read at build time, so the gallery is whatever sits in public/videos.
+	const clips = getClips();
+	const clipSetName = getClipSetName();
+
 	return (
 		<div className="min-h-screen pt-24 pb-16 px-4">
 			<div className="max-w-4xl mx-auto">
@@ -80,28 +86,6 @@ export default function Life() {
 						<div className="h-px mt-6 animate-gradient-line" />
 					</div>
 				</Reveal>
-
-				{/* ===== Video Games ===== */}
-				<section className="mb-16">
-					<Reveal>
-						<SectionHeader
-							title="Video Games"
-							subtitle="Open worlds, survival builds, and boss fights. The games I keep coming back to."
-						/>
-					</Reveal>
-					<Reveal delay={60}>
-						<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-							{GAMES.map((game) => (
-								<div
-									key={game}
-									className="glass-card p-4 border-white/5 hover:border-blue-500/30 hover:shadow-[0_0_20px_rgba(59,130,246,0.08)] transition-all duration-300 hover:-translate-y-1"
-								>
-									<p className="text-white text-sm font-medium leading-snug">{game}</p>
-								</div>
-							))}
-						</div>
-					</Reveal>
-				</section>
 
 				{/* ===== Exercise ===== */}
 				<section className="mb-16">
@@ -145,6 +129,61 @@ export default function Life() {
 							</Reveal>
 						))}
 					</div>
+				</section>
+
+				{/* ===== Video Games ===== */}
+				<section className="mb-16">
+					<Reveal>
+						<SectionHeader
+							title="Video Games"
+							subtitle="Open worlds, survival builds, and boss fights. The games I keep coming back to."
+						/>
+					</Reveal>
+					<Reveal delay={60}>
+						<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+							{GAMES.map((game) => (
+								<div
+									key={game}
+									className="glass-card p-4 border-white/5 hover:border-blue-500/30 hover:shadow-[0_0_20px_rgba(59,130,246,0.08)] transition-all duration-300 hover:-translate-y-1"
+								>
+									<p className="text-white text-sm font-medium leading-snug">{game}</p>
+								</div>
+							))}
+						</div>
+					</Reveal>
+				</section>
+
+				{/* ===== Dokkan Battle ===== */}
+				<section className="mb-16">
+					<Reveal>
+						<SectionHeader
+							title="Dokkan Battle"
+							subtitle="The one that followed me off the desk and onto my phone."
+						/>
+					</Reveal>
+					<Reveal delay={60}>
+						{/* Full width, so it runs the same span as the section's gradient rule above. */}
+						<div>
+							<p className="text-slate-300 text-sm leading-relaxed mb-2">
+								Ten years of pulling for the units I grew up watching. The board is a
+								puzzle, the rotations are a build order, and a good run comes down to
+								planning three turns ahead. It is the same optimization itch that
+								makes the day job fun.
+							</p>
+							<p className="text-slate-500 font-mono text-xs">
+								{clipSetName ? `${clipSetName}. ` : ""}Recorded on my phone. It starts
+								when you reach it and rolls into the next clip, tap the speaker for
+								sound or pick one below.
+							</p>
+						</div>
+					</Reveal>
+
+					{/* One centred player that walks the whole folder in filename order. */}
+					{clips.length > 0 && (
+						<Reveal delay={120}>
+							<ClipSlideshow clips={clips} className="mx-auto mt-10 max-w-[30rem]" />
+						</Reveal>
+					)}
 				</section>
 
 				{/* ===== Favorite Music ===== */}

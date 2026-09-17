@@ -1,0 +1,9 @@
+{
+  "clips": [
+	{ "name": "carnival_lr_teq_perfect_cell_1_intro", "width": 810, "height": 1080 },
+	{ "name": "carnival_lr_teq_perfect_cell_2_12_ki", "width": 810, "height": 1080 },
+	{ "name": "carnival_lr_teq_perfect_cell_3_12_ki_ex", "width": 810, "height": 1080 },
+	{ "name": "carnival_lr_teq_perfect_cell_4_18_ki", "width": 810, "height": 1080 },
+	{ "name": "carnival_lr_teq_perfect_cell_5_active_skill", "width": 810, "height": 1080 }
+  ]
+}

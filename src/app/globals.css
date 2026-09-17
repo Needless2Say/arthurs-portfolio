@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+/* ─── Typography ───────────────────────────────────── */
+/*
+  next/font declares --font-geist-sans and --font-geist-mono on <html>. This maps
+  them onto Tailwind's font scale so the default body face and every `font-mono`
+  utility actually resolve to Geist. Without this block the two families are
+  downloaded on every page load and never used, and everything silently falls
+  back to the system stack, which is what was happening before.
+*/
+@theme {
+	--font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+	--font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
 /* ─── Base ─────────────────────────────────────────── */
 :root {
   	color-scheme: dark;

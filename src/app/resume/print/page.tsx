@@ -71,7 +71,7 @@ export default function ResumePrint() {
 
 				{/* ===== Summary ===== */}
 				<section className="rp-section mt-2.5">
-					<h2 className="mb-1 border-b border-neutral-300 pb-0.5 text-[10pt] font-bold uppercase tracking-widest">
+					<h2 className="mb-1 border-b border-neutral-300 pb-0.5 text-[10pt] font-bold uppercase tracking-wide">
 						Summary
 					</h2>
 					<p className="text-[9pt] text-neutral-800">{PERSONAL_INFO.summary}</p>
@@ -79,7 +79,7 @@ export default function ResumePrint() {
 
 				{/* ===== Experience ===== */}
 				<section className="rp-section mt-2.5">
-					<h2 className="mb-1.5 border-b border-neutral-300 pb-0.5 text-[10pt] font-bold uppercase tracking-widest">
+					<h2 className="mb-1.5 border-b border-neutral-300 pb-0.5 text-[10pt] font-bold uppercase tracking-wide">
 						Experience
 					</h2>
 
@@ -115,7 +115,7 @@ export default function ResumePrint() {
 
 				{/* ===== Projects ===== */}
 				<section className="rp-section mt-2.5">
-					<h2 className="mb-1.5 border-b border-neutral-300 pb-0.5 text-[10pt] font-bold uppercase tracking-widest">
+					<h2 className="mb-1.5 border-b border-neutral-300 pb-0.5 text-[10pt] font-bold uppercase tracking-wide">
 						Projects
 					</h2>
 
@@ -140,7 +140,7 @@ export default function ResumePrint() {
 
 				{/* ===== Education ===== */}
 				<section className="rp-section mt-2.5">
-					<h2 className="mb-1.5 border-b border-neutral-300 pb-0.5 text-[10pt] font-bold uppercase tracking-widest">
+					<h2 className="mb-1.5 border-b border-neutral-300 pb-0.5 text-[10pt] font-bold uppercase tracking-wide">
 						Education
 					</h2>
 
@@ -171,7 +171,7 @@ export default function ResumePrint() {
 
 				{/* ===== Skills ===== */}
 				<section className="rp-section mt-2.5">
-					<h2 className="mb-1.5 border-b border-neutral-300 pb-0.5 text-[10pt] font-bold uppercase tracking-widest">
+					<h2 className="mb-1.5 border-b border-neutral-300 pb-0.5 text-[10pt] font-bold uppercase tracking-wide">
 						Skills
 					</h2>
 
@@ -187,7 +187,7 @@ export default function ResumePrint() {
 
 				{/* ===== Certifications ===== */}
 				<section className="rp-section mt-2.5">
-					<h2 className="mb-1.5 border-b border-neutral-300 pb-0.5 text-[10pt] font-bold uppercase tracking-widest">
+					<h2 className="mb-1.5 border-b border-neutral-300 pb-0.5 text-[10pt] font-bold uppercase tracking-wide">
 						Certifications
 					</h2>
 
@@ -203,7 +203,7 @@ export default function ResumePrint() {
 
 				{/* ===== Speaking ===== */}
 				<section className="rp-section mt-2.5">
-					<h2 className="mb-1.5 border-b border-neutral-300 pb-0.5 text-[10pt] font-bold uppercase tracking-widest">
+					<h2 className="mb-1.5 border-b border-neutral-300 pb-0.5 text-[10pt] font-bold uppercase tracking-wide">
 						Speaking
 					</h2>
 
