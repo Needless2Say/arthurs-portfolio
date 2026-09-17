@@ -49,7 +49,7 @@ export default function NotFound() {
 
 				{/* Coordinates readout */}
 				<div
-					className="glass-card border-white/5 p-4 mb-10 max-w-sm mx-auto font-mono text-[11px] text-left animate-fade-in"
+					className="glass-card border-white/5 p-4 mb-10 max-w-sm mx-auto font-mono text-[10px] text-left animate-fade-in"
 					style={{ animationDelay: "0.4s" }}
 				>
 					<div className="flex justify-between text-slate-500">

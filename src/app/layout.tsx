@@ -94,7 +94,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
 			<head>
 				{/*
 				  Content-Security-Policy via <meta>. GitHub Pages is a static
@@ -111,6 +111,10 @@ export default function RootLayout({
 				  and the EmailJS contact-form POST (api.emailjs.com), and YouTube
 					  iframe embeds on /life + /projects. If GA, the form, or the videos
 				  break, the origins below are the first place to look.
+				    - media-src is spelled out for the self-hosted <video> clips under
+				      public/videos/. It would fall back to default-src today, but an
+				      explicit entry means a later default-src change cannot silently
+				      kill them.
 				*/}
 				<meta
 					httpEquiv="Content-Security-Policy"
@@ -121,6 +125,7 @@ export default function RootLayout({
 						"frame-ancestors 'none'",
 						"frame-src https://www.youtube.com https://www.youtube-nocookie.com",
 						"img-src 'self' data: https:",
+						"media-src 'self'",
 						"font-src 'self' data:",
 						"style-src 'self' 'unsafe-inline'",
 						`script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com`,
@@ -181,7 +186,7 @@ export default function RootLayout({
 				</Script>
 			</head>
 
-			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+			<body className="antialiased">
 				<a href="#main-content" className="skip-to-content">
 					Skip to content
 				</a>

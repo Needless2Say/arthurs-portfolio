@@ -46,7 +46,7 @@ export default function Resume() {
 						<SectionHeader title="Summary" />
 					</Reveal>
 					<Reveal delay={60}>
-						<p className="text-slate-300 leading-relaxed text-sm">{PERSONAL_INFO.summary}</p>
+						<p className="text-slate-300 leading-relaxed text-base">{PERSONAL_INFO.summary}</p>
 					</Reveal>
 				</section>
 
@@ -62,10 +62,10 @@ export default function Resume() {
 								<Card glow="blue">
 									<div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3">
 										<div>
-											<h3 className="text-white font-bold text-sm">
+											<h3 className="text-white font-bold text-lg">
 												{exp.role}
 											</h3>
-											<p className="text-blue-300 text-xs">
+											<p className="text-blue-300 text-sm">
 												{exp.company} · {exp.location}
 											</p>
 										</div>
@@ -77,7 +77,7 @@ export default function Resume() {
 
 									<ul className="space-y-1 mb-3">
 										{exp.bullets.map((b, j) => (
-											<li key={j} className="text-slate-400 text-xs flex gap-2">
+											<li key={j} className="text-slate-400 text-sm flex gap-2">
 												<span className="text-blue-500 mt-0.5 flex-shrink-0">
 													›
 												</span>
@@ -109,16 +109,16 @@ export default function Resume() {
 								<Card glow="blue">
 									<div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
 										<div>
-											<h3 className="text-white font-bold text-sm">
+											<h3 className="text-white font-bold text-lg">
 												{project.title}
 											</h3>
-											<p className="text-blue-300 text-xs">
+											<p className="text-blue-300 text-sm">
 												{project.subtitle}
 											</p>
 										</div>
 									</div>
 
-									<p className="text-slate-400 text-xs leading-relaxed mb-3">
+									<p className="text-slate-400 text-sm leading-relaxed mb-3">
 										{project.summary}
 									</p>
 
@@ -145,19 +145,19 @@ export default function Resume() {
 								<Card glow="blue">
 									<div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
 										<div>
-											<h3 className="text-white font-bold text-sm">
+											<h3 className="text-white font-bold text-lg">
 												{edu.school}
 											</h3>
-											<p className="text-blue-300 text-xs">
+											<p className="text-blue-300 text-sm">
 												{edu.degree}
 											</p>
 											{edu.minor && (
-												<p className="text-slate-400 text-xs">
+												<p className="text-slate-400 text-sm">
 													{edu.minor}
 												</p>
 											)}
 											{edu.honors && (
-												<p className="text-yellow-400 text-xs font-medium">
+												<p className="text-yellow-400 text-sm font-medium">
 													{edu.honors}
 												</p>
 											)}
@@ -237,10 +237,10 @@ export default function Resume() {
 								<Card glow="blue">
 									<div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
 										<div>
-											<h3 className="text-white font-bold text-sm">
+											<h3 className="text-white font-bold text-lg">
 												{item.title}
 											</h3>
-											<p className="text-blue-300 text-xs">
+											<p className="text-blue-300 text-sm">
 												{item.org}
 											</p>
 										</div>
@@ -250,7 +250,7 @@ export default function Resume() {
 										</span>
 									</div>
 
-									<p className="text-slate-400 text-xs leading-relaxed">
+									<p className="text-slate-400 text-sm leading-relaxed">
 										{item.detail}
 									</p>
 
