@@ -172,8 +172,8 @@ export default function Life() {
 							</p>
 							<p className="text-slate-500 font-mono text-xs">
 								{clipSetName ? `${clipSetName}. ` : ""}Recorded on my phone. It starts
-								when you reach it and rolls into the next clip, tap the speaker for
-								sound or pick one below.
+								when you reach it and rolls into the next clip. Hover or tap the clip
+								for sound and full screen, or pick one below.
 							</p>
 						</div>
 					</Reveal>

@@ -43,6 +43,10 @@ export default function ClipSlideshow({ clips, className }: ClipSlideshowProps) 
 	const [muted, setMuted] = useState(true);
 	const [reduced, setReduced] = useState(false);
 	const [progress, setProgress] = useState(0);
+	const [fullscreen, setFullscreen] = useState(false);
+	// Overlay buttons stay hidden until asked for, so nothing sits over the clip.
+	const [controlsVisible, setControlsVisible] = useState(false);
+	const hideTimer = useRef<number | null>(null);
 
 	const current = clips[index];
 	const upcoming = clips.length > 1 ? clips[(index + 1) % clips.length] : undefined;
@@ -128,11 +132,13 @@ export default function ClipSlideshow({ clips, className }: ClipSlideshowProps) 
 		if (inView && armed) {
 			void attemptPlay(sessionStorage.getItem(SOUND_KEY) === "on");
 			setPlaying(true);
-		} else {
+		} else if (!fullscreen) {
+			// While fullscreen the host element can read as off screen, and
+			// pausing there would stop the clip the visitor is actually watching.
 			video.pause();
 			setPlaying(false);
 		}
-	}, [inView, armed, index, reduced, attemptPlay]);
+	}, [inView, armed, index, reduced, fullscreen, attemptPlay]);
 
 	// A hidden tab should never keep making noise.
 	useEffect(() => {
@@ -145,6 +151,55 @@ export default function ClipSlideshow({ clips, className }: ClipSlideshowProps) 
 
 		document.addEventListener("visibilitychange", onVisibility);
 		return () => document.removeEventListener("visibilitychange", onVisibility);
+	}, []);
+
+	/*
+	  Track fullscreen from the browser rather than from our own click, because
+	  Escape, the Android back gesture and the iOS Done button all leave
+	  fullscreen without going through our button.
+
+	  Native controls are switched on only while fullscreen. That is the answer
+	  to where the exit button goes: the browser's own control bar, at the
+	  bottom, auto hiding, exactly where people expect it. Inline it stays off,
+	  so nothing covers the clip.
+	*/
+	useEffect(() => {
+		const video = videoRef.current;
+
+		const sync = () => {
+			const active = document.fullscreenElement === video;
+			setFullscreen(active);
+			if (video) video.controls = active;
+		};
+
+		// iOS Safari has no Fullscreen API on elements. A video handed to the
+		// native player fires these instead.
+		const onIosEnter = () => {
+			setFullscreen(true);
+			if (video) video.controls = true;
+		};
+		const onIosExit = () => {
+			setFullscreen(false);
+			if (video) video.controls = false;
+		};
+
+		document.addEventListener("fullscreenchange", sync);
+		document.addEventListener("webkitfullscreenchange", sync);
+		video?.addEventListener("webkitbeginfullscreen", onIosEnter);
+		video?.addEventListener("webkitendfullscreen", onIosExit);
+
+		return () => {
+			document.removeEventListener("fullscreenchange", sync);
+			document.removeEventListener("webkitfullscreenchange", sync);
+			video?.removeEventListener("webkitbeginfullscreen", onIosEnter);
+			video?.removeEventListener("webkitendfullscreen", onIosExit);
+		};
+	}, []);
+
+	useEffect(() => {
+		return () => {
+			if (hideTimer.current) window.clearTimeout(hideTimer.current);
+		};
 	}, []);
 
 	const advance = () => {
@@ -178,6 +233,61 @@ export default function ClipSlideshow({ clips, className }: ClipSlideshowProps) 
 		void attemptPlay(sessionStorage.getItem(SOUND_KEY) === "on");
 	};
 
+	/*
+	  A mouse keeps the buttons up for as long as it is over the clip. A touch
+	  has no hover, so a tap brings them up and they fade out again on their own.
+	*/
+	const showControls = (autoHide: boolean) => {
+		setControlsVisible(true);
+		if (hideTimer.current) window.clearTimeout(hideTimer.current);
+		if (autoHide) {
+			hideTimer.current = window.setTimeout(() => setControlsVisible(false), 3200);
+		}
+	};
+
+	const hideControls = () => {
+		if (hideTimer.current) window.clearTimeout(hideTimer.current);
+		setControlsVisible(false);
+	};
+
+	const onFramePointer = (e: React.PointerEvent) => {
+		if (e.type === "pointerenter" && e.pointerType === "mouse") {
+			showControls(false);
+			return;
+		}
+		if (e.type === "pointerleave" && e.pointerType === "mouse") {
+			hideControls();
+			return;
+		}
+		// Touch or pen tap on the frame itself, not on a button.
+		if (e.type === "pointerdown" && e.pointerType !== "mouse") {
+			if (controlsVisible) hideControls();
+			else showControls(true);
+		}
+	};
+
+	const toggleFullscreen = () => {
+		const video = videoRef.current;
+		if (!video) return;
+
+		if (document.fullscreenElement) {
+			void document.exitFullscreen();
+			return;
+		}
+
+		// iPhone Safari cannot fullscreen an arbitrary element, but a video can
+		// hand itself to the native player, which brings its own Done button.
+		const ios = video as HTMLVideoElement & { webkitEnterFullscreen?: () => void };
+		if (!document.fullscreenEnabled && typeof ios.webkitEnterFullscreen === "function") {
+			ios.webkitEnterFullscreen();
+			return;
+		}
+
+		void video.requestFullscreen().catch(() => {
+			if (typeof ios.webkitEnterFullscreen === "function") ios.webkitEnterFullscreen();
+		});
+	};
+
 	if (!current) return null;
 
 	return (
@@ -199,6 +309,9 @@ export default function ClipSlideshow({ clips, className }: ClipSlideshowProps) 
 			<div
 				className="relative w-full overflow-hidden rounded-2xl border border-white/5 bg-slate-950/60"
 				style={{ aspectRatio: `${current.width} / ${current.height}` }}
+				onPointerEnter={onFramePointer}
+				onPointerLeave={onFramePointer}
+				onPointerDown={onFramePointer}
 			>
 				{/*
 				  src is bound rather than using a <source> child on purpose.
@@ -223,6 +336,25 @@ export default function ClipSlideshow({ clips, className }: ClipSlideshowProps) 
 					className="absolute inset-0 h-full w-full object-contain"
 				/>
 
+				{/*
+				  Fullscreen, top right. Hidden until the pointer is over the clip
+				  or a touch taps it, so it never sits over the footage otherwise.
+				*/}
+				<button
+					type="button"
+					onClick={toggleFullscreen}
+					aria-label={fullscreen ? "Exit full screen" : "Enter full screen"}
+					className={cn(
+						"absolute top-3 right-3 rounded-full border border-white/15 bg-slate-950/80 p-2",
+						"text-slate-300 backdrop-blur transition-all duration-200",
+						"hover:border-blue-500/40 hover:text-white",
+						"focus-visible:opacity-100 focus-visible:pointer-events-auto",
+						controlsVisible ? "opacity-100" : "pointer-events-none opacity-0"
+					)}
+				>
+					<ExpandIcon />
+				</button>
+
 				{/* Progress across the current clip. */}
 				<div className="absolute inset-x-0 bottom-0 h-0.5 bg-white/10">
 					<div
@@ -242,13 +374,20 @@ export default function ClipSlideshow({ clips, className }: ClipSlideshowProps) 
 						</button>
 					)}
 
+					{/* Same reveal as the fullscreen button, so the pair behave alike. */}
 					{playing && (
 						<button
 							type="button"
 							onClick={toggleSound}
 							aria-pressed={!muted}
 							aria-label={muted ? "Turn sound on" : "Turn sound off"}
-							className="rounded-full border border-white/15 bg-slate-950/80 p-2 text-slate-300 backdrop-blur transition-colors hover:border-blue-500/40 hover:text-white"
+							className={cn(
+								"rounded-full border border-white/15 bg-slate-950/80 p-2",
+								"text-slate-300 backdrop-blur transition-all duration-200",
+								"hover:border-blue-500/40 hover:text-white",
+								"focus-visible:opacity-100 focus-visible:pointer-events-auto",
+								controlsVisible ? "opacity-100" : "pointer-events-none opacity-0"
+							)}
 						>
 							{muted ? <MutedIcon /> : <SoundIcon />}
 						</button>
@@ -333,6 +472,14 @@ export default function ClipSlideshow({ clips, className }: ClipSlideshowProps) 
 				))}
 			</div>
 		</div>
+	);
+}
+
+function ExpandIcon() {
+	return (
+		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4" aria-hidden="true">
+			<path d="M9 3H3v6M21 9V3h-6M15 21h6v-6M3 15v6h6" strokeLinecap="round" strokeLinejoin="round" />
+		</svg>
 	);
 }
 
