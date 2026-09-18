@@ -45,7 +45,8 @@ body {
 	position: absolute;
 	top: -9999px;
 	left: 0;
-	padding: 8px 16px;
+	/* 12px vertical clears a 44px target once focused. */
+	padding: 12px 20px;
 	background: #2563eb;
 	color: white;
 	z-index: 9999;
@@ -291,6 +292,33 @@ body {
 	background: linear-gradient(90deg, #2563eb 0%, #facc15 25%, #3b82f6 50%, #facc15 75%, #2563eb 100%);
 	background-size: 300% auto;
 	animation: gradient-shift 16s linear infinite;
+}
+
+/* ─── Touch targets ──────────────────────────────────── */
+/*
+  A standalone text link is only as tall as its text, around 18 to 20px, which
+  is fiddly to hit with a thumb. This grows the hit area to 44px vertically
+  without moving a single pixel on screen, so the design is untouched.
+
+  Vertical only, deliberately. Expanding sideways would let neighbouring links
+  in a row steal each other's taps, which is worse than a small target.
+
+  Scoped to coarse pointers so a mouse is unaffected.
+*/
+@media (pointer: coarse) {
+	.tap-pad {
+		position: relative;
+	}
+
+	.tap-pad::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 50%;
+		height: 44px;
+		transform: translateY(-50%);
+	}
 }
 
 /* ─── Reduced motion ─────────────────────────────────── */

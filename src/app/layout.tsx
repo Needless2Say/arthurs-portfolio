@@ -7,6 +7,7 @@ import StarField from "@/components/ui/StarField";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import KonamiEasterEgg from "@/components/ui/KonamiEasterEgg";
+import { OG_IMAGE } from "@/constants/seo";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -26,8 +27,18 @@ export const viewport: Viewport = {
 
 const BASE_URL = "https://needless2say.github.io/arthurs-portfolio";
 
+/*
+  metadataBase is the ORIGIN only, deliberately. Next prepends the configured
+  basePath to generated metadata assets, so pointing metadataBase at the full
+  BASE_URL produced /arthurs-portfolio/arthurs-portfolio/opengraph-image, which
+  404s and leaves every share card blank. Absolute URLs below pass through
+  untouched, so canonicals are unaffected.
+*/
+const ORIGIN = "https://needless2say.github.io";
+
+
 export const metadata: Metadata = {
-	metadataBase: new URL(BASE_URL),
+	metadataBase: new URL(ORIGIN),
 	title: {
 		default: "Arthur Krieger | Software Engineer & KriegerDataForge",
 		template: "%s | Arthur Krieger",
@@ -76,12 +87,14 @@ export const metadata: Metadata = {
 		title: "Arthur Krieger | Software Engineer & KriegerDataForge",
 		description:
 			"Software/Platform Engineer at Charles Schwab. CS + Data Science, University of Michigan 2025. Founder of KriegerDataForge — building data pipelines, full-stack apps, ML systems, and fitness technology.",
+		images: [OG_IMAGE],
 	},
 	twitter: {
 		card: "summary_large_image",
 		title: "Arthur Krieger | Software Engineer & KriegerDataForge",
 		description:
 			"Software/Platform Engineer at Charles Schwab. CS + Data Science, UMich 2025. Founder of KriegerDataForge. Building in Chicago, IL.",
+		images: [OG_IMAGE],
 	},
 	alternates: {
 		canonical: BASE_URL,
@@ -122,7 +135,13 @@ export default function RootLayout({
 						"default-src 'self'",
 						"base-uri 'self'",
 						"object-src 'none'",
-						"frame-ancestors 'none'",
+						/*
+						  frame-ancestors is deliberately NOT here. The spec says a
+						  user agent must ignore it when it arrives via <meta>, so it
+						  bought nothing and logged a CSP error into the console on
+						  every single page load. Clickjacking protection on this host
+						  needs a real HTTP header, which GitHub Pages cannot send.
+						*/
 						"frame-src https://www.youtube.com https://www.youtube-nocookie.com",
 						"img-src 'self' data: https:",
 						"media-src 'self'",
@@ -139,35 +158,76 @@ export default function RootLayout({
 					type="application/ld+json"
 					dangerouslySetInnerHTML={{
 						__html: JSON.stringify([
+							/*
+							  The three nodes are joined by @id rather than repeating
+							  "Arthur Krieger" as loose strings. That is what lets a
+							  search engine treat the person, the site and this page
+							  as one entity instead of three unrelated mentions, which
+							  is the whole game when the target query is a name.
+							*/
 							{
 								"@context": "https://schema.org",
 								"@type": "Person",
+								"@id": `${BASE_URL}/#arthur-krieger`,
 								name: "Arthur Krieger",
+								givenName: "Arthur",
+								familyName: "Krieger",
 								jobTitle: "Software/Platform Engineer",
-								worksFor: { "@type": "Organization", name: "Charles Schwab" },
-								alumniOf: { "@type": "EducationalOrganization", name: "University of Michigan" },
+								description:
+									"Software and platform engineer at Charles Schwab, working on internal data platform and cloud infrastructure. Computer Science and Data Science graduate of the University of Michigan. Creator of KriegerDataForge.",
+								image: `${BASE_URL}/og.png`,
+								worksFor: {
+									"@type": "Organization",
+									name: "Charles Schwab",
+									url: "https://www.schwab.com",
+								},
+								alumniOf: {
+									"@type": "CollegeOrUniversity",
+									name: "University of Michigan",
+									url: "https://umich.edu",
+								},
 								url: BASE_URL,
+								mainEntityOfPage: { "@id": `${BASE_URL}/#webpage` },
 								email: "kriegear@umich.edu",
 								address: { "@type": "PostalAddress", addressLocality: "Chicago", addressRegion: "IL", addressCountry: "US" },
+								// sameAs is the strongest signal tying this site to the
+								// profiles that already rank for the name.
 								sameAs: [
 									"https://www.linkedin.com/in/arthur-krieger-3b986220a/",
 									"https://github.com/Needless2Say",
 								],
 								knowsAbout: [
-									"Software Engineering", "Data Engineering", "Machine Learning",
-									"Python", "Next.js", "TypeScript", "React", "Snowflake",
+									"Software Engineering", "Data Engineering", "Platform Engineering",
+									"Machine Learning", "Python", "Next.js", "TypeScript", "React",
+									"Snowflake", "Google Cloud Platform", "Terraform",
 									"Data Pipelines", "Full Stack Development", "Fitness Technology",
 								],
-								founder: { "@type": "Organization", name: "KriegerDataForge" },
+								founder: {
+									"@type": "Organization",
+									name: "KriegerDataForge",
+									url: BASE_URL,
+								},
 							},
 							{
 								"@context": "https://schema.org",
 								"@type": "WebSite",
+								"@id": `${BASE_URL}/#website`,
 								name: "Arthur Krieger | KriegerDataForge",
+								alternateName: ["Arthur Krieger Portfolio", "Arthur's Portfolio", "Arthur Krieger's Portfolio"],
 								url: BASE_URL,
+								inLanguage: "en-US",
 								description: "Portfolio of Arthur Krieger — Software/Platform Engineer, KriegerDataForge founder, and builder of full-stack apps, data pipelines, and fitness technology.",
-								author: { "@type": "Person", name: "Arthur Krieger" },
+								author: { "@id": `${BASE_URL}/#arthur-krieger` },
+								publisher: { "@id": `${BASE_URL}/#arthur-krieger` },
 							},
+							/*
+							  ProfilePage is NOT declared here. This block renders into
+							  every page's head, and a ProfilePage node claiming the
+							  homepage URL would then be repeated on /projects, /resume
+							  and the rest, each asserting it is the homepage. It lives
+							  on the homepage alone, in app/page.tsx, and references
+							  these two nodes by @id.
+							*/
 						]),
 					}}
 				/>
