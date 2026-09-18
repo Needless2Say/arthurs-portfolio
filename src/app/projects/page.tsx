@@ -7,6 +7,7 @@ import HudFrame from "@/components/ui/HudFrame";
 import ProjectStatusBadge from "@/components/ui/ProjectStatusBadge";
 import { PROJECTS } from "@/constants/projects";
 import type { Project, ProjectCategory } from "@/types/portfolio";
+import { OG_IMAGE } from "@/constants/seo";
 
 export const metadata: Metadata = {
 	title: "Projects",
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
 		description:
 			"Professional data platform engineering, plus a personal platform with its own OIDC identity provider, shared Python SDK, Terraform control plane, e-commerce storefront, and nutrition tracker.",
 		url: "https://needless2say.github.io/arthurs-portfolio/projects",
+		images: [OG_IMAGE],
 	},
 };
 
@@ -105,7 +107,7 @@ function FeaturedProject({ project }: { project: Project }) {
 							href={project.links.github}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors font-mono"
+							className="tap-pad inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors font-mono"
 						>
 							↗ View on GitHub
 						</a>

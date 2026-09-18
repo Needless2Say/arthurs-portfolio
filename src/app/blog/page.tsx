@@ -3,17 +3,26 @@ import Card from "@/components/ui/Card";
 import TechBadge from "@/components/ui/TechBadge";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { BLOG_POSTS } from "@/constants/blog";
+import { OG_IMAGE } from "@/constants/seo";
 
 export const metadata: Metadata = {
 	title: "Blog",
 	description:
 		"Technical writing by Arthur Krieger — thoughts on software engineering, data pipelines, machine learning, fitness technology, and building KriegerDataForge.",
 	alternates: { canonical: "https://needless2say.github.io/arthurs-portfolio/blog" },
+	/*
+	  While there are no posts this page is empty, and an empty indexed page
+	  drags on the quality signal for the whole site. follow stays true so the
+	  nav links still pass through. sitemap.ts drops the route under the same
+	  condition, and both flip back the moment a post is added.
+	*/
+	robots: BLOG_POSTS.length ? { index: true, follow: true } : { index: false, follow: true },
 	openGraph: {
 		title: "Blog | Arthur Krieger & KriegerDataForge",
 		description:
 			"Software engineering, data, ML, fitness technology, and lessons from building KriegerDataForge — by Arthur Krieger.",
 		url: "https://needless2say.github.io/arthurs-portfolio/blog",
+		images: [OG_IMAGE],
 	},
 };
 
@@ -22,6 +31,7 @@ export default function Blog() {
 		<div className="min-h-screen pt-24 pb-16 px-4">
 			<div className="max-w-3xl mx-auto">
 				<SectionHeader
+					as="h1"
 					title="Blog"
 					subtitle="Thoughts on code, data, and building things."
 				/>

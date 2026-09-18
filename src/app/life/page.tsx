@@ -4,6 +4,7 @@ import Card from "@/components/ui/Card";
 import Reveal from "@/components/ui/Reveal";
 import ClipSlideshow from "@/components/ui/ClipSlideshow";
 import { getClips, getClipSetName } from "@/utils/clips";
+import { OG_IMAGE } from "@/constants/seo";
 
 export const metadata: Metadata = {
 	title: "Life",
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 		title: "Life | Arthur Krieger",
 		description: "Gaming, running half marathons at 4:30 AM, biking the Chicago Lakefront Trail, and fine-tuning ML models for fun.",
 		url: "https://needless2say.github.io/arthurs-portfolio/life",
+		images: [OG_IMAGE],
 	},
 };
 

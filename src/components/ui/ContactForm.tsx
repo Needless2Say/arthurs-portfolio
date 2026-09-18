@@ -112,7 +112,7 @@ export default function ContactForm() {
 						type="text"
 						required
 						placeholder="Your name"
-						className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-blue-500/60 focus:shadow-[0_0_12px_rgba(37,99,235,0.2)] transition-all duration-200"
+						className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-blue-500/60 focus:shadow-[0_0_12px_rgba(37,99,235,0.2)] transition-all duration-200"
 					/>
 				</div>
 				<div>
@@ -125,7 +125,7 @@ export default function ContactForm() {
 						type="email"
 						required
 						placeholder="your@email.com"
-						className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-blue-500/60 focus:shadow-[0_0_12px_rgba(37,99,235,0.2)] transition-all duration-200"
+						className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-blue-500/60 focus:shadow-[0_0_12px_rgba(37,99,235,0.2)] transition-all duration-200"
 					/>
 				</div>
 			</div>
@@ -141,7 +141,7 @@ export default function ContactForm() {
 					type="text"
 					required
 					placeholder="What's this about?"
-					className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-blue-500/60 focus:shadow-[0_0_12px_rgba(37,99,235,0.2)] transition-all duration-200"
+					className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-blue-500/60 focus:shadow-[0_0_12px_rgba(37,99,235,0.2)] transition-all duration-200"
 				/>
 			</div>
 
@@ -156,7 +156,7 @@ export default function ContactForm() {
 					required
 					rows={5}
 					placeholder="Tell me what's on your mind..."
-					className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-blue-500/60 focus:shadow-[0_0_12px_rgba(37,99,235,0.2)] transition-all duration-200 resize-none"
+					className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-blue-500/60 focus:shadow-[0_0_12px_rgba(37,99,235,0.2)] transition-all duration-200 resize-none"
 				/>
 			</div>
 
