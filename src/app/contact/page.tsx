@@ -5,6 +5,7 @@ import CopyButton from "@/components/ui/CopyButton";
 import Reveal from "@/components/ui/Reveal";
 import ContactForm from "@/components/ui/ContactForm";
 import { PERSONAL_INFO } from "@/constants/personal-info";
+import { OG_IMAGE } from "@/constants/seo";
 
 export const metadata: Metadata = {
 	title: "Contact",
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
 		description:
 			"Reach out to Arthur Krieger — Software Engineer, data builder, KriegerDataForge founder. Open to new opportunities and collaborations.",
 		url: "https://needless2say.github.io/arthurs-portfolio/contact",
+		images: [OG_IMAGE],
 	},
 };
 
@@ -60,6 +62,7 @@ export default function Contact() {
 			<div className="max-w-2xl mx-auto">
 				<Reveal>
 					<SectionHeader
+						as="h1"
 						title="Let's Connect"
 						subtitle="I'm always open to new opportunities and conversations."
 						align="center"
@@ -87,7 +90,7 @@ export default function Contact() {
 										href={contact.href}
 										target={contact.copyable ? undefined : "_blank"}
 										rel={contact.copyable ? undefined : "noopener noreferrer"}
-										className="text-sm text-slate-400 hover:text-white transition-colors font-mono"
+										className="tap-pad text-sm text-slate-400 hover:text-white transition-colors font-mono"
 									>
 										{contact.copyable ? "Send email →" : "Open →"}
 									</Link>

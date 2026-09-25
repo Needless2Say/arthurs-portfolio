@@ -14,7 +14,7 @@ export default function CopyButton({ text }: { text: string }) {
 	return (
 		<button
 			onClick={copy}
-			className="text-sm text-slate-500 hover:text-blue-400 transition-colors font-mono"
+			className="tap-pad text-sm text-slate-500 hover:text-blue-400 transition-colors font-mono"
 		>
 			{copied ? "✓ Copied" : "Copy"}
 		</button>

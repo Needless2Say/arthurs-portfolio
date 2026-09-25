@@ -6,6 +6,7 @@ import Reveal from "@/components/ui/Reveal";
 import { PERSONAL_INFO, EDUCATION, EXPERIENCE, CERTIFICATIONS, SPEAKING } from "@/constants/personal-info";
 import { SKILL_GROUPS } from "@/constants/skills";
 import { PROJECTS } from "@/constants/projects";
+import { OG_IMAGE } from "@/constants/seo";
 
 export const metadata: Metadata = {
 	title: "Resume",
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
 		description:
 			"Software/Platform Engineer at Charles Schwab. UMich CS + Data Science 2025. Experience in data pipelines, DevOps, dashboards, and full-stack development.",
 		url: "https://needless2say.github.io/arthurs-portfolio/resume",
+		images: [OG_IMAGE],
 	},
 };
 
@@ -34,7 +36,8 @@ export default function Resume() {
 					<a
 						href={PERSONAL_INFO.resumePdf}
 						download="Arthur_Krieger_Resume.pdf"
-						className="flex-shrink-0 ml-4 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold transition-all duration-300 hover:shadow-[0_0_20px_rgba(37,99,235,0.4)]"
+						/* py-3 clears 44px. At py-2 this measured 36 and was fiddly on a phone. */
+						className="flex-shrink-0 ml-4 px-4 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold transition-all duration-300 hover:shadow-[0_0_20px_rgba(37,99,235,0.4)]"
 					>
 						Download PDF
 					</a>

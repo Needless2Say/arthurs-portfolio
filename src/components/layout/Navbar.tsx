@@ -50,6 +50,13 @@ export default function Navbar() {
 				<Link
 					key={link.name}
 					href={link.path}
+					/*
+					  Next builds the root route's RSC prefetch as "<basePath>.txt"
+					  instead of "<basePath>/index.txt", so hovering Home fetched
+					  /arthurs-portfolio.txt and 404d, on GitHub Pages as well as
+					  locally. Navigation still works, only the prefetch is skipped.
+					*/
+					prefetch={link.path === "/" ? false : undefined}
 					className={cn(
 						"relative px-4 py-1.5 text-sm font-semibold rounded-full select-none",
 						"transition-all duration-200 ease-out",
@@ -128,9 +135,12 @@ export default function Navbar() {
 							<Link
 								key={link.name}
 								href={link.path}
+								prefetch={link.path === "/" ? false : undefined}
 								onClick={() => setOpen(false)}
 								className={cn(
-									"block px-4 py-2.5 text-sm font-semibold select-none",
+									// py-3 rather than py-2.5 so the row clears 44px, the
+									// minimum comfortable touch target. It measured 40.
+									"block px-4 py-3 text-sm font-semibold select-none",
 									"transition-colors duration-200 ease-out active:scale-95",
 									"animate-nav-item",
 									isActive(link.path)

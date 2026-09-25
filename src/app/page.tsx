@@ -9,6 +9,7 @@ import HomeContentReveal from "@/components/ui/HomeContentReveal";
 import MissionTimeline from "@/components/ui/MissionTimeline";
 import SocialLinks from "@/components/ui/SocialLinks";
 import mission_chicago from "@/../public/mission_control_chicago.jpg";
+import { OG_IMAGE, SITE_URL } from "@/constants/seo";
 
 export const metadata: Metadata = {
 	title: "Arthur Krieger | Software Engineer & KriegerDataForge Founder",
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
 		description:
 			"Software/Platform Engineer at Charles Schwab. Creator of KriegerDataForge, a personal platform for shipping his own apps faster, with its own OIDC identity provider, shared Python SDK, and Terraform control plane. Based in Chicago, IL.",
 		url: "https://needless2say.github.io/arthurs-portfolio",
+		images: [OG_IMAGE],
 	},
 };
 
@@ -33,6 +35,31 @@ const STATS = [
 export default function Home() {
 	return (
 		<>
+		{/*
+		  ProfilePage, the type Google documents for a page that is about one
+		  person. It sits on the homepage alone rather than in the root layout,
+		  because the layout renders into every page and each copy would claim to
+		  be this URL. Person and WebSite are declared there and joined here by
+		  @id, so the three read as one entity.
+		*/}
+		<script
+			type="application/ld+json"
+			dangerouslySetInnerHTML={{
+				__html: JSON.stringify({
+					"@context": "https://schema.org",
+					"@type": "ProfilePage",
+					"@id": `${SITE_URL}/#webpage`,
+					url: SITE_URL,
+					name: "Arthur Krieger | Software Engineer & KriegerDataForge Founder",
+					isPartOf: { "@id": `${SITE_URL}/#website` },
+					about: { "@id": `${SITE_URL}/#arthur-krieger` },
+					mainEntity: { "@id": `${SITE_URL}/#arthur-krieger` },
+					primaryImageOfPage: `${SITE_URL}/og.png`,
+					inLanguage: "en-US",
+				}),
+			}}
+		/>
+
 		<HomeLoader />
 
 		<HomeContentReveal>
@@ -47,18 +74,28 @@ export default function Home() {
 					Ann Arbor → Chicago
 				</p>
 
-				{/* Name */}
-				<h1
-					className="text-6xl sm:text-7xl md:text-8xl font-bold text-white glow-text leading-tight mb-2 pb-2 animate-fade-in-up"
-					style={{ animationDelay: "0.1s" }}
-				>
-					Arthur
-				</h1>
-				<h1
-					className="text-6xl sm:text-7xl md:text-8xl font-bold name-gradient-text leading-tight mb-5 pb-2 animate-fade-in-up"
-					style={{ animationDelay: "0.2s" }}
-				>
-					Krieger
+				{/*
+				  One h1 holding the whole name. It used to be two, "Arthur" and
+				  "Krieger", which meant the page never contained the full name as a
+				  single string for a crawler or a screen reader, on a site whose
+				  whole job is to rank for that name. The spans are block level so
+				  the two lines look exactly as before, and the {" "} between them
+				  is what keeps the text content "Arthur Krieger" and not
+				  "ArthurKrieger".
+				*/}
+				<h1 className="text-6xl sm:text-7xl md:text-8xl font-bold leading-tight mb-5">
+					<span
+						className="block text-white glow-text mb-2 pb-2 animate-fade-in-up"
+						style={{ animationDelay: "0.1s" }}
+					>
+						Arthur
+					</span>{" "}
+					<span
+						className="block name-gradient-text pb-2 animate-fade-in-up"
+						style={{ animationDelay: "0.2s" }}
+					>
+						Krieger
+					</span>
 				</h1>
 
 				{/* Typewriter role */}

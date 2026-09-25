@@ -241,7 +241,7 @@ export default function ClipSlideshow({ clips, className }: ClipSlideshowProps) 
 		setControlsVisible(true);
 		if (hideTimer.current) window.clearTimeout(hideTimer.current);
 		if (autoHide) {
-			hideTimer.current = window.setTimeout(() => setControlsVisible(false), 3200);
+			hideTimer.current = window.setTimeout(() => setControlsVisible(false), 4500);
 		}
 	};
 
@@ -259,8 +259,20 @@ export default function ClipSlideshow({ clips, className }: ClipSlideshowProps) 
 			hideControls();
 			return;
 		}
-		// Touch or pen tap on the frame itself, not on a button.
 		if (e.type === "pointerdown" && e.pointerType !== "mouse") {
+			/*
+			  A tap on a control is not a tap on the clip. pointerdown bubbles up
+			  from the button, and without this the frame treated it as "hide the
+			  controls", which set pointer-events to none before the click landed,
+			  so the button could never actually be pressed on a phone. Keep them
+			  up instead and restart the timer, since someone using a control is
+			  likely to want another one.
+			*/
+			if ((e.target as HTMLElement).closest("button")) {
+				showControls(true);
+				return;
+			}
+
 			if (controlsVisible) hideControls();
 			else showControls(true);
 		}
@@ -345,7 +357,8 @@ export default function ClipSlideshow({ clips, className }: ClipSlideshowProps) 
 					onClick={toggleFullscreen}
 					aria-label={fullscreen ? "Exit full screen" : "Enter full screen"}
 					className={cn(
-						"absolute top-3 right-3 rounded-full border border-white/15 bg-slate-950/80 p-2",
+						"absolute top-3 right-3 flex h-11 w-11 items-center justify-center",
+						"rounded-full border border-white/15 bg-slate-950/80",
 						"text-slate-300 backdrop-blur transition-all duration-200",
 						"hover:border-blue-500/40 hover:text-white",
 						"focus-visible:opacity-100 focus-visible:pointer-events-auto",
@@ -368,7 +381,7 @@ export default function ClipSlideshow({ clips, className }: ClipSlideshowProps) 
 						<button
 							type="button"
 							onClick={manualStart}
-							className="rounded-full border border-white/15 bg-slate-950/80 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-slate-300 backdrop-blur transition-colors hover:border-blue-500/40 hover:text-white"
+							className="flex h-11 items-center rounded-full border border-white/15 bg-slate-950/80 px-4 font-mono text-[10px] uppercase tracking-widest text-slate-300 backdrop-blur transition-colors hover:border-blue-500/40 hover:text-white"
 						>
 							Play
 						</button>
@@ -382,7 +395,8 @@ export default function ClipSlideshow({ clips, className }: ClipSlideshowProps) 
 							aria-pressed={!muted}
 							aria-label={muted ? "Turn sound on" : "Turn sound off"}
 							className={cn(
-								"rounded-full border border-white/15 bg-slate-950/80 p-2",
+								"flex h-11 w-11 items-center justify-center",
+								"rounded-full border border-white/15 bg-slate-950/80",
 								"text-slate-300 backdrop-blur transition-all duration-200",
 								"hover:border-blue-500/40 hover:text-white",
 								"focus-visible:opacity-100 focus-visible:pointer-events-auto",

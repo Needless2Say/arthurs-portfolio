@@ -9,6 +9,7 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import TechBadge from "@/components/ui/TechBadge";
 import Card from "@/components/ui/Card";
 import Reveal from "@/components/ui/Reveal";
+import { OG_IMAGE } from "@/constants/seo";
 
 export const metadata: Metadata = {
 	title: "About",
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
 		description:
 			"Software/Platform Engineer at Charles Schwab. UMich CS + Data Science 2025. Creator of KriegerDataForge, a personal platform for shipping his own apps faster. Experience at Schwab, Revantage (Blackstone), and Wayne State University research.",
 		url: "https://needless2say.github.io/arthurs-portfolio/about",
+		images: [OG_IMAGE],
 	},
 };
 
@@ -264,7 +266,7 @@ export default async function About() {
 									href={PERSONAL_INFO.links.github}
 									target="_blank"
 									rel="noopener noreferrer"
-									className="text-sm text-slate-400 hover:text-white transition-colors font-mono"
+									className="tap-pad text-sm text-slate-400 hover:text-white transition-colors font-mono"
 								>
 									View Profile →
 								</a>

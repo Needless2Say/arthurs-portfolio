@@ -29,7 +29,7 @@ export default function Footer() {
 						href={PERSONAL_INFO.links.github}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="text-slate-500 hover:text-white transition-colors text-sm"
+						className="tap-pad text-slate-500 hover:text-white transition-colors text-sm"
 					>
 						GitHub
 					</Link>
@@ -38,7 +38,7 @@ export default function Footer() {
 						href={PERSONAL_INFO.links.linkedin}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="text-slate-500 hover:text-white transition-colors text-sm"
+						className="tap-pad text-slate-500 hover:text-white transition-colors text-sm"
 					>
 						LinkedIn
 					</Link>
@@ -47,7 +47,7 @@ export default function Footer() {
 						href={PERSONAL_INFO.links.instagram}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="text-slate-500 hover:text-white transition-colors text-sm"
+						className="tap-pad text-slate-500 hover:text-white transition-colors text-sm"
 					>
 						Instagram
 					</Link>
