@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ROUTES } from "@/constants/routes";
@@ -15,12 +15,12 @@ export const metadata: Metadata = {
 	title: "Arthur Krieger | Software Engineer & KriegerDataForge Founder",
 	description:
 		"Arthur Krieger — Software/Platform Engineer at Charles Schwab, CS + Data Science from the University of Michigan (2025). Creator of KriegerDataForge, a personal platform he uses to ship his own apps faster, with its own OAuth 2.0 / OIDC identity provider, shared Python SDK, and Terraform control plane. Building from Chicago, IL. Open to new opportunities.",
-	alternates: { canonical: "https://needless2say.github.io/arthurs-portfolio" },
+	alternates: { canonical: SITE_URL },
 	openGraph: {
 		title: "Arthur Krieger | Software Engineer & KriegerDataForge Founder",
 		description:
 			"Software/Platform Engineer at Charles Schwab. Creator of KriegerDataForge, a personal platform for shipping his own apps faster, with its own OIDC identity provider, shared Python SDK, and Terraform control plane. Based in Chicago, IL.",
-		url: "https://needless2say.github.io/arthurs-portfolio",
+		url: SITE_URL,
 		images: [OG_IMAGE],
 	},
 };
