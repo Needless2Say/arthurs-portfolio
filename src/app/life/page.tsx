@@ -5,6 +5,7 @@ import Reveal from "@/components/ui/Reveal";
 import ClipSlideshow from "@/components/ui/ClipSlideshow";
 import { getClips, getClipSetName } from "@/utils/clips";
 import { OG_IMAGE } from "@/constants/seo";
+import { PERSONAL_INFO } from "@/constants/personal-info";
 
 export const metadata: Metadata = {
 	title: "Life",
@@ -44,10 +45,11 @@ const EXERCISE = [
 	},
 ];
 
-const FUN_CODING = [
+const FUN_CODING: { label: string; detail: string; href?: string }[] = [
 	{
 		label: "KriegerDataForge",
 		detail: "My personal platform for data pipelines, full stack experiments, and anything I want to build without constraints.",
+		href: PERSONAL_INFO.links.kriegerdataforge,
 	},
 	{
 		label: "ML & AI",
@@ -127,6 +129,16 @@ export default function Life() {
 										{item.label}
 									</p>
 									<p className="text-slate-300 text-sm leading-relaxed">{item.detail}</p>
+									{item.href && (
+										<a
+											href={item.href}
+											target="_blank"
+											rel="noopener noreferrer"
+											className="tap-pad inline-block mt-4 text-sm text-yellow-300/90 hover:text-yellow-200 transition-colors font-mono"
+										>
+											Visit the site →
+										</a>
+									)}
 								</Card>
 							</Reveal>
 						))}

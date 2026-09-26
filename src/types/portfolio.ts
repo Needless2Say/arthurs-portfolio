@@ -62,6 +62,8 @@ export interface Project {
 	architecture?: ArchitectureTier[];
 	links: {
 		github?: string;
+		/** The project's own website. */
+		site?: string;
 		youtube?: string[];
 	};
 	featured?: boolean;

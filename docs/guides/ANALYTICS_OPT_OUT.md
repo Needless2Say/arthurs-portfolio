@@ -34,4 +34,4 @@ Reload the page. GA resumes normally.
 - `localStorage` persists across browser closes and reboots. You only need to run this once per browser profile.
 - Each browser (Chrome, Firefox, Edge, Safari) has its own separate `localStorage`. Run the opt out command in each browser you use to visit your site.
 - **Incognito / private windows** do not share `localStorage` with the normal profile, so GA will fire in incognito unless you set the flag there too.
-- The flag is stored per **origin** (domain), so it only applies to your portfolio domain.
+- The flag is stored per **origin** (scheme and host), not per path. The KriegerDataForge portfolio is served from the same origin, `https://needless2say.github.io`, and reads the same `ga-opt-out` key, so setting the flag on either site opts that browser out of both. Keep the key the same in both repos.

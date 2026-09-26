@@ -1,4 +1,5 @@
 import type { Project } from "@/types/portfolio";
+import { PERSONAL_INFO } from "@/constants/personal-info";
 
 export const PROJECTS: Project[] = [
 	{
@@ -50,6 +51,7 @@ export const PROJECTS: Project[] = [
 		],
 		links: {
 			github: "https://github.com/Needless2Say",
+			site: PERSONAL_INFO.links.kriegerdataforge,
 			youtube: [
 				"https://www.youtube.com/embed/emxHI2ybPJ4?si=MjbDHFItsyvVzN-y",
 				"https://www.youtube.com/embed/j3F10BulHSs?si=Dq08f0ymaPxngzs5",

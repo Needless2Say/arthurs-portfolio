@@ -102,15 +102,29 @@ function FeaturedProject({ project }: { project: Project }) {
 						</div>
 					)}
 
-					{project.links.github && (
-						<a
-							href={project.links.github}
-							target="_blank"
-							rel="noopener noreferrer"
-							className="tap-pad inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors font-mono"
-						>
-							↗ View on GitHub
-						</a>
+					{(project.links.site || project.links.github) && (
+						<div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+							{project.links.site && (
+								<a
+									href={project.links.site}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="tap-pad inline-flex items-center gap-1.5 text-sm text-yellow-300/90 hover:text-yellow-200 transition-colors font-mono"
+								>
+									↗ Visit {project.title}
+								</a>
+							)}
+							{project.links.github && (
+								<a
+									href={project.links.github}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="tap-pad inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors font-mono"
+								>
+									↗ View on GitHub
+								</a>
+							)}
+						</div>
 					)}
 				</Card>
 			</HudFrame>
