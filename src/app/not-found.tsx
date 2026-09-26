@@ -1,5 +1,6 @@
 ﻿import Link from "next/link";
 import type { Metadata } from "next";
+import { ROUTES } from "@/constants/routes";
 
 export const metadata: Metadata = {
 	title: "404 — Lost in the Void",
@@ -72,13 +73,13 @@ export default function NotFound() {
 					style={{ animationDelay: "0.5s" }}
 				>
 					<Link
-						href="/"
+						href={ROUTES.HOME}
 						className="px-7 py-3 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all duration-300 hover:shadow-[0_0_24px_rgba(37,99,235,0.5)] w-full sm:w-auto text-center text-sm"
 					>
 						↩ Return to Home Base
 					</Link>
 					<Link
-						href="/projects"
+						href={ROUTES.PROJECTS}
 						className="px-7 py-3 rounded-full border border-white/15 hover:border-white/35 text-slate-300 hover:text-white font-semibold transition-all duration-300 w-full sm:w-auto text-center text-sm"
 					>
 						Browse Projects
