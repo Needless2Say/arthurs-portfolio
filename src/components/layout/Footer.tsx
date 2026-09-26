@@ -24,7 +24,7 @@ export default function Footer() {
 				<span className="text-slate-600 text-sm font-mono">
 					© {new Date().getFullYear()} Arthur Krieger
 				</span>
-				<div className="flex items-center gap-6">
+				<div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
 					<Link
 						href={PERSONAL_INFO.links.github}
 						target="_blank"
@@ -50,6 +50,15 @@ export default function Footer() {
 						className="tap-pad text-slate-500 hover:text-white transition-colors text-sm"
 					>
 						Instagram
+					</Link>
+
+					<Link
+						href={PERSONAL_INFO.links.kriegerdataforge}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="tap-pad text-slate-500 hover:text-yellow-300 transition-colors text-sm"
+					>
+						KriegerDataForge
 					</Link>
 				</div>
 			</div>

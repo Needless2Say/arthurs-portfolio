@@ -262,14 +262,24 @@ export default async function About() {
 									</div>
 								)}
 
-								<a
-									href={PERSONAL_INFO.links.github}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="tap-pad text-sm text-slate-400 hover:text-white transition-colors font-mono"
-								>
-									View Profile →
-								</a>
+								<div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+									<a
+										href={PERSONAL_INFO.links.github}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="tap-pad text-sm text-slate-400 hover:text-white transition-colors font-mono"
+									>
+										View Profile →
+									</a>
+									<a
+										href={PERSONAL_INFO.links.kriegerdataforge}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="tap-pad text-sm text-yellow-300/90 hover:text-yellow-200 transition-colors font-mono"
+									>
+										Visit KriegerDataForge →
+									</a>
+								</div>
 							</div>
 						</div>
 					</Reveal>

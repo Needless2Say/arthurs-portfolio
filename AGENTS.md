@@ -29,7 +29,7 @@ is "tasteful, fast, and correct," not "infinitely extensible."
 - **UI.** React 19, TailwindCSS v4
 - **Language.** TypeScript (strict, no `any`)
 - **Contact.** `@emailjs/browser`. Client side email, no backend
-- **Analytics.** Google Analytics (GA4) with a `localStorage` opt out flag
+- **Analytics.** Google Analytics (GA4) with a `localStorage` opt out flag. The KriegerDataForge portfolio reads the same key from the same origin, so one flag covers both sites, keep the two in step
 - **Deploy.** GitHub Pages via GitHub Actions, **manual, gated dispatch** that builds from the release tag. Merges never auto deploy (see [`docs/guides/DEPLOYMENT.md`](docs/guides/DEPLOYMENT.md))
 - **Tooling.** ESLint (`eslint-config-next`), Makefile, Docker (dev), Python venv only for version bump scripts
 

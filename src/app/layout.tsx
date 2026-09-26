@@ -8,6 +8,7 @@ import ScrollProgress from "@/components/ui/ScrollProgress";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import KonamiEasterEgg from "@/components/ui/KonamiEasterEgg";
 import { OG_IMAGE } from "@/constants/seo";
+import { PERSONAL_INFO } from "@/constants/personal-info";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -205,7 +206,7 @@ export default function RootLayout({
 								founder: {
 									"@type": "Organization",
 									name: "KriegerDataForge",
-									url: BASE_URL,
+									url: PERSONAL_INFO.links.kriegerdataforge,
 								},
 							},
 							{

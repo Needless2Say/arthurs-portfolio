@@ -171,6 +171,7 @@ export default function Home() {
 					<SocialLinks
 						github={PERSONAL_INFO.links.github}
 						linkedin={PERSONAL_INFO.links.linkedin}
+						kriegerdataforge={PERSONAL_INFO.links.kriegerdataforge}
 						email={PERSONAL_INFO.email}
 					/>
 				</div>
