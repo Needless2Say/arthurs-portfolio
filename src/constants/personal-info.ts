@@ -10,7 +10,7 @@ export const PERSONAL_INFO = {
 		linkedin: "https://www.linkedin.com/in/arthur-krieger-3b986220a/",
 		github: "https://github.com/Needless2Say",
 		instagram: "https://www.instagram.com/needless2say_dbfan/",
-		kriegerdataforge: "https://needless2say.github.io/kriegerdataforge-portfolio",
+		kriegerdataforge: "https://kriegerdataforge.com",
 	},
 	bio: "I graduated from the University of Michigan College of Engineering in 2025 with a Bachelor of Science in Computer Science and a minor in Data Science. I currently work as a Software/Platform Engineer at Charles Schwab on the Wealth Asset Management Engineering Team, building dashboards, GitHub devops, and data pipelines. Outside of work I design and build KriegerDataForge, a personal platform spanning 18 repositories that I use to ship my own apps faster, with its own OAuth 2.0 and OIDC identity provider, a shared Python SDK every app backend installs, a Terraform control plane, and the apps built on top of it.",
 	summary:

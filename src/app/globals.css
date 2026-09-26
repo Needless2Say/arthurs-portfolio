@@ -279,6 +279,18 @@ body {
 .animate-nova-flash          { animation: nova-flash 0.68s ease-out forwards; }
 .animate-backdrop-collapse   { animation: backdrop-collapse 0.78s ease-in forwards; }
 
+/* ─── Forge ember glow (KriegerDataForge outbound links) ──── */
+/* Idle animation on purpose, not just on :hover — this is the one link on the
+   site meant to pull the eye toward it without the visitor hovering first. */
+@keyframes ember-glow {
+	0%, 100% { box-shadow: 0 0 8px rgba(245, 158, 11, 0.25), 0 0 0px rgba(249, 115, 22, 0); }
+	50%      { box-shadow: 0 0 22px rgba(245, 158, 11, 0.55), 0 0 44px rgba(249, 115, 22, 0.22); }
+}
+
+.animate-ember-glow {
+	animation: ember-glow 2.6s ease-in-out infinite;
+}
+
 /* ─── Static blue→yellow gradient text (name) ───────── */
 .name-gradient-text {
 	background: linear-gradient(to right, #1e3a8a 25%, #facc15 75%);
@@ -348,6 +360,10 @@ body {
 		opacity: 1;
 		transform: none;
 		filter: none;
+	}
+	.animate-ember-glow {
+		animation: none;
+		box-shadow: 0 0 10px rgba(245, 158, 11, 0.25);
 	}
 	.gradient-text {
 		background: #3b82f6;

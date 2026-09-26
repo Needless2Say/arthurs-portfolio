@@ -3,6 +3,7 @@ import Card from "@/components/ui/Card";
 import SectionHeader from "@/components/ui/SectionHeader";
 import TechBadge from "@/components/ui/TechBadge";
 import Reveal from "@/components/ui/Reveal";
+import ForgeLink from "@/components/ui/ForgeLink";
 import { PERSONAL_INFO, EDUCATION, EXPERIENCE, CERTIFICATIONS, SPEAKING } from "@/constants/personal-info";
 import { SKILL_GROUPS } from "@/constants/skills";
 import { PROJECTS } from "@/constants/projects";
@@ -49,7 +50,10 @@ export default function Resume() {
 						<SectionHeader title="Summary" />
 					</Reveal>
 					<Reveal delay={60}>
-						<p className="text-slate-300 leading-relaxed text-base">{PERSONAL_INFO.summary}</p>
+						<p className="text-slate-300 leading-relaxed text-base mb-4">{PERSONAL_INFO.summary}</p>
+						<ForgeLink href={PERSONAL_INFO.links.kriegerdataforge} size="sm">
+							Visit KriegerDataForge
+						</ForgeLink>
 					</Reveal>
 				</section>
 

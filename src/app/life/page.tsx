@@ -3,6 +3,7 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import Card from "@/components/ui/Card";
 import Reveal from "@/components/ui/Reveal";
 import ClipSlideshow from "@/components/ui/ClipSlideshow";
+import ForgeLink from "@/components/ui/ForgeLink";
 import { getClips, getClipSetName } from "@/utils/clips";
 import { OG_IMAGE } from "@/constants/seo";
 import { PERSONAL_INFO } from "@/constants/personal-info";
@@ -130,14 +131,11 @@ export default function Life() {
 									</p>
 									<p className="text-slate-300 text-sm leading-relaxed">{item.detail}</p>
 									{item.href && (
-										<a
-											href={item.href}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="tap-pad inline-block mt-4 text-sm text-yellow-300/90 hover:text-yellow-200 transition-colors font-mono"
-										>
-											Visit the site →
-										</a>
+										<div className="mt-4">
+											<ForgeLink href={item.href}>
+												Visit the site
+											</ForgeLink>
+										</div>
 									)}
 								</Card>
 							</Reveal>
