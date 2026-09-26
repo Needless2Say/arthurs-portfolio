@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PERSONAL_INFO } from "@/constants/personal-info";
+import ForgeLink from "@/components/ui/ForgeLink";
 
 export default function Footer() {
 	return (
@@ -52,14 +53,9 @@ export default function Footer() {
 						Instagram
 					</Link>
 
-					<Link
-						href={PERSONAL_INFO.links.kriegerdataforge}
-						target="_blank"
-						rel="noopener noreferrer"
-						className="tap-pad text-slate-500 hover:text-yellow-300 transition-colors text-sm"
-					>
+					<ForgeLink href={PERSONAL_INFO.links.kriegerdataforge} size="sm">
 						KriegerDataForge
-					</Link>
+					</ForgeLink>
 				</div>
 			</div>
 		</footer>

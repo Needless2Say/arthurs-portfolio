@@ -5,8 +5,10 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import Reveal from "@/components/ui/Reveal";
 import HudFrame from "@/components/ui/HudFrame";
 import ProjectStatusBadge from "@/components/ui/ProjectStatusBadge";
+import ForgeLink from "@/components/ui/ForgeLink";
 import { PROJECTS } from "@/constants/projects";
 import type { Project, ProjectCategory } from "@/types/portfolio";
+import { PERSONAL_INFO } from "@/constants/personal-info";
 import { OG_IMAGE } from "@/constants/seo";
 
 export const metadata: Metadata = {
@@ -105,14 +107,20 @@ function FeaturedProject({ project }: { project: Project }) {
 					{(project.links.site || project.links.github) && (
 						<div className="flex flex-wrap items-center gap-x-6 gap-y-2">
 							{project.links.site && (
-								<a
-									href={project.links.site}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="tap-pad inline-flex items-center gap-1.5 text-sm text-yellow-300/90 hover:text-yellow-200 transition-colors font-mono"
-								>
-									↗ Visit {project.title}
-								</a>
+								project.links.site === PERSONAL_INFO.links.kriegerdataforge ? (
+									<ForgeLink href={project.links.site}>
+										Visit {project.title}
+									</ForgeLink>
+								) : (
+									<a
+										href={project.links.site}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="tap-pad inline-flex items-center gap-1.5 text-sm text-yellow-300/90 hover:text-yellow-200 transition-colors font-mono"
+									>
+										↗ Visit {project.title}
+									</a>
+								)
 							)}
 							{project.links.github && (
 								<a

@@ -81,7 +81,8 @@ export default function SocialLinks({ github, linkedin, kriegerdataforge, email 
 					</span>
 				</a>
 
-				{/* KriegerDataForge, the anvil from its favicon */}
+				{/* KriegerDataForge, the anvil from its favicon. Idle ember glow — not
+				    just on hover — so this one stands out from the row unprompted. */}
 				<a
 					href={kriegerdataforge}
 					target="_blank"
@@ -89,13 +90,13 @@ export default function SocialLinks({ github, linkedin, kriegerdataforge, email 
 					aria-label="KriegerDataForge"
 					className="group relative flex flex-col items-center gap-2"
 				>
-					<div className="relative w-12 h-12 rounded-2xl glass-card border-white/10 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:border-yellow-400/50 group-hover:shadow-[0_0_22px_rgba(250,204,21,0.25)]">
+					<div className="relative w-12 h-12 rounded-2xl glass-card border-amber-400/25 flex items-center justify-center transition-all duration-300 animate-ember-glow group-hover:scale-110 group-hover:border-amber-300/60">
 						<span className="absolute inset-0 rounded-2xl border border-yellow-500/0 group-hover:border-yellow-400/30 transition-all duration-300 scale-100 group-hover:scale-110 opacity-0 group-hover:opacity-100" />
-						<svg className="w-5 h-5 text-slate-400 group-hover:text-yellow-300 transition-colors duration-200" viewBox="3.5 4 56 56" fill="currentColor" aria-hidden="true">
+						<svg className="w-5 h-5 text-amber-400/80 group-hover:text-yellow-300 transition-colors duration-200" viewBox="3.5 4 56 56" fill="currentColor" aria-hidden="true">
 							<path d="M5 18.5C10 16.6 14.5 15 20 15H58V25H47C43.5 25 41 28 41 32C41 36 44.5 39 52 40.5V49H39.5C39.5 46.8 37.5 46 35 46C32.5 46 30.5 46.8 30.5 49H18V40.5C25.5 39 29 36 29 32C29 28 26.5 25 23 25C16 24.5 10 22 5 18.5Z" />
 						</svg>
 					</div>
-					<span className="text-slate-600 group-hover:text-yellow-400 font-mono text-[10px] tracking-widest uppercase transition-colors duration-200">
+					<span className="text-amber-500/70 group-hover:text-yellow-400 font-mono text-[10px] tracking-widest uppercase transition-colors duration-200">
 						KDF
 					</span>
 				</a>

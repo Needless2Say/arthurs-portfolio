@@ -1,4 +1,6 @@
 ﻿import { cn } from "@/utils/cn";
+import ForgeLink from "@/components/ui/ForgeLink";
+import { PERSONAL_INFO } from "@/constants/personal-info";
 
 type PhaseStatus = "complete" | "online" | "standby";
 
@@ -8,6 +10,7 @@ interface Phase {
 	subtitle: string;
 	period: string;
 	status: PhaseStatus;
+	href?: string;
 }
 
 const PHASES: Phase[] = [
@@ -38,6 +41,7 @@ const PHASES: Phase[] = [
 		subtitle: "KriegerDataForge · identity provider, then storefront launch, then the fitness app",
 		period: "2026 →",
 		status: "online",
+		href: PERSONAL_INFO.links.kriegerdataforge,
 	},
 	{
 		id: "05",
@@ -147,6 +151,13 @@ export default function MissionTimeline() {
 									<p className="text-slate-400 text-sm leading-relaxed">
 										{phase.subtitle}
 									</p>
+									{phase.href && (
+										<div className="mt-3">
+											<ForgeLink href={phase.href} size="sm">
+												Visit KriegerDataForge
+											</ForgeLink>
+										</div>
+									)}
 								</div>
 							</div>
 						);
