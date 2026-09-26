@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
-import { NAV_LINKS, ROUTES } from "@/constants/routes";
+import { NAV_LINKS } from "@/constants/routes";
 import { cn } from "@/utils/cn";
 
 // Mirror the home loader's session flag + timing so the navbar stays hidden
@@ -20,7 +20,7 @@ export default function Navbar() {
 	const menuKeyRef = useRef(0);
 
 	useEffect(() => {
-		if (pathname !== ROUTES.HOME || sessionStorage.getItem(LOADER_KEY)) {
+		if (pathname !== "/" || sessionStorage.getItem(LOADER_KEY)) {
 			setHidden(false);
 			return;
 		}
@@ -34,9 +34,8 @@ export default function Navbar() {
 		};
 	}, [pathname]);
 
-	// "/home" and "/resume" are leaf routes; "/resume" is a prefix of
-	// "/resume/print" and should still read as active there.
-	const isActive = (path: string) => pathname.startsWith(path);
+	const isActive = (path: string) =>
+		path === "/" ? pathname === "/" : pathname.startsWith(path);
 
 	return (
 		<nav
@@ -51,6 +50,13 @@ export default function Navbar() {
 				<Link
 					key={link.name}
 					href={link.path}
+					/*
+					  Next builds the root route's RSC prefetch as "<basePath>.txt"
+					  instead of "<basePath>/index.txt", so hovering Home fetched
+					  /arthurs-portfolio.txt and 404d, on GitHub Pages as well as
+					  locally. Navigation still works, only the prefetch is skipped.
+					*/
+					prefetch={link.path === "/" ? false : undefined}
 					className={cn(
 						"relative px-4 py-1.5 text-sm font-semibold rounded-full select-none",
 						"transition-all duration-200 ease-out",
@@ -129,6 +135,7 @@ export default function Navbar() {
 							<Link
 								key={link.name}
 								href={link.path}
+								prefetch={link.path === "/" ? false : undefined}
 								onClick={() => setOpen(false)}
 								className={cn(
 									// py-3 rather than py-2.5 so the row clears 44px, the
