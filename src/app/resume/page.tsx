@@ -12,7 +12,7 @@ import { OG_IMAGE } from "@/constants/seo";
 export const metadata: Metadata = {
 	title: "Resume",
 	description:
-		"Arthur Krieger's resume — Software/Platform Engineer at Charles Schwab, Data Engineer intern at Revantage (Blackstone), UMich CS + Data Science 2025. Skills: Python, TypeScript, React, Next.js, Snowflake, SQL, GCP, Terraform, and more.",
+		"Arthur Krieger's resume. Software/Platform Engineer at Charles Schwab, Data Engineer intern at Revantage (Blackstone), UMich CS + Data Science 2025. Skills include Python, TypeScript, React, Next.js, Snowflake, SQL, GCP, Terraform, and more.",
 	alternates: { canonical: "https://needless2say.github.io/arthurs-portfolio/resume" },
 	openGraph: {
 		title: "Resume | Arthur Krieger",
@@ -271,7 +271,7 @@ export default function Resume() {
 													<div className="glass-card overflow-hidden border-white/5 rounded-xl">
 														<iframe
 															src={`https://www.youtube.com/embed/${video.id}`}
-															title={`${item.title} — ${video.label}`}
+															title={`${item.title}, ${video.label}`}
 															allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 															referrerPolicy="strict-origin-when-cross-origin"
 															allowFullScreen

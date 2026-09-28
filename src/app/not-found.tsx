@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { ROUTES } from "@/constants/routes";
 
 export const metadata: Metadata = {
-	title: "404 — Lost in the Void",
+	title: "404 · Lost in the Void",
 	description: "These coordinates aren't on the map.",
 	robots: { index: false, follow: false },
 };

@@ -37,7 +37,7 @@ export interface Education {
 export type ProjectStatus =
 	| "live"
 	| "pre-launch"
-	| "security-review"
+	| "live-in-development"
 	| "in-development"
 	| "planned";
 

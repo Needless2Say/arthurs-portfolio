@@ -12,9 +12,9 @@ export const PERSONAL_INFO = {
 		instagram: "https://www.instagram.com/needless2say_dbfan/",
 		kriegerdataforge: "https://kriegerdataforge.com",
 	},
-	bio: "I graduated from the University of Michigan College of Engineering in 2025 with a Bachelor of Science in Computer Science and a minor in Data Science. I currently work as a Software/Platform Engineer at Charles Schwab on the Wealth Asset Management Engineering Team, building dashboards, GitHub devops, and data pipelines. Outside of work I design and build KriegerDataForge, a personal platform spanning 18 repositories that I use to ship my own apps faster, with its own OAuth 2.0 and OIDC identity provider, a shared Python SDK every app backend installs, a Terraform control plane, and the apps built on top of it.",
+	bio: "I graduated from the University of Michigan College of Engineering in 2025 with a Bachelor of Science in Computer Science and a minor in Data Science. I work as a Software/Platform Engineer at Charles Schwab on the Wealth Asset Management Engineering Team, building dashboards, GitHub DevOps tooling, and data pipelines. I also design and build KriegerDataForge, a personal platform I use for my own apps. It spans 18 repositories. The apps share single sign on through its OAuth 2.0 and OIDC identity provider, common code lives in shared Python and npm packages, and Terraform and a CI/CD library keep every repository built and deployed the same way.",
 	summary:
-		"Software and platform engineer at Charles Schwab, on a team building the shared infrastructure other engineers build on. My main focus has been the metadata preservation system, which I designed and built end to end so warehouse governance metadata survives schema deployments, along with the Streamlit dashboards and dashboard template the data governance and tenant teams depend on. Outside work I design and operate KriegerDataForge, a personal platform I use to ship my own apps faster, with its own OIDC identity provider, shared SDK, and Terraform control plane. I build systems that are idempotent, observable, and safe to re-run.",
+		"Software and platform engineer at Charles Schwab, on a team that builds shared infrastructure for other engineers. My main focus has been a metadata preservation system I designed and built so warehouse governance metadata survives schema deployments, along with the Streamlit dashboards and dashboard template that the data governance and tenant teams use. I also design and build KriegerDataForge, a personal platform for my own apps, with an OIDC identity provider for single sign on, shared Python and npm packages, and Terraform infrastructure. I try to build systems that are safe to re-run and easy to observe.",
 };
 
 export const EDUCATION: Education[] = [
@@ -55,20 +55,20 @@ export const EXPERIENCE: Experience[] = [
 		location: "Chicago, IL",
 		period: "June 2025 - Present",
 		bullets: [
-			"Architected and implemented a declarative metadata reconciliation system, mid April to end of August 2026, from the first conversation to working end to end in production, eliminating silent loss of Snowflake data governance metadata during schema deployments and cutting recovery of thousands of metadata rows from three to four hours of manual rework to seconds, saving an estimated tens to hundreds of hours of manual management",
-			"Engineered that system to be provably recoverable and safe to re-run, so any failure mode results in inaction rather than data corruption, and recovery is always a replay rather than a rebuild. 20+ schema deployments absorbed since go-live with no human involvement",
-			"Designed that system to be object type agnostic and multi-tenant, governing any warehouse object type across both standard and fully custom metadata categories, with any number of teams onboarding themselves and managing their own metadata independently. Non-engineers author metadata from the tool they already use, with no YAML to write and no engineering dependency to wait on",
+			"Designed and built a declarative metadata reconciliation system between mid April and the end of August 2026, taking it from the first conversation to production. It stops schema deployments from silently removing Snowflake data governance metadata, and it cut recovery of thousands of metadata rows from three to four hours of manual rework to seconds",
+			"Built it to be safe to re-run, so a failure leaves data as it was instead of corrupting it, and recovery is a replay rather than a rebuild. It has handled 20+ schema deployments since go-live without anyone stepping in",
+			"Made it work across warehouse object types and both standard and custom metadata, with each team onboarding itself and managing its own metadata. Non-engineers edit metadata in the spreadsheets they already use, without writing YAML or waiting on an engineer",
 			"Build and maintain data pipelines that ingest, transform, and deliver financial data to analysts and data scientists on the Wealth Asset Management Engineering Team",
-			"Develop GitHub Actions CI/CD workflows and DevOps automation tooling to streamline engineering team processes across GitHub and GitHub Actions",
+			"Develop GitHub Actions CI/CD workflows and DevOps automation for the engineering team",
 			"Create Streamlit dashboards for internal data observability, pipeline monitoring, and ad-hoc analytics on Snowflake",
 			"Provision and manage cloud infrastructure with Terraform on GCP",
 		],
 		resumeBullets: [
-			"Architected and implemented a declarative metadata reconciliation system, mid April to end of August 2026, eliminating silent loss of warehouse governance metadata during schema deployments. Cut recovery of thousands of metadata rows from three to four hours of manual rework to seconds, with 20+ schema deployments absorbed since go-live and no human involvement in any of them",
-			"Engineered it to be provably recoverable and safe to re-run, so any failure mode is inaction rather than data corruption and recovery is always a replay",
-			"Made it object type agnostic and multi-tenant, so any team onboards itself and manages its own metadata independently, and non-engineers author metadata from the tool they already use with no YAML and no engineering dependency",
-			"Took sole ownership of two business critical dashboard repositories after the original developers departed, rebuilt one on a feature based architecture, and published it as a template any tenant team can start from",
-			"Optimized the dashboard's core Snowflake queries to roughly half the execution time with disk spill eliminated, serving 100+ daily users",
+			"Designed and built a declarative metadata reconciliation system between mid April and the end of August 2026 that stops schema deployments from silently removing warehouse governance metadata. It cut recovery of thousands of metadata rows from three to four hours of manual rework to seconds, and has handled 20+ schema deployments since go-live without anyone stepping in",
+			"Built it to be safe to re-run, so a failure leaves data as it was instead of corrupting it and recovery is a replay",
+			"Made it work across object types and teams, so each team onboards itself and manages its own metadata, and non-engineers edit metadata in the spreadsheets they already use without writing YAML",
+			"Took over two dashboard repositories after their original developers left, rebuilt one on a feature based architecture, and turned it into a template other tenant teams can start from",
+			"Cut the execution time of the dashboard's main Snowflake queries roughly in half and removed disk spill, for a dashboard with 100+ daily users",
 			"Build and maintain data pipelines delivering financial data to analysts and data scientists, develop GitHub Actions CI/CD workflows and DevOps automation, and provision GCP infrastructure with Terraform across five environments",
 		],
 		tech: ["Python", "Snowflake", "SQL", "GCP Cloud Services", "GitHub Actions", "Streamlit", "Terraform", "BitBucket", "Bamboo"],
@@ -99,7 +99,7 @@ export const EXPERIENCE: Experience[] = [
 	},
 	{
 		role: "Research Assistant",
-		company: "Department of Obstetrics and Gynecology — Wayne State University",
+		company: "Department of Obstetrics and Gynecology, Wayne State University",
 		location: "Detroit, MI",
 		period: "September 2021 - August 2022",
 		bullets: [
@@ -123,7 +123,7 @@ export const SPEAKING: Speaking[] = [
 		org: "University of Michigan, College of Engineering · Prof. Westley Weimer",
 		date: "November 2025",
 		detail:
-			"Invited by Professor Westley Weimer to return to the University of Michigan and deliver one of four annual guest lectures, selected from a pool of alumni within six months of graduating. Presented to 100+ students on the path from university to industry, which coursework translates most directly to industry skills, and how to secure internships, followed by an extended Q&A. Also joined Professor Weimer's lunch with Master's and PhD students to discuss research and industry practice.",
+			"Invited by Professor Westley Weimer to give one of the course's four yearly guest lectures, which go to alumni within six months of graduating. Talked with 100+ students about going from university to industry, which coursework carried over most directly, and how to find internships, followed by a Q&A. Also joined Professor Weimer's lunch with Master's and PhD students to talk about research and industry practice.",
 		videos: [
 			{ label: "Lecture", id: "3r0xsfJqhnw" },
 			{ label: "Q&A", id: "bcbiZgvfEPM" },

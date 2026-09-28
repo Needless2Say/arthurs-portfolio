@@ -14,12 +14,12 @@ import { OG_IMAGE, SITE_URL } from "@/constants/seo";
 export const metadata: Metadata = {
 	title: "Arthur Krieger | Software Engineer & KriegerDataForge Founder",
 	description:
-		"Arthur Krieger — Software/Platform Engineer at Charles Schwab, CS + Data Science from the University of Michigan (2025). Creator of KriegerDataForge, a personal platform he uses to ship his own apps faster, with its own OAuth 2.0 / OIDC identity provider, shared Python SDK, and Terraform control plane. Building from Chicago, IL. Open to new opportunities.",
+		"Arthur Krieger, Software/Platform Engineer at Charles Schwab and a 2025 University of Michigan CS + Data Science graduate. Creator of KriegerDataForge, a personal platform he builds and uses for his own apps, with an OAuth 2.0 and OIDC identity provider, shared Python and npm packages, and Terraform infrastructure. Based in Chicago, IL.",
 	alternates: { canonical: SITE_URL },
 	openGraph: {
 		title: "Arthur Krieger | Software Engineer & KriegerDataForge Founder",
 		description:
-			"Software/Platform Engineer at Charles Schwab. Creator of KriegerDataForge, a personal platform for shipping his own apps faster, with its own OIDC identity provider, shared Python SDK, and Terraform control plane. Based in Chicago, IL.",
+			"Software/Platform Engineer at Charles Schwab. Creator of KriegerDataForge, a personal platform he builds and uses for his own apps, with an OIDC identity provider, shared Python and npm packages, and Terraform infrastructure. Based in Chicago, IL.",
 		url: SITE_URL,
 		images: [OG_IMAGE],
 	},
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 
 const STATS = [
 	{ value: "3",          label: "Internships" },
-	{ value: "Fortune 500", label: "Experience" },
+	{ value: "4",          label: "Certifications" },
 	// { value: "3.75",       label: "GPA" },
 	{ value: "UMich Eng CS",   label: "Class of '25" },
 ];
@@ -140,7 +140,7 @@ export default function Home() {
 						<span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
 					</span>
 					<span className="text-slate-400 text-xs font-mono">
-						Currently @ Charles Schwab — Chicago, IL
+						Currently @ Charles Schwab · Chicago, IL
 					</span>
 				</div>
 
@@ -218,7 +218,7 @@ export default function Home() {
 					<div className="relative w-full aspect-video">
 						<Image
 							src={mission_chicago}
-							alt="Chicago HQ — Arthur Krieger's workspace"
+							alt="Chicago HQ, Arthur Krieger's workspace"
 							fill
 							className="object-cover"
 							sizes="(max-width: 640px) 100vw, 672px"

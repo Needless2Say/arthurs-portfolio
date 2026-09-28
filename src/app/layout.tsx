@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 		template: "%s | Arthur Krieger",
 	},
 	description:
-		"Arthur Krieger — Software/Platform Engineer at Charles Schwab, CS + Data Science graduate from the University of Michigan (2025). Founder of KriegerDataForge. Building full-stack apps, data pipelines, ML systems, and fitness technology from Chicago, IL.",
+		"Arthur Krieger, Software/Platform Engineer at Charles Schwab and a 2025 University of Michigan CS + Data Science graduate. Founder of KriegerDataForge, a personal platform he builds and uses for his own apps. Based in Chicago, IL.",
 	keywords: [
 		"Arthur Krieger",
 		"KriegerDataForge",
@@ -68,7 +68,11 @@ export const metadata: Metadata = {
 	],
 	authors: [{ name: "Arthur Krieger", url: BASE_URL }],
 	creator: "Arthur Krieger",
-	publisher: "KriegerDataForge",
+	/*
+		No publisher. Naming KriegerDataForge as the publisher reads as an
+		organization standing behind this site, and it is a personal platform.
+		Arthur is the creator, the same as on kriegerdataforge.com.
+	*/
 	robots: {
 		index: true,
 		follow: true,
@@ -87,14 +91,14 @@ export const metadata: Metadata = {
 		siteName: "Arthur Krieger | KriegerDataForge",
 		title: "Arthur Krieger | Software Engineer & KriegerDataForge",
 		description:
-			"Software/Platform Engineer at Charles Schwab. CS + Data Science, University of Michigan 2025. Founder of KriegerDataForge — building data pipelines, full-stack apps, ML systems, and fitness technology.",
+			"Software/Platform Engineer at Charles Schwab. CS + Data Science, University of Michigan 2025. Founder of KriegerDataForge, a personal platform he builds and uses for his own apps.",
 		images: [OG_IMAGE],
 	},
 	twitter: {
 		card: "summary_large_image",
 		title: "Arthur Krieger | Software Engineer & KriegerDataForge",
 		description:
-			"Software/Platform Engineer at Charles Schwab. CS + Data Science, UMich 2025. Founder of KriegerDataForge. Building in Chicago, IL.",
+			"Software/Platform Engineer at Charles Schwab. CS + Data Science, UMich 2025. Founder of KriegerDataForge. Based in Chicago, IL.",
 		images: [OG_IMAGE],
 	},
 	alternates: {
@@ -217,7 +221,7 @@ export default function RootLayout({
 								alternateName: ["Arthur Krieger Portfolio", "Arthur's Portfolio", "Arthur Krieger's Portfolio"],
 								url: BASE_URL,
 								inLanguage: "en-US",
-								description: "Portfolio of Arthur Krieger — Software/Platform Engineer, KriegerDataForge founder, and builder of full-stack apps, data pipelines, and fitness technology.",
+								description: "Portfolio of Arthur Krieger, Software/Platform Engineer and KriegerDataForge founder.",
 								author: { "@id": `${BASE_URL}/#arthur-krieger` },
 								publisher: { "@id": `${BASE_URL}/#arthur-krieger` },
 							},

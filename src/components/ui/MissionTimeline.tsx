@@ -17,14 +17,14 @@ const PHASES: Phase[] = [
 	{
 		id: "01",
 		title: "Foundation Sequence",
-		subtitle: "CS + Data Science · University of Michigan",
+		subtitle: "CS + Data Science · Michigan State, then the University of Michigan",
 		period: "2021 — 2025",
 		status: "complete",
 	},
 	{
 		id: "02",
 		title: "Field Recon",
-		subtitle: "Internships · Schwab · Revantage (Blackstone) · Wayne State",
+		subtitle: "Internships and research · Schwab · Revantage (Blackstone) · Wayne State",
 		period: "2021 — 2024",
 		status: "complete",
 	},
@@ -38,17 +38,10 @@ const PHASES: Phase[] = [
 	{
 		id: "04",
 		title: "Platform Build",
-		subtitle: "KriegerDataForge · identity provider, then storefront launch, then the fitness app",
-		period: "2026 →",
+		subtitle: "KriegerDataForge · identity provider and fitness app live, storefront next",
+		period: "2025 →",
 		status: "online",
 		href: PERSONAL_INFO.links.kriegerdataforge,
-	},
-	{
-		id: "05",
-		title: "Trajectory Open",
-		subtitle: "Next mission · open to opportunities and conversations",
-		period: "Ongoing",
-		status: "standby",
 	},
 ];
 

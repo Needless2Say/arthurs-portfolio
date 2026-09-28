@@ -8,7 +8,7 @@ import { OG_IMAGE } from "@/constants/seo";
 export const metadata: Metadata = {
 	title: "Blog",
 	description:
-		"Technical writing by Arthur Krieger — thoughts on software engineering, data pipelines, machine learning, fitness technology, and building KriegerDataForge.",
+		"Arthur Krieger's blog, for writing about software engineering, data pipelines, machine learning, and building KriegerDataForge. No posts yet.",
 	alternates: { canonical: "https://needless2say.github.io/arthurs-portfolio/blog" },
 	/*
 	  While there are no posts this page is empty, and an empty indexed page
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 	openGraph: {
 		title: "Blog | Arthur Krieger & KriegerDataForge",
 		description:
-			"Software engineering, data, ML, fitness technology, and lessons from building KriegerDataForge — by Arthur Krieger.",
+			"Writing on software engineering, data, and building KriegerDataForge, by Arthur Krieger. No posts yet.",
 		url: "https://needless2say.github.io/arthurs-portfolio/blog",
 		images: [OG_IMAGE],
 	},

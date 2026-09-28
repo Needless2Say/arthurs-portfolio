@@ -14,12 +14,12 @@ import { OG_IMAGE } from "@/constants/seo";
 export const metadata: Metadata = {
 	title: "Projects",
 	description:
-		"Projects built by Arthur Krieger — professional data platform engineering work, plus KriegerDataForge, a personal platform he uses to ship his own apps faster, with its own OAuth 2.0 / OIDC identity provider, a shared Python SDK, a Terraform control plane, an e-commerce storefront, and a free nutrition tracker. Built with Next.js, React, TypeScript, FastAPI, Python, PostgreSQL, Snowflake, Terraform, and more.",
+		"Projects by Arthur Krieger. Data platform engineering from his job, plus KriegerDataForge, a personal platform he builds and uses for his own apps, with an OAuth 2.0 and OIDC identity provider, shared Python and npm packages, Terraform infrastructure, a storefront, and a nutrition tracker. Built with Next.js, React, TypeScript, FastAPI, Python, PostgreSQL, Snowflake, Terraform, and more.",
 	alternates: { canonical: "https://needless2say.github.io/arthurs-portfolio/projects" },
 	openGraph: {
 		title: "Projects | Arthur Krieger & KriegerDataForge",
 		description:
-			"Professional data platform engineering, plus a personal platform with its own OIDC identity provider, shared Python SDK, Terraform control plane, e-commerce storefront, and nutrition tracker.",
+			"Data platform engineering from work, plus a personal platform with its own OIDC identity provider, shared Python and npm packages, Terraform infrastructure, a storefront, and a nutrition tracker.",
 		url: "https://needless2say.github.io/arthurs-portfolio/projects",
 		images: [OG_IMAGE],
 	},
@@ -268,14 +268,14 @@ export default function Projects() {
 
 				<ProjectSection
 					title="Professional Work"
-					subtitle="Production systems built on the job, running in a Fortune 500 data platform. Described without internal names or proprietary detail."
+					subtitle="Production systems I built at work. Described without internal names or proprietary detail."
 					projects={professional}
 					gridLabel="// also shipped on the job"
 				/>
 
 				<ProjectSection
 					title="Personal Work"
-					subtitle="KriegerDataForge, the platform I build my own apps on, and the apps running on it."
+					subtitle="KriegerDataForge, my personal platform, and the apps I am building on it."
 					projects={personal}
 					gridLabel="// more from this ecosystem"
 				/>
