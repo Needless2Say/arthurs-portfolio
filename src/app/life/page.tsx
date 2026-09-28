@@ -10,7 +10,7 @@ import { PERSONAL_INFO } from "@/constants/personal-info";
 
 export const metadata: Metadata = {
 	title: "Life",
-	description: "Arthur Krieger outside of work — gaming, training along Lake Michigan, building personal projects, and the music that fuels it all.",
+	description: "Arthur Krieger outside of work. Gaming, training along Lake Michigan, building personal projects, and the music that goes with it.",
 	alternates: { canonical: "https://needless2say.github.io/arthurs-portfolio/life" },
 	openGraph: {
 		title: "Life | Arthur Krieger",
@@ -42,14 +42,14 @@ const EXERCISE = [
 	},
 	{
 		activity: "Lakefront Trail",
-		detail: "Biking the full 36 mile Chicago Lakefront Trail end to end.",
+		detail: "Biking the Chicago Lakefront Trail end to end and back, about 36 miles.",
 	},
 ];
 
 const FUN_CODING: { label: string; detail: string; href?: string }[] = [
 	{
 		label: "KriegerDataForge",
-		detail: "My personal platform for data pipelines, full stack experiments, and anything I want to build without constraints.",
+		detail: "A personal platform where my apps use SSO, shared packages, and the same build and deploy setup.",
 		href: PERSONAL_INFO.links.kriegerdataforge,
 	},
 	{

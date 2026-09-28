@@ -15,7 +15,7 @@
 # Two things here are load bearing and easy to get wrong:
 #   1. The export sets assetPrefix "/arthurs-portfolio/", so the page has to be
 #      served over HTTP from a root containing an "arthurs-portfolio" directory.
-#      Opening out/resume/print.html via file:// silently loads no CSS and you
+#      Opening out/resume/print/index.html via file:// silently loads no CSS and you
 #      get an unstyled PDF.
 #   2. The browser is a Windows binary and cannot resolve the POSIX paths this
 #      shell uses. Every path passed to it goes through `cygpath -m` first,
@@ -37,7 +37,9 @@ do
 done
 [ -n "$BROWSER" ] || { echo "No Edge or Chrome found. Install one, or pass a path."; exit 1; }
 
-[ -f "$REPO/out/resume/print.html" ] || { echo "out/resume/print.html missing. Run 'make build' first."; exit 1; }
+# trailingSlash in next.config.ts puts the page at resume/print/index.html
+PRINT_HTML="$REPO/out/resume/print/index.html"
+[ -f "$PRINT_HTML" ] || { echo "out/resume/print/index.html missing. Run 'make build' first."; exit 1; }
 
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK" 2>/dev/null || true' EXIT
@@ -49,13 +51,13 @@ python -m http.server "$PORT" --directory "$WORK/root" >"$WORK/server.log" 2>&1 
 SERVER_PID=$!
 trap 'kill "$SERVER_PID" 2>/dev/null || true; rm -rf "$WORK" 2>/dev/null || true' EXIT
 
-URL="http://localhost:$PORT/arthurs-portfolio/resume/print.html"
+URL="http://localhost:$PORT/arthurs-portfolio/resume/print/"
 for _ in $(seq 1 40); do curl -sf -o /dev/null "$URL" && break; sleep 0.25; done
 curl -sf -o /dev/null "$URL" || { echo "local server never came up"; cat "$WORK/server.log"; exit 1; }
 
 # An unstyled PDF is worse than no PDF, so prove the stylesheet resolves first.
-CSS_PATH="$(grep -o '/arthurs-portfolio/_next/static/css/[^"]*\.css' "$REPO/out/resume/print.html" | head -1)"
-[ -n "$CSS_PATH" ] || { echo "no stylesheet link found in print.html"; exit 1; }
+CSS_PATH="$(grep -o '/arthurs-portfolio/_next/static/css/[^"]*\.css' "$PRINT_HTML" | head -1)"
+[ -n "$CSS_PATH" ] || { echo "no stylesheet link found in the print page"; exit 1; }
 curl -sf -o /dev/null "http://localhost:$PORT$CSS_PATH" || { echo "stylesheet 404: $CSS_PATH"; exit 1; }
 
 "$BROWSER" --headless=new --disable-gpu --no-pdf-header-footer \

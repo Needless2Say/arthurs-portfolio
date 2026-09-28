@@ -10,12 +10,12 @@ import { OG_IMAGE } from "@/constants/seo";
 export const metadata: Metadata = {
 	title: "Contact",
 	description:
-		"Get in touch with Arthur Krieger — Software/Platform Engineer, KriegerDataForge founder. Open to new opportunities, collaborations, and conversations about software, data, fitness technology, and more.",
+		"Get in touch with Arthur Krieger, Software/Platform Engineer and KriegerDataForge founder, about software, data, fitness technology, and more.",
 	alternates: { canonical: "https://needless2say.github.io/arthurs-portfolio/contact" },
 	openGraph: {
 		title: "Contact Arthur Krieger | KriegerDataForge",
 		description:
-			"Reach out to Arthur Krieger — Software Engineer, data builder, KriegerDataForge founder. Open to new opportunities and collaborations.",
+			"Reach out to Arthur Krieger, software engineer and KriegerDataForge founder.",
 		url: "https://needless2say.github.io/arthurs-portfolio/contact",
 		images: [OG_IMAGE],
 	},
@@ -64,7 +64,7 @@ export default function Contact() {
 					<SectionHeader
 						as="h1"
 						title="Let's Connect"
-						subtitle="I'm always open to new opportunities and conversations."
+						subtitle="Happy to talk about software, data, or anything you saw here."
 						align="center"
 					/>
 				</Reveal>
@@ -106,7 +106,7 @@ export default function Contact() {
 
 				<Reveal delay={contacts.length * 80}>
 					<p className="text-center text-slate-600 text-xs mt-12 font-mono">
-						Based in Chicago, IL · Open to remote & hybrid roles
+						Based in Chicago, IL
 					</p>
 				</Reveal>
 

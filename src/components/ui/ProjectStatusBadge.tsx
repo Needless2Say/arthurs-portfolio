@@ -6,11 +6,11 @@ interface ProjectStatusBadgeProps {
 }
 
 const statusMap: Record<ProjectStatus, { label: string; className: string; live: boolean }> = {
-	"live":            { label: "live",            className: "border-emerald-400/40 text-emerald-300", live: true  },
-	"pre-launch":      { label: "pre-launch",      className: "border-yellow-400/40 text-yellow-300",   live: true  },
-	"security-review": { label: "security review", className: "border-orange-400/40 text-orange-300",   live: true  },
-	"in-development":  { label: "in development",  className: "border-blue-400/40 text-blue-300",       live: false },
-	"planned":         { label: "planned",         className: "border-slate-500/40 text-slate-400",     live: false },
+	"live":                { label: "live",                  className: "border-emerald-400/40 text-emerald-300", live: true  },
+	"live-in-development": { label: "live · in development", className: "border-emerald-400/40 text-emerald-300", live: true  },
+	"pre-launch":          { label: "pre-launch",            className: "border-yellow-400/40 text-yellow-300",   live: true  },
+	"in-development":      { label: "in development",        className: "border-blue-400/40 text-blue-300",       live: false },
+	"planned":             { label: "planned",               className: "border-slate-500/40 text-slate-400",     live: false },
 };
 
 export default function ProjectStatusBadge({ status }: ProjectStatusBadgeProps) {

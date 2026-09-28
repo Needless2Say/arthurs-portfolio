@@ -8,7 +8,7 @@
 
 ## Vision & purpose. What you're building toward
 
-This is **Arthur Krieger's personal portfolio and marketing site**. The public face of the person
+This is **Arthur Krieger's personal portfolio site**. The public face of the person
 behind the KriegerDataForge (KDF) ecosystem. It's a fast, clean, space/mission-control-themed Next.js
 site (static export, deployed to GitHub Pages under `basePath: /arthurs-portfolio`) showcasing
 projects, skills, work experience, a résumé, a blog, and a contact form. There is **no database, no
@@ -17,11 +17,31 @@ polished, performant, recruiter and collaborator facing landing spot that loads 
 Arthur's story well. The visual flourishes (canvas star fields, the Goku intro, the Konami easter egg)
 are deliberate personality, not over-engineering.
 
-Within the KDF ecosystem, whose hub (`kriegerdataforge`) is the auth/identity service and whose goal
-is a large data platform others build on. This repo is the **top of funnel storefront**. It markets
-the platform and its author, and it is the lowest risk repo in the family. Treat it accordingly. Keep
-changes simple and proportionate. This is a portfolio, not a complex application. The owner's bar here
-is "tasteful, fast, and correct," not "infinitely extensible."
+Within the KDF ecosystem, whose hub (`kriegerdataforge`) is the auth/identity service, KriegerDataForge
+is Arthur's personal platform for his own apps, not a product for others. This repo is his personal
+site. It presents his work, the platform included, and it is the lowest risk repo in the family. Treat
+it accordingly. Keep changes simple and proportionate. This is a portfolio, not a complex application.
+The owner's bar here is "tasteful, fast, and correct," not "infinitely extensible."
+
+**Copy rule.** Set by the owner on 2026-09-27, to match the KriegerDataForge site.
+
+- **Humble, plain, and accurate, never a pitch.** Say what something is and what it does. No hype,
+  superlatives, boasts, absolute claims ("never reachable", "cannot authenticate anyone"), or vague
+  estimates ("tens to hundreds of hours"). Work entries keep their real facts and numbers, said plainly
+- **No job seeking lines.** Nothing like "open to new opportunities", "open to roles", or "hiring-ready".
+  Arthur has a job, and the owner removed them on 2026-09-27. The Wayne State role was an internship and
+  research position, so the home page counts 3 internships
+- **KriegerDataForge reads the same here as on kriegerdataforge.com.** It is a personal platform for
+  Arthur's own apps. Its project descriptions come from `kriegerdataforge-portfolio/src/constants/projects.ts`
+  word for word, with the same statuses. Never "ship apps faster", "control plane" (say infrastructure),
+  a revenue model, or a comparison with other companies' apps. "Founder" stays
+- **Statuses mean exactly what they say.** For KriegerDataForge projects, `live-in-development` is only for
+  what is deployed and in use while still being built. The rest stay `in-development`, `pre-launch`, or
+  `planned`, matching the KDF site
+- **The résumé PDF is generated from `/resume/print`.** After changing the constants it reads, run
+  `make resume-pdf` so the download matches the site. The script calls bare `python`, so on a machine
+  where that resolves to the Windows Store alias, put a working venv first on `PATH`
+- Prose in commas and periods. Avoid em dashes, colons, and semicolons unless they are necessary
 
 ## Tech stack
 

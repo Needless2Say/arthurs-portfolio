@@ -60,7 +60,7 @@ export default function ContactForm() {
 		}
 
 		if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
-			setErrorMsg("Email service not configured — please reach out directly.");
+			setErrorMsg("Email service not configured. Please reach out directly.");
 			setStatus("error");
 			return;
 		}
@@ -77,7 +77,7 @@ export default function ContactForm() {
 			const e = err as { status?: number; text?: string };
 			const detail = e.status
 				? `[${e.status}] ${e.text ?? "unknown error"}`
-				: "Network error — check credentials or allowed origins in EmailJS dashboard.";
+				: "Network error. Check credentials or allowed origins in the EmailJS dashboard.";
 			setErrorMsg(`Send failed: ${detail}`);
 			setStatus("error");
 			console.error("EmailJS error — status:", e.status, "text:", e.text, err);
@@ -166,7 +166,7 @@ export default function ContactForm() {
 					<svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
 						<path d="m5 13 4 4L19 7" />
 					</svg>
-					Message sent — I&apos;ll get back to you soon.
+					Message sent. I&apos;ll get back to you soon.
 				</div>
 			)}
 			{status === "error" && (

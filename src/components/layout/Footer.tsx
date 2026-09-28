@@ -16,7 +16,6 @@ export default function Footer() {
 						<span>signal · online</span>
 					</div>
 					<span className="hidden sm:inline">node · chi-town</span>
-					<span className="hidden sm:inline">status · hiring-ready</span>
 					<span>uptime · {new Date().getFullYear() - 2025 + 1}y</span>
 				</div>
 			</div>
