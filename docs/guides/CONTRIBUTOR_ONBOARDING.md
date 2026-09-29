@@ -69,7 +69,7 @@ session reads, and only values that work on this machine in `.env.local`, which 
 
 ```bash
 make setup    # creates .env.local and .env.kdf from their examples, never overwriting
-# then fill in .env.kdf (see comments in the file):
+# then uncomment and fill in these lines of .env.kdf, every line starts commented out:
 #   NEXT_PUBLIC_EMAILJS_SERVICE_ID
 #   NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
 #   NEXT_PUBLIC_EMAILJS_PUBLIC_KEY

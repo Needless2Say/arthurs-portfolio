@@ -139,7 +139,7 @@ locally (lint, typecheck, build, npm audit).
 
 ## Environment Variables
 
-Local settings live in two gitignored files, the ecosystem's env standard (cicd ADR D-030). `make setup` creates both from their examples. Never commit either.
+Local settings live in two gitignored files, the ecosystem's env standard (cicd ADR D-030). `make setup` creates both from their examples. Every line of the `.env.kdf` example starts commented out, so uncomment and fill each one you use. Never commit either.
 
 - `.env.kdf` holds the credentials, the three EmailJS keys (service ID, template ID, public key) and `GH_PACKAGES_PAT`. See `.env.kdf.example`, which walks through the EmailJS setup.
 - `.env.local` holds values that work only on this machine, and needs none today. See `.env.local.example`.
