@@ -6,6 +6,12 @@
 > security sensitive work. Unfamiliar term, acronym, or ID prefix? Resolve it in
 > [`docs/reference/GLOSSARY.md`](docs/reference/GLOSSARY.md) before acting on it.
 
+> **Know your role before you act, whatever model or tool you are.**
+> [`docs/agent/AGENT_ROLES.md`](docs/agent/AGENT_ROLES.md) says what each role may do. A review task makes you a
+> reviewer, read only, writing only your report under `docs/security/` and reviewing only what git tracks. In every
+> role, never merge, approve, tag, release, deploy, touch DEV or PROD, push to `main`, read a secret, or edit a
+> guardrail file, and never search, open or quote a path `.gitignore` covers except as that page's rule 6 allows.
+
 ## Vision & purpose. What you're building toward
 
 This is **Arthur Krieger's personal portfolio site**. The public face of the person
@@ -76,7 +82,7 @@ The owner's bar here is "tasteful, fast, and correct," not "infinitely extensibl
 4. **TailwindCSS utility classes only.** No custom CSS unless clearly necessary.
 5. **Naming.** Components `PascalCase` (file + `export function`). Utils camelCase/kebab-case files, constants `UPPER_SNAKE_CASE`.
 6. **Static export discipline.** No server only Next features (no API routes, server actions, or runtime env reads). Honor `basePath`/`assetPrefix` (`/arthurs-portfolio`) for links and asset paths, `images.unoptimized` is required.
-7. **Secrets stay out of source.** EmailJS keys (service ID, template ID, public key) and any personal/sensitive values live in `.env.local` (gitignored), `.env.local.example` holds placeholders. Never hardcode them.
+7. **Secrets stay out of source.** EmailJS keys (service ID, template ID, public key), `GH_PACKAGES_PAT` and any personal/sensitive values live in `.env.kdf` (gitignored, closed to every AI session), `.env.kdf.example` names them. `.env.local` holds only values that work on this machine. Never hardcode them.
 8. Follow existing patterns in `src/components/` and `src/app/` before inventing new ones.
 
 ## Commands
@@ -136,7 +142,7 @@ Don't skip the plan approval gate. Don't self-merge. The supporting kit:
 - [ ] `make ci` is green. Lint, `tsc --noEmit`, `next build` (static export), and `npm audit --audit-level=high --omit=dev` all pass.
 - [ ] Static export still works. `out/` builds clean and links/assets respect `basePath` (`/arthurs-portfolio`).
 - [ ] No `any`. Named exports (except `page.tsx`/`layout.tsx`), Tailwind utilities (no stray CSS).
-- [ ] No secrets in source. EmailJS keys only in `.env.local`, `.env.local.example` updated if a new var was added.
+- [ ] No secrets in source. EmailJS keys only in `.env.kdf`, `.env.kdf.example` updated if a new var was added.
 - [ ] Version bumped when shipping a change. `make bump-patch` (minor/major as warranted). Updates `VERSION` + `package.json` + `package-lock.json` in lockstep.
 - [ ] Architectural change? Add an ADR (`docs/CHANGELOG_AND_DECISION_LOG.md`) and get owner approval first.
 
@@ -152,7 +158,7 @@ consequence), so the surface that actually applies here is:
   hosts, the EmailJS POST, YouTube `frame-src` for `/life` + `/projects`) and don't weaken
   directives casually.
 - **EmailJS public key hygiene.** The `NEXT_PUBLIC_*` values are client exposed identifiers by
-  design, but they still live only in `.env.local` (local) / repo Actions secrets (CI), never
+  design, but they still live only in `.env.kdf` (local) / repo Actions secrets (CI), never
   hardcoded. The **EmailJS dashboard is authoritative** for abuse controls. Allowed Origins =
   `https://needless2say.github.io` + dashboard rate limiting.
 - **Contact form abuse controls.** The `ContactForm.tsx` honeypot + send cooldown are
@@ -163,7 +169,7 @@ consequence), so the surface that actually applies here is:
 - **Deploy pipeline integrity.** Deploys are manual and twice gated (deployer allow list +
   `github-pages` environment approval) and build from the release tag. Never add an auto deploy
   trigger ([`docs/guides/DEPLOYMENT.md`](docs/guides/DEPLOYMENT.md)).
-- **Secrets never touch git or logs.** Placeholders in `.env.local.example`. The owner rotates.
+- **Secrets never touch git or logs.** Their names in `.env.kdf.example`, every line commented out. The owner rotates.
   Found a security issue? **Verify it's real, then flag it**, and **pause for owner approval
   before any architectural, destructive, or behavior changing edit**.
 
