@@ -63,26 +63,31 @@ npm install
 
 The site reads three EmailJS values for the contact form. They are **public, client side**
 keys (`NEXT_PUBLIC_*`). The EmailJS public key is exposed in the shipped bundle by design,
-but they still live in a gitignored `.env.local` so they're not hardcoded in source.
+but they still live in the gitignored `.env.kdf` so they're not hardcoded in source. The
+ecosystem's env standard (cicd ADR D-030) keeps every credential in `.env.kdf`, which no AI
+session reads, and only values that work on this machine in `.env.local`, which needs none here.
 
 ```bash
-cp .env.local.example .env.local
-# then fill in the three values (see comments in the file):
+make setup    # creates .env.local and .env.kdf from their examples, never overwriting
+# then uncomment and fill in these lines of .env.kdf, every line starts commented out:
 #   NEXT_PUBLIC_EMAILJS_SERVICE_ID
 #   NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
 #   NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+#   GH_PACKAGES_PAT        (only for make ci-style, see the file)
 ```
 
-[`.env.local.example`](../../.env.local.example) walks through creating the EmailJS service,
-template, and public key. **Never commit `.env.local`**, and never hardcode personal
-info or keys in source (`AGENTS.md` critical rule #7).
+[`.env.kdf.example`](../../.env.kdf.example) walks through creating the EmailJS service,
+template, and public key. Next.js reads `.env.local` and never `.env.kdf`, so the Makefile
+exports the keys for `make build` and compose hands `.env.kdf` to the dev container.
+**Never commit `.env.kdf` or `.env.local`**, and never hardcode personal info or keys in
+source (`AGENTS.md` critical rule #7).
 
 > The site builds and runs fine without these set, only the contact form's send path
 > needs them. If you're not touching the contact form, placeholders are okay locally.
 >
 > The **authoritative** anti-abuse controls for the contact form (Allowed Origins =
 > `https://needless2say.github.io`, plus rate limiting) live in the **EmailJS dashboard**,
-> not in code. See the notes in `.env.local.example` and the README's Security notes.
+> not in code. See the notes in `.env.kdf.example` and the README's Security notes.
 
 ---
 
@@ -201,7 +206,7 @@ Every task follows the tiered loop in [`WORKFLOW.md`](../../WORKFLOW.md). Pick a
 - [ ] `make ci` is green (lint, `tsc --noEmit`, `next build`, `npm audit`).
 - [ ] Static export still works. `out/` builds clean, links/assets respect `basePath`.
 - [ ] No `any`. Named exports (except `page.tsx`/`layout.tsx`), Tailwind utilities only.
-- [ ] No secrets in source. EmailJS keys only in `.env.local`. Update `.env.local.example`
+- [ ] No secrets in source. EmailJS keys only in `.env.kdf`. Update `.env.kdf.example`
       if you added a new var.
 - [ ] Version bumped. `make bump-patch` (or `bump-minor` / `bump-major`), updates
       `VERSION`, `package.json`, **and** `package-lock.json` in lockstep.

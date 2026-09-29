@@ -25,7 +25,8 @@ All changes, including small fixes. Go through a feature branch and a PR. Never 
 **Environment / Secrets**
 
 - Do not hardcode personal information or secrets in source.
-- EmailJS keys and any other sensitive values go in `.env.local`, which is never committed.
+- EmailJS keys, `GH_PACKAGES_PAT` and any other credential go in `.env.kdf`, which is never committed. See `.env.kdf.example`.
+- `.env.local` holds only values that work on this machine, see `.env.local.example`. It is never committed either (cicd ADR D-030).
 
 ---
 
