@@ -141,8 +141,9 @@ and the static export builds clean.
 GitHub CI additionally runs `secret-scan`, which needs PR context and cannot
 be reproduced locally.
 
-`ci-style` reads the kdf-fmt pin from `.github/workflows/ci.yml` (`kdf_fmt_ref`) rather than
-carrying its own copy, so local and CI cannot check different versions.
+`ci-style` reinstalls kdf-fmt before each check from its one declaration, the line in
+`requirements-dev.in` that names it at `main` (cicd D-054). The reusable style lane reads the
+same line, so the local check and CI run the same formatter.
 
 ### Versioning & Release
 
