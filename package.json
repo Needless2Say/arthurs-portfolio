@@ -1,6 +1,6 @@
 {
   "name": "personal_website",
-  "version": "0.1.35",
+  "version": "0.1.36",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-    "next": "15.5.27",
+    "next": "15.5.28",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
