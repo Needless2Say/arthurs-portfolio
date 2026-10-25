@@ -202,9 +202,7 @@ export default function Home() {
 		</div>
 
 		{/*
-		  KriegerDataForge has a section of its own. It never shares one with
-		  the job, so the timeline above holds school and work alone and the
-		  hero carries no KDF link.
+		  KriegerDataForge has a section of its own.
 		*/}
 		<div className="pb-16 pt-4">
 			<section className="relative w-full max-w-3xl mx-auto px-4">

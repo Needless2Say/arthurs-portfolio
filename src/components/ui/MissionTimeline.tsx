@@ -11,8 +11,7 @@ interface Phase {
 }
 
 /*
-  School and work alone. KriegerDataForge has its own section on the home page,
-  below this one, so it never shares a section with the job.
+  School and work. KriegerDataForge has its own section further down.
 */
 const PHASES: Phase[] = [
 	{

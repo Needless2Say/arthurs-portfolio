@@ -16,8 +16,7 @@ interface TooltipState {
 const CLOSE_MS = 700;
 
 /*
-  No KriegerDataForge icon. This row sits in the home page's top section beside
-  the current job, and KDF has a section of its own further down the page.
+  No KriegerDataForge icon here, it has a section of its own further down the page.
 */
 export default function SocialLinks({ github, linkedin, email }: SocialLinksProps) {
 	const [emailOpen, setEmailOpen] = useState(false);

@@ -208,9 +208,7 @@ export default function RootLayout({
 								],
 								/*
 								  No founder node. KriegerDataForge has its own record on
-								  the projects page, so this record about the job and the
-								  KDF one stay apart, and it is never typed as an
-								  organization.
+								  the projects page, never typed as an organization.
 								*/
 							},
 							{

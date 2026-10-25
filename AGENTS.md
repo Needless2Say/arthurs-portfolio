@@ -46,14 +46,8 @@ The owner's bar here is "tasteful, fast, and correct," not "infinitely extensibl
   project descriptions come from `kriegerdataforge-portfolio/src/constants/projects.ts` word for word, with the same
   statuses. Never "ship apps faster", "control plane" (say infrastructure), a revenue model, or a comparison with
   other companies' apps. "Founder" stays
-- **KriegerDataForge and the job never share a paragraph or a section.** The owner's rule of 2026-10-25. Each keeps
-  its own section, and nothing about either is dropped to keep them apart, it moves. A page's search description is
-  one paragraph, so it carries one of them. The home page and the site default carry KDF, the about and résumé pages
-  carry the job, and the projects page carries both kinds of work without naming the employer. The home page's top
-  section holds no KDF link and the career timeline holds school and work alone. In the structured data the Person
-  record holds the job, and KDF has its own `CreativeWork` record on the projects page, never an organization. The
-  résumé summary and the about page's bio hold the job, and KDF lives in its Projects entry and the GitHub section.
-  The footer is a section of its own and keeps its KDF link
+- **KriegerDataForge keeps its own sections** on every page and its own structured data record. The full rule is in
+  the owner's private context, read it before moving KDF content
 - **Statuses mean exactly what they say.** For KriegerDataForge projects, `live-in-development` is only for
   what is deployed and in use while still being built. The rest stay `in-development`, `pre-launch`, or
   `planned`, matching the KDF site

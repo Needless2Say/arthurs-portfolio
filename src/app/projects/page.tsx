@@ -259,10 +259,9 @@ export default function Projects() {
 	return (
 		<div className="min-h-screen pt-24 pb-16 px-4">
 			{/*
-			  KriegerDataForge's own record, kept apart from the Person record in
-			  the root layout, which holds the job. It is a piece of work the owner
-			  made, so a CreativeWork with him as author by name, never an
-			  organization he founded.
+			  KriegerDataForge's own record, separate from the Person record in
+			  the root layout. It is a piece of work the owner made, so a
+			  CreativeWork with him as author by name, never an organization.
 			*/}
 			<script
 				type="application/ld+json"
