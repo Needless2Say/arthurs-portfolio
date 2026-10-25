@@ -22,7 +22,7 @@ Written 2026-08-22, for humans and AI agents alike.
 
 | Term | Definition |
 | --- | --- |
-| **KDF / KriegerDataForge** | The owner's broader platform ecosystem this site belongs to. |
+| **KDF / KriegerDataForge** | The smithy behind the owner's apps, a personal toolkit, and the family of repos this site sits beside. |
 | **Agentic workflow kit** | The shared agent operating standard, `AGENTS.md`, `WORKFLOW.md`, `skills.md`, and `docs/agent/`, synced centrally across KDF repos. Never edit the synced copies locally. |
 | **VERSION bump gate** | Every PR bumps the `VERSION` file, with `package.json` and `package-lock.json` updated in lockstep via `make bump-patch` (or `bump-minor`, `bump-major`). The version-check gate in CI enforces a strict single increment of exactly one segment against `main`. |
 | **`make ci`** | The local CI gate, run green before any PR. It runs lint, typecheck, the static build, and npm audit, mirroring the code quality subset of the five GitHub CI gates (those five add secret-scan and version-check, which run in CI only). |

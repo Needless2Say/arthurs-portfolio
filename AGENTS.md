@@ -27,9 +27,9 @@ polished, performant, recruiter and collaborator facing landing spot that loads 
 Arthur's story well. The visual flourishes (canvas star fields, the Goku intro, the Konami easter egg)
 are deliberate personality, not over-engineering.
 
-Within the KDF ecosystem, whose hub (`kriegerdataforge`) is the auth/identity service, KriegerDataForge
-is Arthur's personal platform for his own apps, not a product for others. This repo is his personal
-site. It presents his work, the platform included, and it is the lowest risk repo in the family. Treat
+Within the KDF repos, whose hub (`kriegerdataforge`) is the auth/identity service, KriegerDataForge
+is the smithy behind Arthur's apps, a personal toolkit for his own apps, not a product for others. This repo is his
+personal site. It presents his work, KriegerDataForge included, and it is the lowest risk repo in the family. Treat
 it accordingly. Keep changes simple and proportionate. This is a portfolio, not a complex application.
 The owner's bar here is "tasteful, fast, and correct," not "infinitely extensible."
 
@@ -41,10 +41,19 @@ The owner's bar here is "tasteful, fast, and correct," not "infinitely extensibl
 - **No job seeking lines.** Nothing like "open to new opportunities", "open to roles", or "hiring-ready".
   Arthur has a job, and the owner removed them on 2026-09-27. The Wayne State role was an internship and
   research position, so the home page counts 3 internships
-- **KriegerDataForge reads the same here as on kriegerdataforge.com.** It is a personal platform for
-  Arthur's own apps. Its project descriptions come from `kriegerdataforge-portfolio/src/constants/projects.ts`
-  word for word, with the same statuses. Never "ship apps faster", "control plane" (say infrastructure),
-  a revenue model, or a comparison with other companies' apps. "Founder" stays
+- **KriegerDataForge reads the same here as on kriegerdataforge.com.** It is the smithy behind Arthur's
+  apps, a personal toolkit, and never a platform, an ecosystem or a framework (the owner's word of 2026-10-25). Its
+  project descriptions come from `kriegerdataforge-portfolio/src/constants/projects.ts` word for word, with the same
+  statuses. Never "ship apps faster", "control plane" (say infrastructure), a revenue model, or a comparison with
+  other companies' apps. "Founder" stays
+- **KriegerDataForge and the job never share a paragraph or a section.** The owner's rule of 2026-10-25. Each keeps
+  its own section, and nothing about either is dropped to keep them apart, it moves. A page's search description is
+  one paragraph, so it carries one of them. The home page and the site default carry KDF, the about and résumé pages
+  carry the job, and the projects page carries both kinds of work without naming the employer. The home page's top
+  section holds no KDF link and the career timeline holds school and work alone. In the structured data the Person
+  record holds the job, and KDF has its own `CreativeWork` record on the projects page, never an organization. The
+  résumé summary and the about page's bio hold the job, and KDF lives in its Projects entry and the GitHub section.
+  The footer is a section of its own and keeps its KDF link
 - **Statuses mean exactly what they say.** For KriegerDataForge projects, `live-in-development` is only for
   what is deployed and in use while still being built. The rest stay `in-development`, `pre-launch`, or
   `planned`, matching the KDF site

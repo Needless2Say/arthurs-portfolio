@@ -1,6 +1,4 @@
 ﻿import { cn } from "@/utils/cn";
-import ForgeLink from "@/components/ui/ForgeLink";
-import { PERSONAL_INFO } from "@/constants/personal-info";
 
 type PhaseStatus = "complete" | "online" | "standby";
 
@@ -10,9 +8,12 @@ interface Phase {
 	subtitle: string;
 	period: string;
 	status: PhaseStatus;
-	href?: string;
 }
 
+/*
+  School and work alone. KriegerDataForge has its own section on the home page,
+  below this one, so it never shares a section with the job.
+*/
 const PHASES: Phase[] = [
 	{
 		id: "01",
@@ -34,14 +35,6 @@ const PHASES: Phase[] = [
 		subtitle: "Software/Platform Engineer · Charles Schwab · Chicago",
 		period: "2025 — Present",
 		status: "online",
-	},
-	{
-		id: "04",
-		title: "Platform Build",
-		subtitle: "KriegerDataForge · identity provider and fitness app live, storefront next",
-		period: "2025 →",
-		status: "online",
-		href: PERSONAL_INFO.links.kriegerdataforge,
 	},
 ];
 
@@ -144,13 +137,6 @@ export default function MissionTimeline() {
 									<p className="text-slate-400 text-sm leading-relaxed">
 										{phase.subtitle}
 									</p>
-									{phase.href && (
-										<div className="mt-3">
-											<ForgeLink href={phase.href} size="sm">
-												Visit KriegerDataForge
-											</ForgeLink>
-										</div>
-									)}
 								</div>
 							</div>
 						);

@@ -12,9 +12,9 @@ export const PERSONAL_INFO = {
 		instagram: "https://www.instagram.com/needless2say_dbfan/",
 		kriegerdataforge: "https://kriegerdataforge.com",
 	},
-	bio: "I graduated from the University of Michigan College of Engineering in 2025 with a Bachelor of Science in Computer Science and a minor in Data Science. I work as a Software/Platform Engineer at Charles Schwab on the Wealth Asset Management Engineering Team, building dashboards, GitHub DevOps tooling, and data pipelines. I also design and build KriegerDataForge, a personal platform I use for my own apps. It spans 18 repositories. The apps share single sign on through its OAuth 2.0 and OIDC identity provider, common code lives in shared Python and npm packages, and Terraform and a CI/CD library keep every repository built and deployed the same way.",
+	bio: "I graduated from the University of Michigan College of Engineering in 2025 with a Bachelor of Science in Computer Science and a minor in Data Science. I work as a Software/Platform Engineer at Charles Schwab on the Wealth Asset Management Engineering Team, building dashboards, GitHub DevOps tooling, and data pipelines.",
 	summary:
-		"Software and platform engineer at Charles Schwab, on a team that builds shared infrastructure for other engineers. My main focus has been a metadata preservation system I designed and built so warehouse governance metadata survives schema deployments, along with the Streamlit dashboards and dashboard template that the data governance and tenant teams use. I also design and build KriegerDataForge, a personal platform for my own apps, with an OIDC identity provider for single sign on, shared Python and npm packages, and Terraform infrastructure. I try to build systems that are safe to re-run and easy to observe.",
+		"Software and platform engineer at Charles Schwab, on the Wealth Asset Management Engineering Team. My main focus has been a metadata preservation system I designed and built so warehouse governance metadata survives schema deployments, along with the Streamlit dashboards and dashboard template that the data governance and tenant teams use. I try to build systems that are safe to re-run and easy to observe.",
 };
 
 export const EDUCATION: Education[] = [

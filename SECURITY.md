@@ -1,8 +1,7 @@
 # Security Policy
 
-> Part of the **KriegerDataForge (KDF)** ecosystem. A centralized SSO/OIDC auth platform
-> and the apps built on it. We take security seriously. This repo (`arthurs-portfolio`) follows the
-> ecosystem wide disclosure process below.
+> Arthur Krieger's personal site. It follows the disclosure process below, the same one every
+> KriegerDataForge (KDF) repo uses.
 
 ## Reporting a Vulnerability
 
