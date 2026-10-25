@@ -8,18 +8,23 @@ import HomeLoader from "@/components/ui/HomeLoader";
 import HomeContentReveal from "@/components/ui/HomeContentReveal";
 import MissionTimeline from "@/components/ui/MissionTimeline";
 import SocialLinks from "@/components/ui/SocialLinks";
+import ForgeLink from "@/components/ui/ForgeLink";
 import mission_chicago from "@/../public/mission_control_chicago.jpg";
 import { OG_IMAGE, SITE_URL } from "@/constants/seo";
+import { PROJECTS } from "@/constants/projects";
+
+/** The résumé's KDF summary, so the home page and the résumé say the same thing. */
+const KDF_SUMMARY = PROJECTS.find((p) => p.title === "KriegerDataForge")?.summary;
 
 export const metadata: Metadata = {
 	title: "Arthur Krieger | Software Engineer & KriegerDataForge Founder",
 	description:
-		"Arthur Krieger, Software/Platform Engineer at Charles Schwab and a 2025 University of Michigan CS + Data Science graduate. Creator of KriegerDataForge, a personal platform he builds and uses for his own apps, with an OAuth 2.0 and OIDC identity provider, shared Python and npm packages, and Terraform infrastructure. Based in Chicago, IL.",
+		"Arthur Krieger, software engineer and a 2025 University of Michigan CS + Data Science graduate. Creator of KriegerDataForge, the smithy behind his apps, with an OAuth 2.0 and OIDC identity provider, shared Python and npm packages, and templates for starting new apps. Based in Chicago, IL.",
 	alternates: { canonical: SITE_URL },
 	openGraph: {
 		title: "Arthur Krieger | Software Engineer & KriegerDataForge Founder",
 		description:
-			"Software/Platform Engineer at Charles Schwab. Creator of KriegerDataForge, a personal platform he builds and uses for his own apps, with an OIDC identity provider, shared Python and npm packages, and Terraform infrastructure. Based in Chicago, IL.",
+			"Software engineer and creator of KriegerDataForge, the smithy behind his apps, with an OIDC identity provider, shared Python and npm packages, and templates for starting new apps. Based in Chicago, IL.",
 		url: SITE_URL,
 		images: [OG_IMAGE],
 	},
@@ -171,7 +176,6 @@ export default function Home() {
 					<SocialLinks
 						github={PERSONAL_INFO.links.github}
 						linkedin={PERSONAL_INFO.links.linkedin}
-						kriegerdataforge={PERSONAL_INFO.links.kriegerdataforge}
 						email={PERSONAL_INFO.email}
 					/>
 				</div>
@@ -195,6 +199,34 @@ export default function Home() {
 		{/* ===== Mission Timeline (below the fold) ===== */}
 		<div className="pb-16 pt-8">
 			<MissionTimeline />
+		</div>
+
+		{/*
+		  KriegerDataForge has a section of its own.
+		*/}
+		<div className="pb-16 pt-4">
+			<section className="relative w-full max-w-3xl mx-auto px-4">
+				<div className="text-center mb-8">
+					<p className="text-yellow-400 font-mono text-[10px] tracking-[0.4em] uppercase mb-2">
+						◇ personal work ◇
+					</p>
+					<h2 className="text-3xl sm:text-4xl font-bold gradient-text glow-text mb-5 pb-2">
+						KriegerDataForge
+					</h2>
+					<p className="text-slate-500 text-sm font-mono">
+						{"// the smithy behind my apps"}
+					</p>
+				</div>
+
+				<div className="glass-card border-yellow-500/20 px-6 py-5 max-w-2xl mx-auto text-center">
+					<p className="text-slate-300 text-sm leading-relaxed mb-4">
+						{KDF_SUMMARY}
+					</p>
+					<ForgeLink href={PERSONAL_INFO.links.kriegerdataforge} size="sm">
+						Visit KriegerDataForge
+					</ForgeLink>
+				</div>
+			</section>
 		</div>
 
 		{/* ===== Chicago HQ ===== */}

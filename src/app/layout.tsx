@@ -8,7 +8,6 @@ import ScrollProgress from "@/components/ui/ScrollProgress";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import KonamiEasterEgg from "@/components/ui/KonamiEasterEgg";
 import { OG_IMAGE } from "@/constants/seo";
-import { PERSONAL_INFO } from "@/constants/personal-info";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -45,7 +44,7 @@ export const metadata: Metadata = {
 		template: "%s | Arthur Krieger",
 	},
 	description:
-		"Arthur Krieger, Software/Platform Engineer at Charles Schwab and a 2025 University of Michigan CS + Data Science graduate. Founder of KriegerDataForge, a personal platform he builds and uses for his own apps. Based in Chicago, IL.",
+		"Arthur Krieger, software engineer and a 2025 University of Michigan CS + Data Science graduate. Founder of KriegerDataForge, the smithy behind his apps. Based in Chicago, IL.",
 	keywords: [
 		"Arthur Krieger",
 		"KriegerDataForge",
@@ -70,7 +69,7 @@ export const metadata: Metadata = {
 	creator: "Arthur Krieger",
 	/*
 		No publisher. Naming KriegerDataForge as the publisher reads as an
-		organization standing behind this site, and it is a personal platform.
+		organization standing behind this site, and it is a personal toolkit.
 		Arthur is the creator, the same as on kriegerdataforge.com.
 	*/
 	robots: {
@@ -91,14 +90,14 @@ export const metadata: Metadata = {
 		siteName: "Arthur Krieger | KriegerDataForge",
 		title: "Arthur Krieger | Software Engineer & KriegerDataForge",
 		description:
-			"Software/Platform Engineer at Charles Schwab. CS + Data Science, University of Michigan 2025. Founder of KriegerDataForge, a personal platform he builds and uses for his own apps.",
+			"Software engineer, CS + Data Science, University of Michigan 2025. Founder of KriegerDataForge, the smithy behind his apps.",
 		images: [OG_IMAGE],
 	},
 	twitter: {
 		card: "summary_large_image",
 		title: "Arthur Krieger | Software Engineer & KriegerDataForge",
 		description:
-			"Software/Platform Engineer at Charles Schwab. CS + Data Science, UMich 2025. Founder of KriegerDataForge. Based in Chicago, IL.",
+			"Software engineer, CS + Data Science, UMich 2025. Founder of KriegerDataForge. Based in Chicago, IL.",
 		images: [OG_IMAGE],
 	},
 	alternates: {
@@ -179,7 +178,7 @@ export default function RootLayout({
 								familyName: "Krieger",
 								jobTitle: "Software/Platform Engineer",
 								description:
-									"Software and platform engineer at Charles Schwab, working on internal data platform and cloud infrastructure. Computer Science and Data Science graduate of the University of Michigan. Creator of KriegerDataForge.",
+									"Software and platform engineer at Charles Schwab, working on internal data platform and cloud infrastructure. Computer Science and Data Science graduate of the University of Michigan.",
 								image: `${BASE_URL}/og.png`,
 								worksFor: {
 									"@type": "Organization",
@@ -207,11 +206,10 @@ export default function RootLayout({
 									"Snowflake", "Google Cloud Platform", "Terraform",
 									"Data Pipelines", "Full Stack Development", "Fitness Technology",
 								],
-								founder: {
-									"@type": "Organization",
-									name: "KriegerDataForge",
-									url: PERSONAL_INFO.links.kriegerdataforge,
-								},
+								/*
+								  No founder node. KriegerDataForge has its own record on
+								  the projects page, never typed as an organization.
+								*/
 							},
 							{
 								"@context": "https://schema.org",
@@ -221,7 +219,7 @@ export default function RootLayout({
 								alternateName: ["Arthur Krieger Portfolio", "Arthur's Portfolio", "Arthur Krieger's Portfolio"],
 								url: BASE_URL,
 								inLanguage: "en-US",
-								description: "Portfolio of Arthur Krieger, Software/Platform Engineer and KriegerDataForge founder.",
+								description: "Portfolio of Arthur Krieger, Software/Platform Engineer.",
 								author: { "@id": `${BASE_URL}/#arthur-krieger` },
 								publisher: { "@id": `${BASE_URL}/#arthur-krieger` },
 							},

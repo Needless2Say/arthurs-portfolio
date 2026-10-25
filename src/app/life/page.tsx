@@ -49,7 +49,7 @@ const EXERCISE = [
 const FUN_CODING: { label: string; detail: string; href?: string }[] = [
 	{
 		label: "KriegerDataForge",
-		detail: "A personal platform where my apps use SSO, shared packages, and the same build and deploy setup.",
+		detail: "A personal toolkit for building my apps, with one sign in, shared packages, and templates to start from.",
 		href: PERSONAL_INFO.links.kriegerdataforge,
 	},
 	{

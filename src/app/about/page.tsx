@@ -15,12 +15,12 @@ import { OG_IMAGE } from "@/constants/seo";
 export const metadata: Metadata = {
 	title: "About",
 	description:
-		"Arthur Krieger, Software/Platform Engineer at Charles Schwab and a 2025 University of Michigan CS + Data Science graduate (GPA 3.75). Creator of KriegerDataForge, a personal platform he builds and uses for his own apps, with an OAuth 2.0 and OIDC identity provider. Experience in data pipelines, full stack development, platform engineering, and infrastructure as code. Based in Chicago, IL.",
+		"Arthur Krieger, Software/Platform Engineer at Charles Schwab and a 2025 University of Michigan CS + Data Science graduate (GPA 3.75). Experience in data pipelines, full stack development, platform engineering, and infrastructure as code. Based in Chicago, IL.",
 	alternates: { canonical: "https://needless2say.github.io/arthurs-portfolio/about" },
 	openGraph: {
-		title: "About Arthur Krieger | KriegerDataForge",
+		title: "About Arthur Krieger",
 		description:
-			"Software/Platform Engineer at Charles Schwab. UMich CS + Data Science 2025. Creator of KriegerDataForge, a personal platform he builds and uses for his own apps. Experience at Schwab, Revantage (Blackstone), and Wayne State University research.",
+			"Software/Platform Engineer at Charles Schwab. UMich CS + Data Science 2025. Experience at Schwab, Revantage (Blackstone), and Wayne State University research.",
 		url: "https://needless2say.github.io/arthurs-portfolio/about",
 		images: [OG_IMAGE],
 	},
@@ -242,7 +242,7 @@ export default async function About() {
 							<div className="flex-grow">
 								<p className="text-white font-bold text-lg mb-0.5">Needless2Say</p>
 								<p className="text-slate-400 text-sm mb-4 leading-relaxed">
-									Building KriegerDataForge, my personal platform. An OIDC identity provider, shared Python and npm packages, Terraform infrastructure, and the apps on top of them.
+									Building KriegerDataForge, the smithy behind my apps, across 18 repositories. The apps share single sign on through its OAuth 2.0 and OIDC identity provider, common code lives in shared Python and npm packages, new apps start from templates, and Terraform and a CI/CD library keep every repository built and deployed the same way.
 								</p>
 
 								{gh && (

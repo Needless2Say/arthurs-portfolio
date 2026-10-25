@@ -14,12 +14,12 @@ import { OG_IMAGE } from "@/constants/seo";
 export const metadata: Metadata = {
 	title: "Projects",
 	description:
-		"Projects by Arthur Krieger. Data platform engineering from his job, plus KriegerDataForge, a personal platform he builds and uses for his own apps, with an OAuth 2.0 and OIDC identity provider, shared Python and npm packages, Terraform infrastructure, a storefront, and a nutrition tracker. Built with Next.js, React, TypeScript, FastAPI, Python, PostgreSQL, Snowflake, Terraform, and more.",
+		"Projects by Arthur Krieger. Data engineering from his job, plus KriegerDataForge, the smithy behind his apps, with an OAuth 2.0 and OIDC identity provider, shared Python and npm packages, app templates, a storefront, and a nutrition tracker. Built with Next.js, React, TypeScript, FastAPI, Python, PostgreSQL, Snowflake, Terraform, and more.",
 	alternates: { canonical: "https://needless2say.github.io/arthurs-portfolio/projects" },
 	openGraph: {
 		title: "Projects | Arthur Krieger & KriegerDataForge",
 		description:
-			"Data platform engineering from work, plus a personal platform with its own OIDC identity provider, shared Python and npm packages, Terraform infrastructure, a storefront, and a nutrition tracker.",
+			"Data engineering from work, plus KriegerDataForge, the smithy behind his apps, with its own OIDC identity provider, shared Python and npm packages, app templates, a storefront, and a nutrition tracker.",
 		url: "https://needless2say.github.io/arthurs-portfolio/projects",
 		images: [OG_IMAGE],
 	},
@@ -254,9 +254,29 @@ function ProjectSection({
 export default function Projects() {
 	const professional = PROJECTS.filter((p) => p.category === "professional");
 	const personal = PROJECTS.filter((p) => p.category === "personal");
+	const kdf = personal.find((p) => p.title === "KriegerDataForge");
 
 	return (
 		<div className="min-h-screen pt-24 pb-16 px-4">
+			{/*
+			  KriegerDataForge's own record, separate from the Person record in
+			  the root layout. It is a piece of work the owner made, so a
+			  CreativeWork with him as author by name, never an organization.
+			*/}
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{
+					__html: JSON.stringify({
+						"@context": "https://schema.org",
+						"@type": "CreativeWork",
+						name: "KriegerDataForge",
+						url: PERSONAL_INFO.links.kriegerdataforge,
+						description: kdf?.summary,
+						author: { "@type": "Person", name: "Arthur Krieger" },
+						inLanguage: "en-US",
+					}),
+				}}
+			/>
 			<div className="max-w-4xl mx-auto">
 				<Reveal className="mb-12">
 					<h1 className="text-4xl font-bold text-white glow-text mb-3 pb-2">Projects</h1>
@@ -275,9 +295,9 @@ export default function Projects() {
 
 				<ProjectSection
 					title="Personal Work"
-					subtitle="KriegerDataForge, my personal platform, and the apps I am building on it."
+					subtitle="KriegerDataForge, my personal toolkit, and the apps I am building with it."
 					projects={personal}
-					gridLabel="// more from this ecosystem"
+					gridLabel="// more from the smithy"
 				/>
 			</div>
 		</div>
