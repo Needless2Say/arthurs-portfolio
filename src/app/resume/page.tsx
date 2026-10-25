@@ -50,10 +50,7 @@ export default function Resume() {
 						<SectionHeader title="Summary" />
 					</Reveal>
 					<Reveal delay={60}>
-						<p className="text-slate-300 leading-relaxed text-base mb-4">{PERSONAL_INFO.summary}</p>
-						<ForgeLink href={PERSONAL_INFO.links.kriegerdataforge} size="sm">
-							Visit KriegerDataForge
-						</ForgeLink>
+						<p className="text-slate-300 leading-relaxed text-base">{PERSONAL_INFO.summary}</p>
 					</Reveal>
 				</section>
 
@@ -134,6 +131,15 @@ export default function Resume() {
 											<TechBadge key={t} label={t} color="cosmic" />
 										))}
 									</div>
+
+									{/* KriegerDataForge's link sits on its own card, as on the projects page */}
+									{project.links.site === PERSONAL_INFO.links.kriegerdataforge && (
+										<div className="mt-4">
+											<ForgeLink href={project.links.site} size="sm">
+												Visit KriegerDataForge
+											</ForgeLink>
+										</div>
+									)}
 								</Card>
 							</Reveal>
 						))}

@@ -9,6 +9,7 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import TechBadge from "@/components/ui/TechBadge";
 import Card from "@/components/ui/Card";
 import Reveal from "@/components/ui/Reveal";
+import ForgeLink from "@/components/ui/ForgeLink";
 import { OG_IMAGE } from "@/constants/seo";
 
 export const metadata: Metadata = {
@@ -271,6 +272,9 @@ export default async function About() {
 									>
 										View Profile →
 									</a>
+									<ForgeLink href={PERSONAL_INFO.links.kriegerdataforge}>
+										Visit KriegerDataForge
+									</ForgeLink>
 								</div>
 							</div>
 						</div>
